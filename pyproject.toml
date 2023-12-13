@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "epurelib-github-io"
+version = "0.1.0"
+description = ""
+authors = ["Pavel <pavelpichugin28@gmail.com>"]
+readme = "README.md"
+packages = [{include = "epurelib"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+mkdocs = "^1.5.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
