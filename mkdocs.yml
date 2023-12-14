@@ -1,5 +1,5 @@
-site_name: My Docs
-site_url: https://epurelib.github.io/docs/
+site_name: Epure Docs
+site_url: https://epurelib.github.io/epure-docs
 
 # Repository
 repo_name: nagvalhm/epure
@@ -11,5 +11,4 @@ theme:
 
 extra:
   version:
-    # default: stable
     provider: mike
