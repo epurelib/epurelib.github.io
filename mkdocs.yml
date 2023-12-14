@@ -1,1 +1,15 @@
 site_name: My Docs
+site_url: https://epurelib.github.io/docs/
+
+# Repository
+repo_name: nagvalhm/epure
+repo_url: https://github.com/nagvalhm/epure
+
+theme:
+  name: material
+  custom_dir: overrides
+
+extra:
+  version:
+    # default: stable
+    provider: mike
