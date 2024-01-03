@@ -1,5 +1,6 @@
-site_name: Epure Docs
+site_name: Epure
 site_url: https://epurelib.github.io/epure-docs
+
 
 # Repository
 repo_name: nagvalhm/epure
@@ -8,6 +9,47 @@ repo_url: https://github.com/nagvalhm/epure
 theme:
   name: material
   custom_dir: overrides
+  features:
+    - content.code.copy
+    - content.tabs.link
+    - navigation.indexes
+    - content.tooltips
+    - navigation.path
+    - content.code.annotate
+    - content.code.select
+    - navigation.tabs
+  logo: assets/img/logo.svg
+  # logo: assets/images/favicon.png
+  palette:
+    primary: white
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+
+nav:
+  - Welcome to Epure: index.md
+  - Features: features.md
+  - Learn: 
+    - ./learn/learn.md
+    - Elist and fun: elist.md
+  - Help: help.md
+  - Contribute: contribute.md
+  - Release Notes: release_notes.md
 
 extra:
   version:

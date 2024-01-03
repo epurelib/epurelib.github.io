@@ -11,3 +11,7 @@
       "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format"
     ]
   }
+
+
+// prewiev docs: mkdocs serve
+// publish versioning: mike deploy --push --update-aliases 0.1 latest
