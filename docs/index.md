@@ -1,7 +1,7 @@
 ---
 hide:
   - navigation
-  - toc
+#   - toc
 ---
 
 <p align="center">
@@ -33,8 +33,9 @@ All technical details hidden from you. Care only about your business logic.
 
 Key features:
 
-* **Easy syntax**: Create tables based on your classes in no time *
-* **Light**: etc
+* **Easy syntax**: Create tables based on your classes in no time
+* **Concise**: No more weird and long SQL queries
+* **Convinient**: many useful and intuitive interfaces
 
 Installing
 ----------
@@ -48,7 +49,7 @@ $ pip install -U epure
 Install and update using <a href="https://python-poetry.org/docs/">`poetry`</a>:
 
 ```console
-$ poetry add epure
+$ poetry add epure@latest
 ```
 
 A Simple Example
@@ -63,24 +64,28 @@ Read more about supported DB's here :
 !!! warning
     Note that you need to use __type__ __hints__ for class attributes in order to save class to DB.
 
-```python hl_lines="1 6 11 14 21 27"
+```python hl_lines="1 7 13 16 25 31"
 from epure import epure, escript, GresDB
+from ..epure.generics import NotNull # (1)!
+from typing import List, Dict
 
 GresDb('postgres://postgres:postgres@localhost:5432',
-log_level=3).connect() # (1)!
+log_level=3).connect() # (2)!
 
-@epure() # (2)!
+@epure() # (3)!
 class Example:
     int_attr:int
     str_attr:str = "Hello World!"
+    float_attr:NotNull[float] = 3.14
+    generic_list:List[int] = [3, 4, 8]
 
-    @escript # (3)!
+    @escript # (4)!
     def get_example_hello_str(self): [func]
-        tp = self.tp # (4)!
-        query = tp.str_attr in ("Hello Sun!") # (5)!
+        md = self.md # (5)!
+        query = md.str_attr in ("Hello Sun!") # (6)!
         #↓↓↓
         # query = "SELECT public.example.str_attr IN ("Hello Sun!")"
-        res = self.resource.read(query) # (6)!
+        res = self.resource.read(query) # (7)!
         return res
 
 obj1 = Example()
@@ -96,20 +101,21 @@ obj2.save()
 
 ```
 
-1. Format of string to connect ('database://user:password@host:port'); Note that there is two ways to connect to db, read here:
-2. `#!python @epure` is metaclass decorator function, that modifies class; more info here: 
-3. `#!python @escript` is method decorator for epure decorated classes; more info here:
-4. note that tp (short for `#!python TableProxy`) is only avalible in @escript decorated method scope and only; more info here: 
-5. read more about supported sql operators in `#!python Epure` like `#!python in` here:
-6. learn more about `#!python read()` here:
+1. Check out more about generic Epure types here: link
+2. Format of string to connect ('database://user:password@host:port'); Note that there is two ways to connect to db, read here:
+3. `#!python @epure` is metaclass decorator function, that modifies class; more info here: 
+4. `#!python @escript` is method decorator for epure decorated classes; more info here:
+5. note that md (short for `#!python Model`) is only avalible in @escript decorated method scope and only; more info here: 
+6. read more about supported sql operators in `#!python Epure` like `#!python in` here:
+7. learn more about `#!python read()` here:
 
 Now when your instances saved in DB under the public.example table, we can talk about __creating__ __queries__ __variations__:
 
-#### 1. `#!python @escript` with use of magic debugger
+### 1. `#!python @escript` with use of magic debugger
 
-Using the declared class above, we now can call <a name="func">it's</a> `#!python get_example_hello_str()` method that will :magic_wand: _magically_ :magic_wand: return your executed query.
+Using the declared class above, we now can call <a name="func">its</a> `#!python get_example_hello_str()` method that will :magic_wand: _magically_ :magic_wand: return your executed query.
 
-And it's even compatible with IDE's debugger like VSCode!
+And it's even compatible with IDE's debugger like VSCode ! :star_struck:
 
 ```python hl_lines="1"
 
@@ -120,46 +126,51 @@ res2[0].str_attr # -> "Hello Sun!"
 
 ```
 
-#### 2. shortcut `#!python read()` with kwarg parameters
+### 2. shortcut `#!python read()` with kwarg parameters
 
 Alternatively if you know criteria by which you want to read data, you can use this method
-or you have a unique node_id of the object and you want to straight up retrive it
+or you have a unique data_id of the object and you want to straight up retrieve it
 
 ```python hl_lines="3"
 
-node_id = obj1.node_id # -> UUID4 # (1)!
+data_id = obj1.data_id # -> UUID4 # (1)!
 
-res1 = obj1.table.read(node_id=node_id) # -> list[list[epure_object]]
+res1 = obj1.table.read(data_id=data_id) # -> list[list[epure_object]]
 
 res1[0].int_attr # -> 1
 res1[0].str_attr # -> "Hello World!"
 
 ```
 
-1. node_id is a unique UUID object indentifier that Epure uses to discriminate different objects
+1. data_id is a unique UUID object indentifier that Epure uses to discriminate different objects
+
+Advanced example with Join
+-----
+
+Check out advanced example here :arrow_right:: <a href="http://127.0.0.1:8000/epure-docs/learn/joins/#advanced-example-with-join">http://127.0.0.1:8000/epure-docs/learn/joins/#advanced-example-with-join</a>
 
 Elist and Eset
 -----
 
-#### Elist
+### Elist
 
-Elist is really convenient in terms of using easy retrivable data collection.
+Elist is really convenient in terms of using easy retrievable data collection.
 
-You can look at it like strictly typed list which garanties order with idea of simple saving and retriving its contents from DB.
+You can look at it like strictly typed list which guarantees order with idea of simple saving and retrieving its contents from DB.
 
-Elist can garantuie order of objects when is used by user at a time, in cases of big system with multiple users please refer to Eset.
+Elist can guarantee order of objects when is used by user at a time, in cases of big system with multiple users please refer to Eset.
 
 Let's look at an example:
 
 ```python hl_lines="3"
 from epure import epure, Elist
 
-@epure() # (2)!
+@epure()
 class Example:
     int_attr:int = 42
     str_attr:str = "Hello World!"
 
-@epure() # (2)!
+@epure()
 class ElistExample:
     elist_str:Elist[str] = Elist[str](["Like","a", "piece", "of", "cake"])
     elist_epure:Elist[Example]
@@ -171,23 +182,120 @@ ex2 = Example()
 
 elist_ex = ElistExample()
 elist_ex.elist_epure = Elist[Example]([ex1, ex2])
-elist_ex.save()
+elist_ex.save() # (1)!
 
-elist_ex_read = Example.resource.read(data_id = elist_ex.data_id)
+elist_ex_read = ElistExample.resource.read(data_id = elist_ex.data_id)
 elist_ex_read.elist_str[4] # -> "cake"
 elist_ex_read.elist_epure[0].int_attr # -> 68
 ```
 
-#### Eset
+1. Saving this Epure instance with Elist field will triger saving for Elist
 
-Eset is simmilar to Elist, though it does not guarantee order of its stored contents.
+### Eset
 
-It is convinient in cases when you need store big chunks of data. You can then easily retrive part of data stored there based on criteria you need
+Eset is similar to Elist, though it does not guarantee order of its stored contents.
+
+It is convinient in cases when you need store big chunks of data. You can then easily retrieve part of data stored in it based on criteria specified
+
+This is in a way our interpretation of many2many field.
+
+```python hl_lines="1 18 20 22 28 32" 
+from epure import epure, Eset
+
+@epure()
+class Example:
+    int_attr:complex = 5 + 7j
+    str_attr:str = "Hello Sky!"
+
+@epure()
+class EsetExample:
+    eset_str:Eset[str]
+    eset_epure:Eset[Example]
+
+ex1 = Example()
+ex2 = Example()
+
+eset_ex = EsetExample()
+
+eset_ex.eset_epure = Eset[Example]((ex1, ex2))
+
+eset_ex.eset_str = Eset[str](("Grin", "like", "a", "Cheshire", "cat"))
+
+eset_ex.save() # (1)!
+
+eset_ex_read = EsetExample.resource.read(data_id = eset_ex.data_id)[0]
+
+eset_ex_read.eset_epure # -> {}
+eset_ex_read.eset_epure.load() # (2)!
+eset_ex_read.eset_epure # -> {<pyt1.tests.resource...0D4245C00>, <pyt1.tests.resource...0D4245CC0>}
+
+eset_ex_read.eset_str # -> {}
+eset_ex_read.eset_str.load() # (2)!
+"".join(eset_ex_read.eset_str) # -> "Grin cat like a Cheshire"
+```
+
+1. Note that saving this will triger recursive saving for all elists and esets bounded to this object
+2. Eset is empty when is retrieved, you need to use .load() method of Eset to fill the eset with its content.
+
+Serialization and deserialization of Epure objects
+-----
+
+Check out serialization and deserialization example here :arrow_right:: <a href="http://127.0.0.1:8000/epure-docs/learn/joins/#advanced-example-with-join">http://127.0.0.1:8000/epure-docs/learn/joins/#advanced-example-with-join</a>
+
+Ini File Parser
+-----
+
+This section of library appeared mainly because there is no adequate solution for working with ini files in python
+
+#### A small example
+
+Save this as example.ini file:
+
+``` title="example.ini"
+db_host = localhost
+
+[general]
+db_port = 5432
+
+[public]
+
+[section1]
+db_port = 323
+
+[section1.section2]
+db_user = user
+
+[section1.section2.section3]
+pi_begins = 3.14159265359
+
+[epure.best.app.forever]
+friend = true
+```
+
+Now we can easily access fields of this ini file:
+
+```python hl_lines="5 7 9"
+from epure.files import IniFile
+
+config = IniFile('./example.ini')
+
+config.db_host # -> "localhost"
+
+config.general.db_port # -> 5432
+
+config.epure.best.app.forever.friend # -> True
+
+```
+
+Learn more about Ini Parser here: link
 
 Developers
 -----
 Nikita Umarov (Pichugin), 
 Pavel Pichugin
+
+Sponsor us
+-----
 
 
 Links
