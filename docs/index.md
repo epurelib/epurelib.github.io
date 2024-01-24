@@ -28,7 +28,7 @@ hide:
 
 ---
 
-Epure is python agnostic ORM - you can store and retrieve data having no idea about database, table and columns. 
+Epure is python type-based ORM - you can store and retrieve data having no idea about database, table and columns. 
 All technical details hidden from you. Care only about your business logic.
 
 Key features:
@@ -36,6 +36,7 @@ Key features:
 * **Easy syntax**: Create tables based on your classes in no time
 * **Concise**: No more weird and long SQL queries
 * **Convinient**: many useful and intuitive interfaces
+* **Lightweight structure**: Contrary to other python ORM - in Epure you have freedom to make structure for your project whatever you like
 
 Installing
 ----------
