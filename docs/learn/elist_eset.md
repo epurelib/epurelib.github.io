@@ -1,4 +1,6 @@
-<a>`Elist`</a> and <a>`Eset`</a> are <a href="https://docs.python.org/3/library/stdtypes.html#generic-alias-type">Generic</a> strict-type-based Alias classes and are created with subscripting the <a>`Elist`</a> or <a>`Eset`</a> class with the argument of python primitive `#!python type` or <a href="">Epure</a> `#!python type` e.g.
+<a>`Elist`</a> and <a>`Eset`</a> are <a href="https://docs.python.org/3/library/stdtypes.html#generic-alias-type">Generic</a> strict-type-based Alias classes and are created with subscripting the <a>`Elist`</a> or <a>`Eset`</a> class with the argument of python primitive `#!python type` or <a href="">Epure</a> `#!python type` 
+
+e.g.
 
 ??? example "Example of creating Elist or Eset by subscriptiting type"
     ```python
@@ -29,7 +31,7 @@
 
 !!! note "Elist and Eset are strict-type-based"
 
-    <a>`Elist`</a> and <a>`Eset`</a> are __strict-type-based__ classes which means that they can contain __only__ instances of their subscribed class:
+    <a>`Elist`</a> and <a>`Eset`</a> are __strict-type-based__ classes which means that they can contain __only__ instances of their subscripted class:
 
     ??? example "Example of Eset and Elist strict-type-based nature"
 
@@ -65,7 +67,7 @@
         
         ```
 
-    Because <a>`Elist`</a> and <a>`Eset`</a> are Generic Alias type, when subscripted - their class will be stored in `.__origin__` field of subscripted class:
+    Because <a>`Elist`</a> and <a>`Eset`</a> are Generic Alias type, when subscripted - Elist class will be stored in `.__origin__` field of created from subscription class:
 
     ??? example "Check type with `__origin__` field of Elist or Eset"
 
@@ -93,7 +95,13 @@
 
 ## Elist
 
-Elist is a very usefull collection based on `#!python list` when you need to store small amounts of data in DB with consistent order of items.
+Elist is a very usefull collection based on `#!python list` when:
+
+ - you need to store small amounts of data
+ - to have consistent and numerated order of stored items
+ - used by one user at same time
+
+Elist is created and stored in DB (by default in ecollections scheme) in form of table with name: `"elist__"` + "{name of your type}" e.g. `"elist__str"`, `"elist__my_epure_cls"`
 
 Elist inherits some of `#!python list` type methods, but they may differ from python default `#!python list` methods: these methods are explained below.
 
@@ -123,7 +131,7 @@ Elist inherits some of `#!python list` type methods, but they may differ from py
 
     res[0].my_elist_field[2] # power
 
-    res[0].pop(2)
+    res[0].pop(0) # knowledge
     ```
 
 ### Elist methods:
@@ -135,7 +143,7 @@ Elist inherits some of `#!python list` type methods, but they may differ from py
          values from DataPromises"
 
     Elist.ids(self)
-        "Returns data_id's from all items of Elist"
+        "Returns data_id's from all stored items in Elist"
 
     Elist.append(item)
 
@@ -162,3 +170,16 @@ Elist inherits some of `#!python list` type methods, but they may differ from py
 
 ## Eset
 
+Eset is our interpretation of Many-To-Many field. 
+
+Eset is convinient when you:
+
+- potentially want to store big amounts of data
+- do not care about the order of stored items 
+- can be used by many people simultaneously
+
+In DB Eset is stored by default in ecollection scheme in two ways:
+
+1. When Eset is a bound field of class
+
+2. When Eset is not bounded to any class, it is stored in a way like elist: `"eset__"` + "{name of your type}" e.g. `"eset__int"`, `"eset__new_epure"`
