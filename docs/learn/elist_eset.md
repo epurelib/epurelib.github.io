@@ -1,3 +1,5 @@
+## Elist and Eset: shared logic
+
 <a>`Elist`</a> and <a>`Eset`</a> are <a href="https://docs.python.org/3/library/stdtypes.html#generic-alias-type">Generic</a> strict-type-based Alias classes and are created with subscripting the <a>`Elist`</a> or <a>`Eset`</a> class with the argument of python primitive `#!python type` or <a href="">Epure</a> `#!python type` 
 
 e.g.
@@ -101,7 +103,16 @@ Elist is a very usefull collection based on `#!python list` when:
  - to have consistent and numerated order of stored items
  - used by one user at same time
 
-Elist is created and stored in DB (by default in ecollections scheme) in form of table with name: `"elist__"` + "{name of your type}" e.g. `"elist__str"`, `"elist__my_epure_cls"`
+??? info "The way Elist is stored in DB"
+
+    Elist is created and stored in DB (by default in ecollections scheme) in form of table with name: `"elist__"` + "{name of your type}" e.g. `"elist__str"`, `"elist__my_epure_cls"`
+
+    ??? example "Example of the way Elist is stored"
+        ```python
+        Elist[str] # This will be stored in "elist__str"
+        ```
+
+Contrary for Eset - you dont need to call `.load()` method for Elist.
 
 Elist inherits some of `#!python list` type methods, but they may differ from python default `#!python list` methods: these methods are explained below.
 
@@ -139,11 +150,14 @@ Elist inherits some of `#!python list` type methods, but they may differ from py
 (*If none description provided, then methods's return type and signature does not differ from default python `#!python list` methods)
 
     Elist.load(self, *args, **kwargs)
-        "Loads all items of Elist contents like Epure, Elist, Eset 
-         values from DataPromises"
+        """Loads all items of Elist contents like Epure, Elist, Eset 
+         values from DataPromises"""
 
     Elist.ids(self)
-        "Returns data_id's from all stored items in Elist"
+        """Returns data_id's from all stored items in Elist if Elist was saved"""
+
+    Elist.save(self)
+        """Saves Elist to DB"""
 
     Elist.append(item)
 
@@ -178,8 +192,135 @@ Eset is convinient when you:
 - do not care about the order of stored items 
 - can be used by many people simultaneously
 
-In DB Eset is stored by default in ecollection scheme in two ways:
 
-1. When Eset is a bound field of class
+!!! info "Loading Eset"
 
-2. When Eset is not bounded to any class, it is stored in a way like elist: `"eset__"` + "{name of your type}" e.g. `"eset__int"`, `"eset__new_epure"`
+    When Eset is retrived from DB - Eset is empty by default, so it needs be loaded by `.load()` method of Eset.
+
+    <!-- Because Eset can store big chunks of data, `.load()` is useful because you can `.load()` parts of data you stored based on your specified condition -->
+
+    ??? example "Using `.load()`"
+        ```python hl_lines="13 17"
+        @epure()
+        class MyEpureCls:
+            my_eset = Eset[str](["up", "down"])
+
+        my_inst = MyEpureCls()
+
+        my_inst.save()
+
+        data_id = my_inst.data_id
+
+        res = MyEpureCls.resource.read(data_id=data_id)
+
+        res[0].my_eset # {}
+
+        res[0].my_eset.load()
+
+        res[0].my_eset # {"up", "down"}
+        ```
+
+
+??? info "The way Eset is stored in DB"
+    In DB Eset is stored by default in ecollection scheme in two ways:
+
+    1) When Eset is a bound field of "epurized" (1) class, collection will be saved in table: `"eset__"` + "{name of your field}" e.g. `"my_epure_cls__my_eset"`
+    { .annotate }
+
+    1. "epurized" class is class that was decorated by `@epure()` decorator
+
+    ??? example "Example of bounded Eset to epurized class"
+        ```python
+        @epure()
+        class MyEpureCls:
+            myElist:Eset[str] = Elist[str](["puss", "in", "boots"]) # this will be stored as "my_epure_cls__myelist"
+        ```
+        
+
+    (in cases when type is primitive like `str` or `int`, it will be stored in number 2) way)
+        
+
+    2) When Eset is not bounded to any class, it is stored in a way like elist: `"eset__"` + "{name of your type}" e.g. `"eset__int"`, `"eset__new_epure"`
+
+    ??? example "Example of not bounded to class Eset"
+        ```python
+        class MyBasicCls:
+            my_elist_epure:Eset[MyEpureCls] # this will be stored as "eset__my_epure_cls"
+        ```
+
+        or
+
+        ```python
+        my_elist_epure:Eset[str] # this will be stored as "eset__str"
+        ```
+
+???+ example "Example of creating Eset, saving, deleting its contents"
+
+    ```python
+    from epure import Elist, Eset, epure
+
+    @epure()
+    class SomeEpureEset:
+        my_eset_field:Eset[str] = Eset[str](["knowledge", "is", "power"])
+
+    my_inst = SomeEpureElist()
+
+    my_inst.save() # this will triger recursive save for
+                   # all esets, elists and its internal epure vals to save()
+
+    data_id = my_inst.data_id
+
+    res = SomeEpureElist.resource.read(data_id = data_id)
+
+    res[0].my_eset_field.load()
+
+    res[0].remove("knowledge")
+    ```
+
+### Eset methods:
+
+(*If none description provided, then methods's return type and signature does not differ from default python `#!python set` methods)
+
+    Eset.load()
+        """Loads all items of Eset contents like Epure, Elist, Eset 
+         values from DataPromises"""
+    
+    Eset.ids()
+        """Returns data_id's from all stored items in Elist if Elist was saved"""
+
+    Eset.save()
+        """Saves Elist to DB"""
+    
+    Eset.add(item)
+
+    Eset.clear()
+
+    Eset.copy() (In progress)
+
+    Eset.difference() (In progress)
+
+    Eset.difference_update() (In progress)
+
+    Eset.discard(val)
+
+    Eset.intersection() (In progress)
+
+    Eset.intersection_update() (In progress)
+
+    Eset.isdisjoint() (In progress)
+
+    Eset.issubset() (In progress)
+
+    Eset.issuperset() (In progress)
+
+    Eset.pop()
+
+    Eset.remove(val)
+
+    Eset.symmetric_difference() (In progress)
+
+    Eset.symmetric_difference_update() (In progress)
+    
+    Eset.union() (In progress)
+
+    Eset.update(_set)
