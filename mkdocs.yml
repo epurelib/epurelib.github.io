@@ -58,6 +58,7 @@ nav:
     - Serialization and Deserialization: 
       - Serialization with to_dict and to_json: ./learn/serialization_deserialization/serialization.md
       - Deserialization with from_dict and from_json: ./learn/serialization_deserialization/deserialization.md
+    - "@escript decorator": ./learn/escript_decorator.md
   - Help: help.md
   - Contribute: contribute.md
   - Release Notes: release_notes.md
