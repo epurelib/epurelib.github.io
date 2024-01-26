@@ -1,4 +1,4 @@
-## magic `#!python @escript` decorator
+## Magic `#!python @escript` decorator
 
 `#!python @escript` decorator is a method-decorator, that is used for decorating methods of "epurized" (1) class
 { .annotate }
@@ -67,7 +67,7 @@ Lets see an example:
 
     In resulting list we will get cats with more than one tail and those who doesnt like catnip. Like expected!
 
-All the avalible methods (e.g. `==`, `like`, `is_not`, `_is` etc),  for `self.md` can be found in <a href="">Model section</a>
+All the avalible methods (e.g. `==`, `like`, `is_not`, `_is` etc),  for `self.md` can be found in <a href="">Column Proxy methods section</a>
 
 
 
