@@ -21,7 +21,7 @@
 
 Lets see an example:
 
-??? example "Retrieving cats with more than one tail using `#!python @escript`"
+???+ example "Retrieving cats with more than one tail using `#!python @escript`"
     For example you have a `#!python class Cat`:
     ```python
     @epure()
@@ -66,6 +66,13 @@ Lets see an example:
         Then we are taking `.md` <a href="">Model</a> of Cat class and taking <a href="">Column</a> `tail_cntr` and comparing it to more than 1
 
     In resulting list we will get cats with more than one tail and those who doesnt like catnip. Like expected!
+
+    ??? tip "What will be result SQL of this query"
+        ```sql 
+        SELECT * 
+        FROM public.cat 
+        WHERE cat.tail_cntr > 1 AND cat.likes_catnip = False
+        ```
 
 All the avalible methods (e.g. `==`, `like`, `is_not`, `_is` etc),  for `self.md` can be found in <a href="">Column Proxy methods section</a>
 
