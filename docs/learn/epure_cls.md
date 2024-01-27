@@ -18,7 +18,7 @@ For type-hinting class attributes Epure supports:
 !!! info "Supported types"
     ```python
     from uuid import UUID
-    from epure import @epure, Elist, Eset
+    from epure import epure, Elist, Eset
 
     @epure()
     class SomeEpureCls:
