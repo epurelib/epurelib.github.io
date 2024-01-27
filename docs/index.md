@@ -63,9 +63,9 @@ We will be using PostgresSQL for this example.
 Read more about supported DB's here :
 
 !!! warning
-    Note that you need to use __type__ __hints__ for class attributes in order to save class to DB.
+    Note that you need to use __type hints__ for class attributes in order to save class to DB. Class attribute without a type-hint will not be saved in DB.
 
-```python hl_lines="1 7 13 16 25 31"
+```python hl_lines="1 8 15 18 27 33"
 from epure import epure, escript, GresDB
 from ..epure.generics import NotNull # (1)!
 from typing import List, Dict
@@ -252,22 +252,11 @@ This section of library appeared mainly because there is no adequate solution fo
 
 Save this as example.ini file:
 
-``` title="example.ini"
+```ini title="example.ini"
 db_host = localhost
 
 [general]
 db_port = 5432
-
-[public]
-
-[section1]
-db_port = 323
-
-[section1.section2]
-db_user = user
-
-[section1.section2.section3]
-pi_begins = 3.14159265359
 
 [epure.best.app.forever]
 friend = true
@@ -288,7 +277,7 @@ config.epure.best.app.forever.friend # -> True
 
 ```
 
-Learn more about Ini Parser here: link
+Learn more about Ini Parser here: <a href="">link</a>
 
 Developers
 -----

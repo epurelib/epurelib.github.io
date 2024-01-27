@@ -50,17 +50,20 @@ markdown_extensions:
 
 nav:
   - Welcome to Epure: index.md
-  - Features: features.md
+  # - Features: features.md
   - Learn: 
     - ./learn/learn.md
     - Eset and Elist: ./learn/elist_eset.md
     - Join: ./learn/joins.md
-    - Serialization and Deserialization: 
-      - Serialization with to_dict and to_json: ./learn/serialization_deserialization/serialization.md
-      - Deserialization with from_dict and from_json: ./learn/serialization_deserialization/deserialization.md
     - "@escript decorator": ./learn/escript_decorator.md
     - Domain and Model: ./learn/domain_model.md
     - Supported ColumnProxy methods with @escript decorator: ./learn/column_proxy_methods.md
+    - More about IniFile parser: ./learn/ini_parser.md
+    - "@epure() decorator, its supported types and overriding default storing for epure": ./learn/epure_cls.md
+    - Reading from resource with `.read()`: ./learn/epure_read.md
+    - Serialization and Deserialization: 
+      - Serialization with to_dict and to_json: ./learn/serialization_deserialization/serialization.md
+      - Deserialization with from_dict and from_json: ./learn/serialization_deserialization/deserialization.md
   - Help: help.md
   - Contribute: contribute.md
   - Release Notes: release_notes.md
