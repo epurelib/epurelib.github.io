@@ -7,11 +7,11 @@ Model of a class can be accessed through the `.md` field
 
 !!! warning "Accessing `.dom`, `.md` fields and `.model()` method"
 
-    `.dom`, `.md` fields and `.model()` method can be only accessed in method of "epurized" class, decorated by @escript function. Read more about @escript <a href="">here</a>
+    `.dom`, `.md` fields and `.model()` method can be only accessed in method of "epurized" class, decorated by @escript function. Read more about @escript <a href="https://epurelib.github.io/0.1/learn/escript_decorator/#magic-escript-decorator">here</a>
 
 You can get ColumnProxy objects by accessing fields of Model
 
-Through ColumnProxy object you then can create all kinds of queries. Read more about examples and methods of ColumnProxy that are used with `#!python @escript` decorator <a href="">here</a>
+Through ColumnProxy object you then can create all kinds of queries. Read more about examples and methods of ColumnProxy that are used with `#!python @escript` decorator <a href="https://epurelib.github.io/0.1/learn/column_proxy_methods/">here</a>
 
 ??? example "Getting ColumnProxy field from Model"
 
@@ -61,7 +61,7 @@ Domain comes from the idea of "DDD" or Domain Driven Design, in Epure, Domain re
 
 !!! warning "Accessing `.dom`, `.md` fields and `.model()` method"
 
-    `.dom`, `.md` fields and `.model()` method can be only accessed in method of "epurized" class, decorated by @escript function. Read more about @escript <a href="">here</a>
+    `.dom`, `.md` fields and `.model()` method can be only accessed in method of "epurized" class, decorated by @escript function. Read more about @escript <a href="https://epurelib.github.io/0.1/learn/escript_decorator/#magic-escript-decorator">here</a>
 
 You can dynamically interact with Domain object by getting Models from it.
 

@@ -13,7 +13,7 @@ For type-hinting class attributes Epure supports:
 
 - most of primitive types of `#!python python` 
 - type: `#!python UUID` 
-- other "epurized" classes and <a>Elist</a> and <a>Eset</a> Generic types
+- other "epurized" classes and <a href="https://epurelib.github.io/0.1/learn/elist_eset/#elist">Elist</a> and <a href="https://epurelib.github.io/0.1/learn/elist_eset/#eset">Eset</a> Generic types
 
 !!! info "Supported types"
     ```python

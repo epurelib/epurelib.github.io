@@ -56,7 +56,7 @@ def to_dict(
     ) -> Dict[str, Any]:
 ```
 
-1. `full` is parameter that you can pass as `#!python True` if you want object to be serialized fully, to its end. Check out example <a>here</a>
+1. `full` is parameter that you can pass as `#!python True` if you want object to be serialized fully, to its end. Check out example <a href="https://epurelib.github.io/0.1/learn/serialization_deserialization/serialization/#14-using-to_dict-with-full-true">here</a>
 2. `#!python lambda_func` is explained more below in note section
 3. `#!python _rec_depth` is purely private field for `#!python .to_dict()`. Please avoid using it.
 
@@ -76,7 +76,7 @@ Let's look more closely to the parameters for `#!python .to_dict()`:
 
         This `#!python lambda` parameter is used to specify what fields of Epure object you want to serialize as `#!python dict` or `#!python UUID` in resulting dictionary. 
         
-        By default `lambda_func` is set to serialize fields of object's first level that are of type <a>`Epure`</a>, <a>`Elist`</a> or <a>`Eset`</a> to <a>`UUID`</a> value. If you specify them explicitly in `lambda_func` they will be serialized as `#!python dict`.
+        By default `lambda_func` is set to serialize fields of object's first level that are of type <a>`Epure`</a>, <a href="https://epurelib.github.io/0.1/learn/elist_eset/#elist">`Elist`</a> or <a href="https://epurelib.github.io/0.1/learn/elist_eset/#eset">`Eset`</a> to <a>`UUID`</a> value. If you specify them explicitly in `lambda_func` they will be serialized as `#!python dict`.
 
         If you want to use your own custom `#!python lambda` function and pass it to `#!python .to_dict()` - it __must__ follow some requirements:
 
@@ -135,7 +135,7 @@ Let's look more closely to the parameters for `#!python .to_dict()`:
             And `#!python rec_depth < 2` will serialize children of object (of type Epure) and children of children (that are of type Epure as well)
 
         !!! example 
-            More examples for using custom lambdas <a href="http://127.0.0.1:8000/epure-docs/learn/serialization_deserialization/#13-passing-custom-lambda-function-to-to_dict">here</a>
+            More examples for using custom lambdas <a href="https://epurelib.github.io/0.1/learn/serialization_deserialization/serialization/#13-passing-custom-lambda-function-to-to_dict">here</a>
 
 <!-- !!! note
     `#!python to_dict()` method takes `#!python lambda` (lambda_func) function as parameter in order for you to specify what field 
@@ -268,7 +268,7 @@ And then result will be:
 
 So for example we want to get serialized `#!python dict` where:
 
-- All children of object of type <a>`Elist`</a> to be serialized __not__ as `#!python dict`, but as `UUID`.
+- All children of object of type <a href="https://epurelib.github.io/0.1/learn/elist_eset/#elist">`Elist`</a> to be serialized __not__ as `#!python dict`, but as `UUID`.
 
 - First and second level children of object of type `Epure` to be serialized as `#!python dict` and __not__ `UUID`.
 

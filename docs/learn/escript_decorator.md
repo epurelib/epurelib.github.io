@@ -17,7 +17,7 @@
     ```
 
 !!! info
-    Only in method decorated by @escript, can be used instances of <a href="">self.dom</a>, <a href="">self.md</a> and method <a href="">self.model</a>
+    Only in method decorated by @escript, can be used instances of <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">self.dom</a>, <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">self.md</a> and method <a href="">self.model</a>
 
 Lets see an example:
 
@@ -63,7 +63,7 @@ Lets see an example:
         ```
         First, because method is a classmethod, in cat variable will be assigned class.
 
-        Then we are taking `.md` <a href="">Model</a> of Cat class and taking <a href="">Column</a> `tail_cntr` and comparing it to more than 1
+        Then we are taking `.md` <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> of Cat class and taking <a href="https://epurelib.github.io/0.1/learn/column_proxy_methods/">Column</a> `tail_cntr` and comparing it to more than 1
 
     In resulting list we will get cats with more than one tail and those who doesnt like catnip. Like expected!
 
@@ -74,7 +74,7 @@ Lets see an example:
         WHERE cat.tail_cntr > 1 AND cat.likes_catnip = False
         ```
 
-All the avalible methods (e.g. `==`, `like`, `is_not`, `_is` etc),  for `self.md` can be found in <a href="">Column Proxy methods section</a>
+All the avalible methods (e.g. `==`, `like`, `is_not`, `_is` etc),  for `self.md` can be found in <a href="https://epurelib.github.io/0.1/learn/column_proxy_methods/">Column Proxy methods section</a>
 
 
 

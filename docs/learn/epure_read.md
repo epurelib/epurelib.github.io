@@ -9,7 +9,7 @@ def read(self, *args, **kwargs) -> Any
 
 Read is called from resource of table property (table property is called from object of epure)
 
-Read takes either key-word arguments or result of creating query with `#!python @escript` decorator (read abput `#!python @escript` <a href="">here</a>):
+Read takes either key-word arguments or result of creating query with `#!python @escript` decorator (read abput `#!python @escript` <a href="https://epurelib.github.io/latest/learn/escript_decorator/#magic-escript-decorator">here</a>):
 
 ???+ example "Using `#!python .read()`"
     ```python

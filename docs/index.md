@@ -22,7 +22,7 @@ hide:
 
 ---
 
-**Documentation**: <a href="https://epurelib.github.io/docs/" target="_blank">https://epurelib.github.io/docs/</a>
+**Documentation**: <a href="https://epurelib.github.io/docs/" target="_blank">https://epurelib.github.io/latest/</a>
 
 **Source Code**: <a href="https://github.com/nagvalhm/epure" target="_blank">https://github.com/nagvalhm/epure</a>
 
@@ -148,7 +148,7 @@ res1[0].str_attr # -> "Hello World!"
 Advanced example with Join
 -----
 
-Check out advanced example here :arrow_right:: <a href="http://127.0.0.1:8000/epure-docs/learn/joins/#advanced-example-with-join">http://127.0.0.1:8000/epure-docs/learn/joins/#advanced-example-with-join</a>
+Check out advanced example here :arrow_right:: <a href="https://epurelib.github.io/latest/learn/joins/#advanced-example-with-two-joins">https://epurelib.github.io/latest/learn/joins/#advanced-example-with-two-joins</a>
 
 Elist and Eset
 -----
@@ -241,7 +241,7 @@ eset_ex_read.eset_str.load() # (2)!
 Serialization and deserialization of Epure objects
 -----
 
-Check out serialization and deserialization example here :arrow_right:: <a href="http://127.0.0.1:8000/epure-docs/learn/joins/#advanced-example-with-join">http://127.0.0.1:8000/epure-docs/learn/joins/#advanced-example-with-join</a>
+Check out serialization and deserialization example here :arrow_right:: <a href="https://epurelib.github.io/latest/learn/serialization_deserialization/serialization/">https://epurelib.github.io/latest/learn/serialization_deserialization/serialization/</a>
 
 Ini File Parser
 -----
@@ -277,7 +277,7 @@ config.epure.best.app.forever.friend # -> True
 
 ```
 
-Learn more about Ini Parser here: <a href="">link</a>
+Learn more about Ini Parser here: <a href="https://epurelib.github.io/latest/learn/ini_parser/">link</a>
 
 Developers
 -----

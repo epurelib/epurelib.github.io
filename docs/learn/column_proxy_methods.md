@@ -1,6 +1,6 @@
 <!-- ## Supported ColumnProxy methods with @escript decorator -->
 
-Listed below methods are supported in decorated with `#!python @escript` methods of "epurized" class such as those described in `#!python @escript` section <a href="">here</a>
+Listed below methods are supported in decorated with `#!python @escript` methods of "epurized" class such as those described in `#!python @escript` section <a href="https://epurelib.github.io/0.1/learn/escript_decorator/#magic-escript-decorator">here</a>
 
 Methods below demonstrate how operators in Epure will be translated in SQL and the class used in examples will be declared here:
 

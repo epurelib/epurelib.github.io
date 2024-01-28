@@ -10,9 +10,9 @@ def join(
     ) -> JoinResource:
 ```
 
-`.join()` is a method of <a>Model</a>, that joins model(s) by specific `on_clause` and `join_type`
+`.join()` is a method of <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a>, that joins model(s) by specific `on_clause` and `join_type`
 
-- `model` parameter takes <a>Model</a> object that you want to join
+- `model` parameter takes <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> object that you want to join
 
 - `on_clause` specifies by which id (e.g. data_id) tables will be joined
 
@@ -117,10 +117,10 @@ We will create 3 classes (TestShippmentOffice, TestCustomer, TestOrder) and crea
     TestOrder(bob_id, "2022-05-11", office1_id).save()
     ```
 
-    1. Here we are accessing the md: <a href="">Model</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a>here</a>
-    2. Here we are accessing dom: <a href="">Domain</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a>here</a>
-    3. This way we get Model object of class <span style="color:#00A550;">TestOrder</span> by accessing dom object. Read more about it <a>here</a>
-    4. This `model()` method of Model might be more convinient for you if you have class instance in reach. Read more about it <a>here</a>
+    1. Here we are accessing the md: <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
+    2. Here we are accessing dom: <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">Domain</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">here</a>
+    3. This way we get Model object of class <span style="color:#00A550;">TestOrder</span> by accessing dom object. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
+    4. This `model()` method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model-method">here</a>
     5. Check out about Epure Generics more <a href="">here</a>
 
 
@@ -162,10 +162,10 @@ Lets look at our `#!python classmethod` a bit closer:
     ...
     ```
 
-    1. Here we are accessing the md: <a href="">Model</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a>here</a>
-    2. Here we are accessing dom: <a href="">Domain</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a>here</a>
-    3. This way we get Model object of class <span style="color:#00A550;">TestOrder</span> by accessing dom object. Read more about it <a>here</a>
-    4. This `model()` method of Model might be more convinient for you if you have class instance in reach. Read more about it <a>here</a>
+    1. Here we are accessing the md: <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
+    2. Here we are accessing dom: <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">Domain</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">here</a>
+    3. This way we get Model object of class <span style="color:#00A550;">TestOrder</span> by accessing dom object. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
+    4. This `model()` method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model-method">here</a>
 
     At line `#!python 14-15`:
 
@@ -177,7 +177,7 @@ Lets look at our `#!python classmethod` a bit closer:
     join_res = md.join(test_order_md, md.data_id == test_order_md.test_customer_id) 
     ```
 
-    Because TestOrder has `test_customer_id` field, we can use it as `on_clause` to join it to our TestCustomer <a href="">Model</a>
+    Because TestOrder has `test_customer_id` field, we can use it as `on_clause` to join it to our TestCustomer <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a>
 
     At line `#!python 17-18`:
 
@@ -186,7 +186,7 @@ Lets look at our `#!python classmethod` a bit closer:
         test_order_md.office_id == test_office_md.data_id) 
     ```
 
-    After we joined two Models, we can additionally join another <a href="">Model</a> TestOffice using `office_id`
+    After we joined two Models, we can additionally join another <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> TestOffice using `office_id`
 
     At line `#!python 20-23`:
 
@@ -197,7 +197,7 @@ Lets look at our `#!python classmethod` a bit closer:
         test_office_md.adress == "Washington str.") # header
     ```
 
-    <a href="">read()</a> here takes:
+    <a href="https://epurelib.github.io/0.1/learn/epure_read/#read">read()</a> here takes:
 
     - `header` as `[test_office_md.adress, md.name, md, test_order_md, md.country]`, in this case we want to retrive address, name, the full Model itself, TestOrder Model, country and from these values classes will be initialized. 
     
@@ -205,7 +205,7 @@ Lets look at our `#!python classmethod` a bit closer:
         
     and it will return list of list with classes `[[TestShippmentOffice, TestCustomer, TestOrder], ...]` that were joined on `test_customer_id` and TestOffice object has `adress = "Washington str."`
 
-    Read about `read()` more <a>here</a>
+    Read about `read()` more <a href="https://epurelib.github.io/0.1/learn/epure_read/#read">here</a>
 
     At line `#!python 25-26`:
 

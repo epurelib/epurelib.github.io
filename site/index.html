@@ -8,9 +8,11 @@
       
       
       
-        <link rel="canonical" href="https://epurelib.github.io/epure-docs/0.2/">
+        <link rel="canonical" href="https://epurelib.github.io/epure-docs/0.1/">
       
       
+      
+        <link rel="next" href="learn/learn/">
       
       
       <link rel="icon" href="assets/images/favicon.png">
@@ -18,11 +20,14 @@
     
     
       
-        <title>Epure Docs</title>
+        <title>Epure</title>
       
     
     
       <link rel="stylesheet" href="assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -41,6 +46,8 @@
       
     
     
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -51,7 +58,12 @@
   </head>
   
   
-    <body dir="ltr">
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -60,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-mkdocs" class="md-skip">
+        <a href="#installing" class="md-skip">
           Skip to content
         </a>
       
@@ -88,14 +100,11 @@
     
       
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Epure Docs" class="md-header__button md-logo" aria-label="Epure Docs" data-md-component="logo">
+    <a href="." title="Epure" class="md-header__button md-logo" aria-label="Epure" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="assets/img/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -106,21 +115,21 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Epure Docs
+            Epure
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Welcome to MkDocs
+              Welcome to Epure
             
           </span>
         </div>
       </div>
     </div>
     
+      
     
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
@@ -183,6 +192,105 @@
       
         
           
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
+        
+  
+    
+  
+  Welcome to Epure
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="learn/learn/" class="md-tabs__link">
+          
+  
+    
+  
+  Learn
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="help/" class="md-tabs__link">
+        
+  
+    
+  
+  Help
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="contribute.md" class="md-tabs__link">
+        
+  
+    
+  
+  Contribute
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="release_notes/" class="md-tabs__link">
+        
+  
+    
+  
+  Release Notes
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -190,22 +298,25 @@
           
             
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
 
 
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="." title="Epure Docs" class="md-nav__button md-logo" aria-label="Epure Docs" data-md-component="logo">
-      
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Epure" class="md-nav__button md-logo" aria-label="Epure" data-md-component="logo">
+      
+  <img src="assets/img/logo.svg" alt="logo">
 
     </a>
-    Epure Docs
+    Epure
   </label>
   
     <div class="md-nav__source">
@@ -235,14 +346,12 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    Welcome to MkDocs
+    Welcome to Epure
   </span>
   
 
@@ -253,7 +362,7 @@
         
   
   <span class="md-ellipsis">
-    Welcome to MkDocs
+    Welcome to Epure
   </span>
   
 
@@ -265,8 +374,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -275,18 +382,153 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#installing" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      Installing
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#a-simple-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      A Simple Example
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A Simple Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-epurized-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Epurized Class
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-escript-with-use-of-magic-debugger" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. @escript with use of magic debugger
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-shortcut-read-with-kwarg-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. shortcut read() with kwarg parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-example-with-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced example with Join
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elist-and-eset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elist and Eset
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Elist and Eset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eset
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serialization-and-deserialization-of-epure-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serialization and deserialization of Epure objects
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ini-file-parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ini File Parser
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ini File Parser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-small-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      A small example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Developers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sponsor-us" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sponsor us
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Links
     </span>
   </a>
   
@@ -300,6 +542,420 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Learn
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Learn
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="learn/learn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Learn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="learn/elist_eset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Eset and Elist
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="learn/joins/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Join
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="learn/escript_decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    @escript decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="learn/domain_model/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Domain and Model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="learn/column_proxy_methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Supported ColumnProxy methods with @escript decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="learn/ini_parser/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    More about IniFile parser
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="learn/epure_cls/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    @epure() decorator, its supported types and overriding default storing for epure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="learn/epure_read/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reading from resource with `.read()`
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Serialization and Deserialization
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            Serialization and Deserialization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="learn/serialization_deserialization/serialization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Serialization with to_dict and to_json
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="learn/serialization_deserialization/deserialization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deserialization with from_dict and from_json
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="help/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Help
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contribute.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribute
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="release_notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -307,6 +963,8 @@
               </div>
             
             
+              
+                
               
               <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
@@ -317,8 +975,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -327,18 +983,153 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#installing" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
+      Installing
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+  <a href="#a-simple-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Project layout
+      A Simple Example
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A Simple Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-epurized-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Epurized Class
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-escript-with-use-of-magic-debugger" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. @escript with use of magic debugger
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-shortcut-read-with-kwarg-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. shortcut read() with kwarg parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-example-with-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced example with Join
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elist-and-eset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elist and Eset
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Elist and Eset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eset
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serialization-and-deserialization-of-epure-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serialization and deserialization of Epure objects
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ini-file-parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ini File Parser
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ini File Parser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-small-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      A small example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Developers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sponsor-us" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sponsor us
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Links
     </span>
   </a>
   
@@ -362,21 +1153,234 @@
   
 
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a> or dont ;) or go dance.</p>
-<h2 id="commands">Commands</h2>
+  <h1>Welcome to Epure</h1>
+
+<p align="center">
+<svg width="182" height="35" viewBox="0 0 182 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect width="182" height="35" fill="url(#pattern0)"/>
+<defs>
+<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_331_118" transform="scale(0.00243427 0.0126582)"/>
+</pattern>
+<image id="image0_331_118" width="411" height="79" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZsAAABPCAYAAAA9QGh1AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAZgSURBVHgB7d2Bbdw2FMbxL4UHyAZVJ7AzQZUJkkzQ8wRpJ/B5ArsTdISkE/g2cDLBXSawN3D1IBsuXNt9vHuUSOr/A4gggSCcXh75TjxSeiPpTvB6o/zeDq0f2q9D64Z2cv9vb9UmT0y9OTrF/89cSogBuflfjJ9OR0Ip+qGd6bEDA6XoRW7iQBSb+X0c2oXGb4pASchNhKHYzKcb2l8avzUCJelEbiLYT8IcPg/tWnRmlIfcRBYUm+nZ3PelmPtGechNZEOxmZZ15rWA8pCbyIpiMx06M0pFbiI7W0fOOnG/ffcw2Dz4pfAc9tn45IoBufky9tkEotik2Wcw6zT+4Mo8+PMoNj45YtCJ3HwNxQZVsc58t0e70Ti10avOfQ7e65z6XLXKEQNyc7n5hMaslN6Rt2pj2Wlkh2ZwiI/BKuGc5CZQOOucKZ25pWWnkR2awSE+BuTmsvMJDbFHfaR05rXaEtmhGRxiY0Bukk9oyBelfWtsTWSHZnCIjQG5ST6hETbd4E3ordpcDRTZoRkc4mJAbpJPaEjKNMVKbYrs0AwOcTEgN8knNMSmHrzfHFtFsYkVFQNyk3yaBY+ryePYedzfAqZFbmIWFJs8vPPcXwVMi9wEGmI7rD236S0/JoRptFhRMSA3ySc0ZOnJ7F3xdOM8H4NDXAzIzdjchBPTaMjhxHncTsC0yM2ZUGyQw0fncbcCpkVuzoRigxw+OI/7LmBa5OZMKDaItpL/sfMbAdNZidxEY5b6I6z9+LqV//q9K56W/qO2YYHAYXLlJjCrpXboC/mvPWUfx1Lj+W8Um8Pkyk1gVkvs0GfyX7c17w+1Sjhnyyg2+8uZm8CsltShbboh5Vujta3SLHGAfIpik26K3ARmtZQO3Sv9jY/WVkqzpAHyJRSbNL2myU1gVq126E5jJz6T/7EnT9u10i1lgHwNxeZ1nebJTTgdqf1OGumNYi0t9rZR7pNQA3LTh/HTiX02mNK5eAwIykRuZkaxwVSsM7f4PnvUj9ycAMUGU7DOvBZQHnJzIhQb5EZnRqnIzQkdCcjDfnBlegIl48f9CVFskMNmaKfiB1eUbX3/57mQHdNoiLTTuHz0vSg0qMNa494cZGb7RriV9PPus1lSTG267JvGb4cb5eGNZ/Q+qJJExYD+/rw/tN+UL/F0otikWXqxudVjcfmhsbhslP+thhQbik1ulsPvlH5HTjwxq1YfCTIX4snjav6PPXSz13h3stV+j6u5ElAZBsdYxJNik2ql/YoOrxdAVRgcYxFPis0+7G7H7nRSig0P40RVGBxjEU+KzSHWSis4vYBKMDjGIp4Um0Ol3OFcCagEg2Ms4kmxOZRNqW3lu/ab++MRiE2dAJbAljafOo99WNmGQBQbAEuxkX9PWC+EotgAWJI/ncd1QiiKDYAl2TiPOxZCUWwALMnOeRwLBIK1/CypOXlX8xB/H+IZFwNiSQxmwZ0NACA7ig0AIDuKDQAgO4oNACA7ig1q4N2I97Pa5F0ZlfsldsDeKDaogXcQ/UVtOnEetxNQKIoNavDNeVyvNnlf6MWdDYpFsUENfjiP+6w2fXAe911AoSg2qMHGeVyLT+tdyf+cro0ALArvX4llRcTeMeKJ6VbtPGok5R0sd/JdN7lJDNAQkjnelfxxvVAb7Dq81/zVeU5ykxigISRzvF7+uFo7U93s86dcr3cRAblJDNAQkjmPrdIGYLszqG1KzT5vyh2Nta3/9OSmiAEaQjLnYd/e7xKbDcQr1aFXekG1tpIfuUkM0BCSOZ8rpQ/GD0XH7hh6lXO302n8PGfyL4B42q6VhtwkBrOw9zUQVD/v+y28MeV9Gek6jQMsL7caN3G+U9qTA8jN2Bgwfjqxzwa12Q3tXDAWh52AClBsUKNLUXDs+i8FVOSOFj6HG30+PG+t8nMmR1trf+RmbAxKzI9SW1Ufdu7mFX0+vGyt8vMmsq11GHIzNgYl5kipraoPO3fzij4fXve79l/NVUu7ub/OQ5GbsTEoMVeKbKxGS8NqtHJ1Q/si/7tfarIZ2qliFgOQm7ExYPx0YoEAWrHTuAw4alAuwW5on4b2Xqw6Q+W4s0nDnU097GkDv8n/zLBS2N4Ze1mcrTbbKB65yZ3NLCg2aSg29Xl4x4214/u/dypjU+itHouLvSBuc99yvnGT3KTYzOIfpxjyh6R0klYAAAAASUVORK5CYII="/>
+</defs>
+</svg>
+</p>
+
+<p align="center">
+    <em>The purest architecture, intuitive EList, magic debugger, lightweight syntax</em>
+</p>
+
+<hr />
+<p><strong>Documentation</strong>: <a href="https://epurelib.github.io/docs/" target="_blank">https://epurelib.github.io/docs/</a></p>
+<p><strong>Source Code</strong>: <a href="https://github.com/nagvalhm/epure" target="_blank">https://github.com/nagvalhm/epure</a></p>
+<hr />
+<p>Epure is python type-based ORM - you can store and retrieve data having no idea about database, table and columns. 
+All technical details hidden from you. Care only about your business logic.</p>
+<p>Key features:</p>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<li><strong>Easy syntax</strong>: Create tables based on your classes in no time</li>
+<li><strong>Concise</strong>: No more weird and long SQL queries</li>
+<li><strong>Convinient</strong>: many useful and intuitive interfaces</li>
+<li><strong>Lightweight structure</strong>: Contrary to other python ORM - in Epure you have freedom to make structure for your project whatever you like</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
+<h2 id="installing">Installing<a class="headerlink" href="#installing" title="Permanent link">&para;</a></h2>
+<p>Install and update using <a href="https://pip.pypa.io/en/stable/getting-started/"><code>pip</code></a>:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>epure
+</span></code></pre></div>
+<p>Install and update using <a href="https://python-poetry.org/docs/"><code>poetry</code></a>:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gp">$ </span>poetry<span class="w"> </span>add<span class="w"> </span>epure@latest
+</span></code></pre></div>
+<h2 id="a-simple-example">A Simple Example<a class="headerlink" href="#a-simple-example" title="Permanent link">&para;</a></h2>
+<h4 id="creating-epurized-class">Creating Epurized Class<a class="headerlink" href="#creating-epurized-class" title="Permanent link">&para;</a></h4>
+<p>Let's start with simple example for Epure, you will need your DataBase to be up and running.
+We will be using PostgresSQL for this example.
+Read more about supported DB's here :</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that you need to use <strong>type hints</strong> for class attributes in order to save class to DB. Class attribute without a type-hint will not be saved in DB.</p>
+</div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="hll"><span class="kn">from</span> <span class="nn">epure</span> <span class="kn">import</span> <span class="n">epure</span><span class="p">,</span> <span class="n">escript</span><span class="p">,</span> <span class="n">GresDB</span>
+</span></span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span> <span class="nn">..epure.generics</span> <span class="kn">import</span> <span class="n">NotNull</span> <span class="c1"># (1)!</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">GresDb</span><span class="p">(</span><span class="s1">&#39;postgres://postgres:postgres@localhost:5432&#39;</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">log_level</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="c1"># (2)!</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="hll"><span class="nd">@epure</span><span class="p">()</span> <span class="c1"># (3)!</span>
+</span></span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">class</span> <span class="nc">Example</span><span class="p">:</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">int_attr</span><span class="p">:</span><span class="nb">int</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">str_attr</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Hello World!&quot;</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="n">float_attr</span><span class="p">:</span><span class="n">NotNull</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.14</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">generic_list</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="hll">    <span class="nd">@escript</span> <span class="c1"># (4)!</span>
+</span></span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="k">def</span> <span class="nf">get_example_hello_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="p">[</span><span class="n">func</span><span class="p">]</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>        <span class="n">md</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">md</span> <span class="c1"># (5)!</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="hll">        <span class="n">query</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">str_attr</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;Hello Sun!&quot;</span><span class="p">)</span> <span class="c1"># (6)!</span>
+</span></span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>        <span class="c1">#↓↓↓</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>        <span class="c1"># query = &quot;SELECT public.example.str_attr IN (&quot;Hello Sun!&quot;)&quot;</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="c1"># (7)!</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>        <span class="k">return</span> <span class="n">res</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="n">obj1</span> <span class="o">=</span> <span class="n">Example</span><span class="p">()</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="n">obj1</span><span class="o">.</span><span class="n">int_attr</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="hll"><span class="n">obj1</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span></span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="n">obj2</span> <span class="o">=</span> <span class="n">Example</span><span class="p">()</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="n">obj1</span><span class="o">.</span><span class="n">int_attr</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="n">obj1</span><span class="o">.</span><span class="n">int_attr</span> <span class="o">=</span> <span class="s2">&quot;Hello Sun!&quot;</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="hll"><span class="n">obj2</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span></span></code></pre></div>
+<ol>
+<li>Check out more about generic Epure types here: link</li>
+<li>Format of string to connect ('database://user:password@host:port'); Note that there is two ways to connect to db, read here:</li>
+<li><code class="language-python highlight"><span class="nd">@epure</span></code> is metaclass decorator function, that modifies class; more info here: </li>
+<li><code class="language-python highlight"><span class="nd">@escript</span></code> is method decorator for epure decorated classes; more info here:</li>
+<li>note that md (short for <code class="language-python highlight"><span class="n">Model</span></code>) is only avalible in @escript decorated method scope and only; more info here: </li>
+<li>read more about supported sql operators in <code class="language-python highlight"><span class="n">Epure</span></code> like <code class="language-python highlight"><span class="ow">in</span></code> here:</li>
+<li>learn more about <code class="language-python highlight"><span class="n">read</span><span class="p">()</span></code> here:</li>
+</ol>
+<p>Now when your instances saved in DB under the public.example table, we can talk about <strong>creating</strong> <strong>queries</strong> <strong>variations</strong>:</p>
+<h3 id="1-escript-with-use-of-magic-debugger">1. <code class="language-python highlight"><span class="nd">@escript</span></code> with use of magic debugger<a class="headerlink" href="#1-escript-with-use-of-magic-debugger" title="Permanent link">&para;</a></h3>
+<p>Using the declared class above, we now can call <a name="func">its</a> <code class="language-python highlight"><span class="n">get_example_hello_str</span><span class="p">()</span></code> method that will <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>magically</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> return your executed query.</p>
+<p>And it's even compatible with IDE's debugger like VSCode ! <img alt="🤩" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f929.svg" title=":star_struck:" /></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="hll"><span class="n">res2</span> <span class="o">=</span> <span class="n">obj2</span><span class="o">.</span><span class="n">get_example_hello_str</span><span class="p">()</span> <span class="c1"># -&gt; list[list[epure_object]]</span>
+</span></span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">res2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">int_attr</span> <span class="c1"># -&gt; 2</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">res2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">str_attr</span> <span class="c1"># -&gt; &quot;Hello Sun!&quot;</span>
+</span></code></pre></div>
+<h3 id="2-shortcut-read-with-kwarg-parameters">2. shortcut <code class="language-python highlight"><span class="n">read</span><span class="p">()</span></code> with kwarg parameters<a class="headerlink" href="#2-shortcut-read-with-kwarg-parameters" title="Permanent link">&para;</a></h3>
+<p>Alternatively if you know criteria by which you want to read data, you can use this method
+or you have a unique data_id of the object and you want to straight up retrieve it</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">data_id</span> <span class="o">=</span> <span class="n">obj1</span><span class="o">.</span><span class="n">data_id</span> <span class="c1"># -&gt; UUID4 # (1)!</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="hll"><span class="n">res1</span> <span class="o">=</span> <span class="n">obj1</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_id</span><span class="o">=</span><span class="n">data_id</span><span class="p">)</span> <span class="c1"># -&gt; list[list[epure_object]]</span>
+</span></span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">res1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">int_attr</span> <span class="c1"># -&gt; 1</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">res1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">str_attr</span> <span class="c1"># -&gt; &quot;Hello World!&quot;</span>
+</span></code></pre></div>
+<ol>
+<li>data_id is a unique UUID object indentifier that Epure uses to discriminate different objects</li>
+</ol>
+<h2 id="advanced-example-with-join">Advanced example with Join<a class="headerlink" href="#advanced-example-with-join" title="Permanent link">&para;</a></h2>
+<p>Check out advanced example here <img alt="➡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/27a1.svg" title=":arrow_right:" />: <a href="http://127.0.0.1:8000/epure-docs/learn/joins/#advanced-example-with-join">http://127.0.0.1:8000/epure-docs/learn/joins/#advanced-example-with-join</a></p>
+<h2 id="elist-and-eset">Elist and Eset<a class="headerlink" href="#elist-and-eset" title="Permanent link">&para;</a></h2>
+<h3 id="elist">Elist<a class="headerlink" href="#elist" title="Permanent link">&para;</a></h3>
+<p>Elist is really convenient in terms of using easy retrievable data collection.</p>
+<p>You can look at it like strictly typed list which guarantees order with idea of simple saving and retrieving its contents from DB.</p>
+<p>Elist can guarantee order of objects when is used by user at a time, in cases of big system with multiple users please refer to Eset.</p>
+<p>Let's look at an example:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">epure</span> <span class="kn">import</span> <span class="n">epure</span><span class="p">,</span> <span class="n">Elist</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="hll"><span class="nd">@epure</span><span class="p">()</span>
+</span></span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">class</span> <span class="nc">Example</span><span class="p">:</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">int_attr</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="n">str_attr</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Hello World!&quot;</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="k">class</span> <span class="nc">ElistExample</span><span class="p">:</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="n">elist_str</span><span class="p">:</span><span class="n">Elist</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Elist</span><span class="p">[</span><span class="nb">str</span><span class="p">]([</span><span class="s2">&quot;Like&quot;</span><span class="p">,</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;piece&quot;</span><span class="p">,</span> <span class="s2">&quot;of&quot;</span><span class="p">,</span> <span class="s2">&quot;cake&quot;</span><span class="p">])</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="n">elist_epure</span><span class="p">:</span><span class="n">Elist</span><span class="p">[</span><span class="n">Example</span><span class="p">]</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="n">ex1</span> <span class="o">=</span> <span class="n">Example</span><span class="p">()</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="n">ex1</span><span class="o">.</span><span class="n">int_attr</span> <span class="o">=</span> <span class="mi">68</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="n">ex2</span> <span class="o">=</span> <span class="n">Example</span><span class="p">()</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="n">elist_ex</span> <span class="o">=</span> <span class="n">ElistExample</span><span class="p">()</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="n">elist_ex</span><span class="o">.</span><span class="n">elist_epure</span> <span class="o">=</span> <span class="n">Elist</span><span class="p">[</span><span class="n">Example</span><span class="p">]([</span><span class="n">ex1</span><span class="p">,</span> <span class="n">ex2</span><span class="p">])</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="n">elist_ex</span><span class="o">.</span><span class="n">save</span><span class="p">()</span> <span class="c1"># (1)!</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="n">elist_ex_read</span> <span class="o">=</span> <span class="n">ElistExample</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_id</span> <span class="o">=</span> <span class="n">elist_ex</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="n">elist_ex_read</span><span class="o">.</span><span class="n">elist_str</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c1"># -&gt; &quot;cake&quot;</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="n">elist_ex_read</span><span class="o">.</span><span class="n">elist_epure</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">int_attr</span> <span class="c1"># -&gt; 68</span>
+</span></code></pre></div>
+<ol>
+<li>Saving this Epure instance with Elist field will triger saving for Elist</li>
+</ol>
+<h3 id="eset">Eset<a class="headerlink" href="#eset" title="Permanent link">&para;</a></h3>
+<p>Eset is similar to Elist, though it does not guarantee order of its stored contents.</p>
+<p>It is convinient in cases when you need store big chunks of data. You can then easily retrieve part of data stored in it based on criteria specified</p>
+<p>This is in a way our interpretation of many2many field.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="hll"><span class="kn">from</span> <span class="nn">epure</span> <span class="kn">import</span> <span class="n">epure</span><span class="p">,</span> <span class="n">Eset</span>
+</span></span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="k">class</span> <span class="nc">Example</span><span class="p">:</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">int_attr</span><span class="p">:</span><span class="nb">complex</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">7</span><span class="n">j</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">str_attr</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Hello Sky!&quot;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="k">class</span> <span class="nc">EsetExample</span><span class="p">:</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    <span class="n">eset_str</span><span class="p">:</span><span class="n">Eset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    <span class="n">eset_epure</span><span class="p">:</span><span class="n">Eset</span><span class="p">[</span><span class="n">Example</span><span class="p">]</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="n">ex1</span> <span class="o">=</span> <span class="n">Example</span><span class="p">()</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">ex2</span> <span class="o">=</span> <span class="n">Example</span><span class="p">()</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="n">eset_ex</span> <span class="o">=</span> <span class="n">EsetExample</span><span class="p">()</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="hll"><span class="n">eset_ex</span><span class="o">.</span><span class="n">eset_epure</span> <span class="o">=</span> <span class="n">Eset</span><span class="p">[</span><span class="n">Example</span><span class="p">]((</span><span class="n">ex1</span><span class="p">,</span> <span class="n">ex2</span><span class="p">))</span>
+</span></span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="hll"><span class="n">eset_ex</span><span class="o">.</span><span class="n">eset_str</span> <span class="o">=</span> <span class="n">Eset</span><span class="p">[</span><span class="nb">str</span><span class="p">]((</span><span class="s2">&quot;Grin&quot;</span><span class="p">,</span> <span class="s2">&quot;like&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;Cheshire&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">))</span>
+</span></span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="hll"><span class="n">eset_ex</span><span class="o">.</span><span class="n">save</span><span class="p">()</span> <span class="c1"># (1)!</span>
+</span></span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="n">eset_ex_read</span> <span class="o">=</span> <span class="n">EsetExample</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_id</span> <span class="o">=</span> <span class="n">eset_ex</span><span class="o">.</span><span class="n">data_id</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="n">eset_ex_read</span><span class="o">.</span><span class="n">eset_epure</span> <span class="c1"># -&gt; {}</span>
+</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="n">eset_ex_read</span><span class="o">.</span><span class="n">eset_epure</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="c1"># (2)!</span>
+</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="hll"><span class="n">eset_ex_read</span><span class="o">.</span><span class="n">eset_epure</span> <span class="c1"># -&gt; {&lt;pyt1.tests.resource...0D4245C00&gt;, &lt;pyt1.tests.resource...0D4245CC0&gt;}</span>
+</span></span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>
+</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a><span class="n">eset_ex_read</span><span class="o">.</span><span class="n">eset_str</span> <span class="c1"># -&gt; {}</span>
+</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="n">eset_ex_read</span><span class="o">.</span><span class="n">eset_str</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="c1"># (2)!</span>
+</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="hll"><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">eset_ex_read</span><span class="o">.</span><span class="n">eset_str</span><span class="p">)</span> <span class="c1"># -&gt; &quot;Grin cat like a Cheshire&quot;</span>
+</span></span></code></pre></div>
+<ol>
+<li>Note that saving this will triger recursive saving for all elists and esets bounded to this object</li>
+<li>Eset is empty when is retrieved, you need to use .load() method of Eset to fill the eset with its content.</li>
+</ol>
+<h2 id="serialization-and-deserialization-of-epure-objects">Serialization and deserialization of Epure objects<a class="headerlink" href="#serialization-and-deserialization-of-epure-objects" title="Permanent link">&para;</a></h2>
+<p>Check out serialization and deserialization example here <img alt="➡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/27a1.svg" title=":arrow_right:" />: <a href="http://127.0.0.1:8000/epure-docs/learn/joins/#advanced-example-with-join">http://127.0.0.1:8000/epure-docs/learn/joins/#advanced-example-with-join</a></p>
+<h2 id="ini-file-parser">Ini File Parser<a class="headerlink" href="#ini-file-parser" title="Permanent link">&para;</a></h2>
+<p>This section of library appeared mainly because there is no adequate solution for working with ini files in python</p>
+<h4 id="a-small-example">A small example<a class="headerlink" href="#a-small-example" title="Permanent link">&para;</a></h4>
+<p>Save this as example.ini file:</p>
+<div class="language-ini highlight"><span class="filename">example.ini</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="na">db_host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">localhost</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">[general]</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="na">db_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">5432</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="k">[epure.best.app.forever]</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="na">friend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
+</span></code></pre></div>
+<p>Now we can easily access fields of this ini file:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">epure.files</span> <span class="kn">import</span> <span class="n">IniFile</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">config</span> <span class="o">=</span> <span class="n">IniFile</span><span class="p">(</span><span class="s1">&#39;./example.ini&#39;</span><span class="p">)</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="hll"><span class="n">config</span><span class="o">.</span><span class="n">db_host</span> <span class="c1"># -&gt; &quot;localhost&quot;</span>
+</span></span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="hll"><span class="n">config</span><span class="o">.</span><span class="n">general</span><span class="o">.</span><span class="n">db_port</span> <span class="c1"># -&gt; 5432</span>
+</span></span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="hll"><span class="n">config</span><span class="o">.</span><span class="n">epure</span><span class="o">.</span><span class="n">best</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">forever</span><span class="o">.</span><span class="n">friend</span> <span class="c1"># -&gt; True</span>
+</span></span></code></pre></div>
+<p>Learn more about Ini Parser here: <a href="">link</a></p>
+<h2 id="developers">Developers<a class="headerlink" href="#developers" title="Permanent link">&para;</a></h2>
+<p>Nikita Umarov (Pichugin), 
+Pavel Pichugin</p>
+<h2 id="sponsor-us">Sponsor us<a class="headerlink" href="#sponsor-us" title="Permanent link">&para;</a></h2>
+<h2 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Documentation: https://github.com/nagvalhm/epure/blob/main/README.md</li>
+<li>Changes: https://github.com/nagvalhm/epure</li>
+<li>PyPI Releases: https://pypi.org/project/epure/</li>
+<li>Source Code: https://github.com/nagvalhm/epure</li>
+<li>Issue Tracker: https://github.com/nagvalhm/epure/issues</li>
+<li>Website: https://pypi.org/project/epure/</li>
+</ul>
 
 
 
@@ -384,8 +1388,13 @@ docs/
 
 
 
+  
+  
 
 
+
+
+  
 
 
 
@@ -394,6 +1403,8 @@ docs/
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -423,7 +1434,7 @@ docs/
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "content.tabs.link", "navigation.indexes", "content.tooltips", "navigation.path", "content.code.annotate", "content.code.select", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="assets/javascripts/bundle.d7c377c4.min.js"></script>

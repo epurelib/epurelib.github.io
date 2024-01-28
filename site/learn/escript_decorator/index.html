@@ -8,22 +8,28 @@
       
       
       
+        <link rel="canonical" href="https://epurelib.github.io/epure-docs/0.1/learn/escript_decorator/">
       
       
+        <link rel="prev" href="../joins/">
       
-      <link rel="icon" href="/epure-docs/0.1/assets/images/favicon.png">
+      
+        <link rel="next" href="../domain_model/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
     
     
       
-        <title>Epure</title>
+        <title>@escript decorator - Epure</title>
       
     
     
-      <link rel="stylesheet" href="/epure-docs/0.1/assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
       
         
-        <link rel="stylesheet" href="/epure-docs/0.1/assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -42,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="/epure-docs/0.1/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("/epure-docs/0.1",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -67,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#magic-escript-decorator" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -78,7 +89,7 @@
             <div class="md-banner__inner md-grid md-typeset">
               
   You're not viewing the latest version.
-  <a href="..//epure-docs/0.1"> 
+  <a href="../../.."> 
     <strong>Click here to go to latest.</strong>
   </a>
 
@@ -93,9 +104,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/epure-docs/0.1/." title="Epure" class="md-header__button md-logo" aria-label="Epure" data-md-component="logo">
+    <a href="../.." title="Epure" class="md-header__button md-logo" aria-label="Epure" data-md-component="logo">
       
-  <img src="/epure-docs/0.1/assets/img/logo.svg" alt="logo">
+  <img src="../../assets/img/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -112,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              @escript decorator
             
           </span>
         </div>
@@ -193,7 +204,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/epure-docs/0.1/." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
     
@@ -208,11 +219,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="/epure-docs/0.1/learn/learn/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../learn/" class="md-tabs__link">
           
   
     
@@ -230,7 +243,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/epure-docs/0.1/help/" class="md-tabs__link">
+      <a href="../../help/" class="md-tabs__link">
         
   
     
@@ -247,7 +260,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/epure-docs/0.1/contribute.md" class="md-tabs__link">
+      <a href="../../contribute.md" class="md-tabs__link">
         
   
     
@@ -264,7 +277,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/epure-docs/0.1/release_notes/" class="md-tabs__link">
+      <a href="../../release_notes/" class="md-tabs__link">
         
   
     
@@ -298,9 +311,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/epure-docs/0.1/." title="Epure" class="md-nav__button md-logo" aria-label="Epure" data-md-component="logo">
+    <a href="../.." title="Epure" class="md-nav__button md-logo" aria-label="Epure" data-md-component="logo">
       
-  <img src="/epure-docs/0.1/assets/img/logo.svg" alt="logo">
+  <img src="../../assets/img/logo.svg" alt="logo">
 
     </a>
     Epure
@@ -327,7 +340,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -344,8 +357,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -376,12 +391,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -395,7 +410,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Learn
@@ -409,7 +424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/learn/learn/" class="md-nav__link">
+      <a href="../learn/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -430,7 +445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/learn/elist_eset/" class="md-nav__link">
+      <a href="../elist_eset/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -451,7 +466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/learn/joins/" class="md-nav__link">
+      <a href="../joins/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -469,10 +484,28 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/epure-docs/0.1/learn/escript_decorator/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    @escript decorator
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -481,6 +514,33 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#magic-escript-decorator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Magic @escript decorator
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -493,7 +553,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/learn/domain_model/" class="md-nav__link">
+      <a href="../domain_model/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -514,7 +574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/learn/column_proxy_methods/" class="md-nav__link">
+      <a href="../column_proxy_methods/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -535,7 +595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/learn/ini_parser/" class="md-nav__link">
+      <a href="../ini_parser/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -556,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/learn/epure_cls/" class="md-nav__link">
+      <a href="../epure_cls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -577,7 +637,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/learn/epure_read/" class="md-nav__link">
+      <a href="../epure_read/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -644,7 +704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/learn/serialization_deserialization/serialization/" class="md-nav__link">
+      <a href="../serialization_deserialization/serialization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -665,7 +725,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/learn/serialization_deserialization/deserialization/" class="md-nav__link">
+      <a href="../serialization_deserialization/deserialization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -701,7 +761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/help/" class="md-nav__link">
+      <a href="../../help/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -721,7 +781,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/contribute.md" class="md-nav__link">
+      <a href="../../contribute.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -741,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/epure-docs/0.1/release_notes/" class="md-nav__link">
+      <a href="../../release_notes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -772,6 +832,23 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#magic-escript-decorator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Magic @escript decorator
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -782,8 +859,99 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+  
+  
+
+
+  <h1>@escript decorator</h1>
+
+<h2 id="magic-escript-decorator">Magic <code class="language-python highlight"><span class="nd">@escript</span></code> decorator<a class="headerlink" href="#magic-escript-decorator" title="Permanent link">&para;</a></h2>
+<p class="annotate"><code class="language-python highlight"><span class="nd">@escript</span></code> decorator is a method-decorator, that is used for decorating methods of "epurized" (1) class</p>
+<ol>
+<li>"epurized" class is class that was decorated by <code>@epure()</code> decorator</li>
+</ol>
+<p><code class="language-python highlight"><span class="nd">@escript</span></code> decorator magicly convert your queries into strings</p>
+<details class="note">
+<summary><code class="language-python highlight"><span class="nd">@escript</span></code> decorator with <code class="language-python highlight"><span class="nd">@classmethod</span></code> decorator</summary>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">...</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@classmethod</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nd">@escript</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">def</span> <span class="nf">your_method</span><span class="p">():</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">...</span>
+</span></code></pre></div>
+</details>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Only in method decorated by @escript, can be used instances of <a href="">self.dom</a>, <a href="">self.md</a> and method <a href="">self.model</a></p>
+</div>
+<p>Lets see an example:</p>
+<details class="example" open="open">
+<summary>Retrieving cats with more than one tail using <code class="language-python highlight"><span class="nd">@escript</span></code></summary>
+<p>For example you have a <code class="language-python highlight"><span class="k">class</span> <span class="nc">Cat</span></code>:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">class</span> <span class="nc">Cat</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">paws_cntr</span><span class="p">:</span><span class="nb">int</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">name</span><span class="p">:</span><span class="nb">str</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">tail_cntr</span><span class="p">:</span><span class="nb">int</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">likes_catnip</span><span class="p">:</span><span class="nb">bool</span>
+</span></code></pre></div>
+And you want to get all the stored cats:</p>
+<ul>
+<li>
+<p>with more than one tail (lets assume there are some cat-alien species)</p>
+</li>
+<li>
+<p>and those cats who don't like catnip (a real weird cat-aliens)</p>
+</li>
+</ul>
+<p>Then we will define a method for <code class="language-python highlight"><span class="k">class</span> <span class="nc">Cat</span></code> decorated by <code class="language-python highlight"><span class="nd">@escript</span></code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">...</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nd">@classmethod</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nd">@escript</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">def</span> <span class="nf">get_all_cats_with_two_tails</span><span class="p">(</span><span class="n">cat</span><span class="p">):</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="hll">    <span class="n">my_query</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">tail_cntr</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">cat</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">likes_catnip</span> <span class="o">==</span> <span class="kc">False</span>
+</span></span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">my_query</span><span class="p">)</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">res</span> <span class="c1"># [&lt;Cat object at 0x000001FFFC6800D0&gt;, &lt;Cat object at 0x000001FCFC6800D7&gt;, ...]</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="o">...</span>
+</span></code></pre></div>
+<details class="info">
+<summary>Let's look closely to my_query:</summary>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="o">...</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">my_query</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">tail_cntr</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">cat</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">likes_catnip</span> <span class="o">==</span> <span class="kc">False</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="o">...</span>
+</span></code></pre></div>
+First, because method is a classmethod, in cat variable will be assigned class.</p>
+<p>Then we are taking <code>.md</code> <a href="">Model</a> of Cat class and taking <a href="">Column</a> <code>tail_cntr</code> and comparing it to more than 1</p>
+</details>
+<p>In resulting list we will get cats with more than one tail and those who doesnt like catnip. Like expected!</p>
+<details class="tip">
+<summary>What will be result SQL of this query</summary>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">FROM</span><span class="w"> </span><span class="k">public</span><span class="p">.</span><span class="n">cat</span><span class="w"> </span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">cat</span><span class="p">.</span><span class="n">tail_cntr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">cat</span><span class="p">.</span><span class="n">likes_catnip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">False</span>
+</span></code></pre></div>
+</details>
+</details>
+<p>All the avalible methods (e.g. <code>==</code>, <code>like</code>, <code>is_not</code>, <code>_is</code> etc),  for <code>self.md</code> can be found in <a href="">Column Proxy methods section</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -819,10 +987,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "/epure-docs/0.1", "features": ["content.code.copy", "content.tabs.link", "navigation.indexes", "content.tooltips", "navigation.path", "content.code.annotate", "content.code.select", "navigation.tabs", "navigation.sections"], "search": "/epure-docs/0.1/assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.tabs.link", "navigation.indexes", "content.tooltips", "navigation.path", "content.code.annotate", "content.code.select", "navigation.tabs", "navigation.sections"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="/epure-docs/0.1/assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>
       
     
   </body>

@@ -11,7 +11,7 @@ def from_dict(cls, _dict:Dict[str, Any]) -> Epure
 
 1. "epurized" class is class that was decorated by `@epure()` decorator
 
-We will use {==Example with nested Epure values==} defined in `#!python to_dict()` section. You can find it <a href="http://127.0.0.1:8000/epure-docs/learn/serialization_deserialization/#serialization-with-to_dict-or-to_json">here</a>:
+We will use {==Example with nested Epure values==} defined in `#!python to_dict()` section. You can find it <a href="https://epurelib.github.io/0.1/learn/serialization_deserialization/serialization/">here</a>:
 
 #### 1.1 `.from_dict()` when object is saved
 
@@ -23,7 +23,7 @@ serialized_obj = to_dict_ex_inst.to_dict()
 
 ```
 
-Result of `to_dict()` with this object you can examine <a href="http://127.0.0.1:8000/epure-docs/learn/serialization_deserialization/#11-to_dict-when-object-is-saved">here</a>:
+Result of `to_dict()` with this object you can examine <a href="https://epurelib.github.io/0.1/learn/serialization_deserialization/serialization/#11-to_dict-when-object-is-saved">here</a>:
 
 ```python
 
