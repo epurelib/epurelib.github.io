@@ -1054,7 +1054,7 @@
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 </span></code></pre></div>
 <ol>
-<li><code>full</code> is parameter that you can pass as <code class="language-python highlight"><span class="kc">True</span></code> if you want object to be serialized fully, to its end. Check out example <a>here</a></li>
+<li><code>full</code> is parameter that you can pass as <code class="language-python highlight"><span class="kc">True</span></code> if you want object to be serialized fully, to its end. Check out example <a href="https://epurelib.github.io/0.1/learn/serialization_deserialization/serialization/#14-using-to_dict-with-full-true">here</a></li>
 <li><code class="language-python highlight"><span class="n">lambda_func</span></code> is explained more below in note section</li>
 <li><code class="language-python highlight"><span class="n">_rec_depth</span></code> is purely private field for <code class="language-python highlight"><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span></code>. Please avoid using it.</li>
 </ol>
@@ -1071,7 +1071,7 @@
 <!-- This <code class="language-python highlight"><span class="n">lamda</span></code> parameter is used to specify what fields you want to __exclude__ from resulting dictionary.  -->
 <!-- By default it set to serialize children of object for first level or if value is Elist or Eset. -->
 <p>This <code class="language-python highlight"><span class="k">lambda</span></code> parameter is used to specify what fields of Epure object you want to serialize as <code class="language-python highlight"><span class="nb">dict</span></code> or <code class="language-python highlight"><span class="n">UUID</span></code> in resulting dictionary. </p>
-<p>By default <code>lambda_func</code> is set to serialize fields of object's first level that are of type <a><code>Epure</code></a>, <a><code>Elist</code></a> or <a><code>Eset</code></a> to <a><code>UUID</code></a> value. If you specify them explicitly in <code>lambda_func</code> they will be serialized as <code class="language-python highlight"><span class="nb">dict</span></code>.</p>
+<p>By default <code>lambda_func</code> is set to serialize fields of object's first level that are of type <a><code>Epure</code></a>, <a href="https://epurelib.github.io/0.1/learn/elist_eset/#elist"><code>Elist</code></a> or <a href="https://epurelib.github.io/0.1/learn/elist_eset/#eset"><code>Eset</code></a> to <a><code>UUID</code></a> value. If you specify them explicitly in <code>lambda_func</code> they will be serialized as <code class="language-python highlight"><span class="nb">dict</span></code>.</p>
 <p>If you want to use your own custom <code class="language-python highlight"><span class="k">lambda</span></code> function and pass it to <code class="language-python highlight"><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span></code> - it <strong>must</strong> follow some requirements:</p>
 <ul>
 <li>
@@ -1126,7 +1126,7 @@
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<p>More examples for using custom lambdas <a href="http://127.0.0.1:8000/epure-docs/learn/serialization_deserialization/#13-passing-custom-lambda-function-to-to_dict">here</a></p>
+<p>More examples for using custom lambdas <a href="https://epurelib.github.io/0.1/learn/serialization_deserialization/serialization/#13-passing-custom-lambda-function-to-to_dict">here</a></p>
 </div>
 </li>
 </ul>
@@ -1250,7 +1250,7 @@
 <p>So for example we want to get serialized <code class="language-python highlight"><span class="nb">dict</span></code> where:</p>
 <ul>
 <li>
-<p>All children of object of type <a><code>Elist</code></a> to be serialized <strong>not</strong> as <code class="language-python highlight"><span class="nb">dict</span></code>, but as <code>UUID</code>.</p>
+<p>All children of object of type <a href="https://epurelib.github.io/0.1/learn/elist_eset/#elist"><code>Elist</code></a> to be serialized <strong>not</strong> as <code class="language-python highlight"><span class="nb">dict</span></code>, but as <code>UUID</code>.</p>
 </li>
 <li>
 <p>First and second level children of object of type <code>Epure</code> to be serialized as <code class="language-python highlight"><span class="nb">dict</span></code> and <strong>not</strong> <code>UUID</code>.</p>
