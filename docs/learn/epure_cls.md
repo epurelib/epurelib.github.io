@@ -71,3 +71,30 @@ This is also done by passing str with name of path, but with additional dot nota
     ```
 
 So this will be stored in scheme named "my_other_domain" and in table named "my_other_table".
+
+## Class with mulitple inheritance and `#!python @epure` decorator
+
+When "epurized" class inherits another parent class, fields of this parent class will be inherited and stored in DB by "epurized" class
+
+Let's look at example:
+
+!!! example "Example with class inheritance"
+
+    ```python
+    class FirstParent:
+        first_parent_complex:complex
+        first_parent_uuid: UUID
+
+    class SecondParent:
+        second_parent_float:float
+        second_parent_bool:bool
+
+    @epure()
+    class Child(FirstParent, SecondParent):
+        child_field_str:str
+        child_obj:object
+
+    ```
+
+In result there will be created a Table "child" with its parents inhereted fields of FirstParent: `first_parent_complex, first_parent_uuid` and of SecondParent: `second_parent_float, second_parent_bool`
+

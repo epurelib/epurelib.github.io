@@ -61,6 +61,7 @@ nav:
     - More about IniFile parser: ./learn/ini_parser.md
     - "@epure() decorator, its supported types and overriding default storing for epure": ./learn/epure_cls.md
     - Reading from resource with `.read()`: ./learn/epure_read.md
+    - Supported DataBases: ./learn/supported_db.md
     - Serialization and Deserialization: 
       - Serialization with to_dict and to_json: ./learn/serialization_deserialization/serialization.md
       - Deserialization with from_dict and from_json: ./learn/serialization_deserialization/deserialization.md
