@@ -384,6 +384,8 @@
       
         
       
+        
+      
     
     
     
@@ -663,6 +665,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#class-with-mulitple-inheritance-and-epure-decorator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class with mulitple inheritance and @epure decorator
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -699,6 +710,27 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../supported_db/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Supported DataBases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
       
@@ -718,10 +750,10 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
         
           
-          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -732,8 +764,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_10">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
             <span class="md-nav__icon md-icon"></span>
             Serialization and Deserialization
           </label>
@@ -931,6 +963,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#class-with-mulitple-inheritance-and-epure-decorator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class with mulitple inheritance and @epure decorator
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1013,6 +1054,26 @@
 </span></code></pre></div>
 </div>
 <p>So this will be stored in scheme named "my_other_domain" and in table named "my_other_table".</p>
+<h2 id="class-with-mulitple-inheritance-and-epure-decorator">Class with mulitple inheritance and <code class="language-python highlight"><span class="nd">@epure</span></code> decorator<a class="headerlink" href="#class-with-mulitple-inheritance-and-epure-decorator" title="Permanent link">&para;</a></h2>
+<p>When "epurized" class inherits another parent class, fields of this parent class will be inherited and stored in DB by "epurized" class</p>
+<p>Let's look at example:</p>
+<div class="admonition example">
+<p class="admonition-title">Example with class inheritance</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span> <span class="nc">FirstParent</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">first_parent_complex</span><span class="p">:</span><span class="nb">complex</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">first_parent_uuid</span><span class="p">:</span> <span class="n">UUID</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">class</span> <span class="nc">SecondParent</span><span class="p">:</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">second_parent_float</span><span class="p">:</span><span class="nb">float</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">second_parent_bool</span><span class="p">:</span><span class="nb">bool</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">FirstParent</span><span class="p">,</span> <span class="n">SecondParent</span><span class="p">):</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">child_field_str</span><span class="p">:</span><span class="nb">str</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">child_obj</span><span class="p">:</span><span class="nb">object</span>
+</span></code></pre></div>
+</div>
+<p>In result there will be created a Table "child" with its parents inhereted fields of FirstParent: <code>first_parent_complex, first_parent_uuid</code> and of SecondParent: <code>second_parent_float, second_parent_bool</code></p>
 
 
 
