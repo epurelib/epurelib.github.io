@@ -44,6 +44,7 @@ Key features:
 * **Fast**: Create tables based on your classes in no time
 * **Concise**: Encourages efficient building of flexible and _smart_ queries
 * **Elegant**: Epure allows structure of your project to be as complicated or simple as you want
+
 Installing
 ----------
 
