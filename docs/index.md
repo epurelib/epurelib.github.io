@@ -28,7 +28,7 @@ hide:
 
 ---
 
-Epure is python type-based ORM - you can store and retrieve data having no idea about database, table and columns. 
+Epure is python type-hints based ORM - you can store and retrieve data having no idea about database, table and columns. 
 All technical details hidden from you. Care only about your business logic.
 
 Key features:
@@ -94,27 +94,31 @@ log_level=3).connect() # (2)!
 
 ### Define it
 
-Define a class that you want to save as a table and its :magic_wand: _magic_ :magic_wand: method:
+Define a class that you want to save as a table and its :magic_wand: _magic_ :magic_wand: method, in our case `get_articles`:
 
 ```python
 
-@epure() # (3)!
-class Example:
-    int_attr:int
-    str_attr:str
-    float_attr:NotNull[float] = 3.14
-    generic_list:List[int] = [3, 4, 8]
+@epure()
+class Reporter:
+    full_name:str = "Victor Bennet"
 
-    def __init__(int_attr, str_attr="Hello World!"):
-        self.int_attr = int_attr
-        self.str_attr = str_attr
+@epure() # (3)!
+class Article:
+    reporter:Reporter
+    title:str
+    times_published:NotNull[int] = 3
+    authors:List[str] = ["Charles Dickens", "Frank Herbert"]
+
+    def __init__(self, reporter, title):
+        self.reporter = reporter
+        self.title = title
 
     @escript # (4)!
-    def smart_query_example(self): [func]
+    def get_articles(self):
         md = self.md # (5)!
-        query = md.str_attr in ("Hello Sun!") # (6)!
-        #↓↓↓
-        # query = "SELECT public.example.str_attr IN ("Hello Sun!")"
+        query = md.title in ("Why Epure is the best ORM?", "Why Elist is so powerfull?") # (6)!
+        # ↓↓↓ Will result in ↓↓↓
+        # query = "SELECT public.example.title IN ("Why Epure is the best ORM?", "Why Elist is so powerfull?")"
         res = self.resource.read(query) # (7)!
         return res
 
@@ -126,97 +130,121 @@ class Example:
 6. read more about supported SQL operators in `#!python Epure` like `#!python in` here:
 7. learn more about `#!python read()` here:
 
-Read more about :magic_wand: _magic_ :magic_wand: methods and `#!python @escript` decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
+!!! info "Supported by Epure type-hint types"
+    Read more about supported types for type-hinting :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_cls/#supported-types-for-type-hinting-class-attributes">here</a> :arrow_left:
+
+??? tip ":magic_wand: _Magic_ :magic_wand: method and _smart queries_"
+    Read more about :magic_wand: _magic_ :magic_wand: methods and `#!python @escript` decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
 
 ### Save it
 
 Create and save instances of your class as such:
 
 ```python
+my_reporter = Reporter()
 
-obj1 = Example(42)
-obj1.save()
+article_one = Article(my_reporter, "Why Epure is the best ORM?")
+article_one.save()
 
-obj2 = Example(99, "Hello Sun!")
-obj2.save()
+article_two = Article(my_reporter, "Why Eset is so magnificent?")
+article_two.save()
 ```
 
 ### Retrieve it
 
 Now when your instances saved in DB table named `#!sql public.example`, we can talk about __creating__ __queries__ __variations__:
 
-#### 1. smart queries with use of `#!python @escript` magic method :star_struck:
+#### 1. Smart queries with use of `#!python @escript` magic method :star_struck:
 
 <!-- Let's do some magic  : -->
 
 Method itself becomes magical after we decorated it with `#!python @escript`. It will take your smart query and will turn it into a `#!sql SQL` string.
 
-Passing it then to `#!python .read()` will retrieve `Example` object with `str_attr` with value `#!python "Hello Sun!"`.
+Passing it then to `#!python .read()` will retrieve `Reporter` object(s) with `title` value either: `#!python "Why Epure is the best ORM?"` or `#!python "Why Elist is so powerfull?"`.
 
 And calling `#!python .smart_query_example()` method will :magic_wand: _magically_ :magic_wand: return your retrieved object. Viola!
 
 <!-- Calling this method we are reading data from resource and we will get Epure objects as result -->
 
 ```python hl_lines="1"
-res2 = obj2.smart_query_example() # -> list[list[epure_object]]
+my_articles = article_one.get_articles() # -> [<Article object at 0x0...>, <Article object at 0x2...>]
 
-res2[0].int_attr # -> 99
-res2[0].str_attr # -> "Hello Sun!"
+my_articles[0].reporter # -> <Reporter object at 0x0...>
+my_articles[0].title # -> "Why Epure is the best ORM?"
 ```
-Read more about :magic_wand: _magic_ :magic_wand: methods, `smart_queries` and `#!python @escript` decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
+!!! info ":magic_wand: _Magic_ :magic_wand: method and _smart queries_"
+    Read more about :magic_wand: _magic_ :magic_wand: methods, `smart_queries` and `#!python @escript` decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
 
 
-#### 2. shortcut :material-arrow-right-top-bold: `#!python read()` with kwarg parameters
+#### 2. Shortcut :material-arrow-right-top-bold: `#!python read()` with kwarg parameters
 
 Alternatively if you:
 
 - know attribute by which you want to get set of objects
 
-- have `data_id` (`UUID`) of specific object
+- have `data_id` (`#!python UUID`) of specific object
 
 you can use `.read()` method that takes key-word arguments and allows this ready to hand approach of getting objects
 <!-- or you have a unique data_id of the object and you want to straight up retrieve it -->
 
 ```python hl_lines="4 9"
 
-data_id = obj1.data_id # -> UUID4 # (1)!
+article_one_data_id = article_one.data_id # -> UUID4 # (1)!
 
-# unique data_id of object
-res1 = obj1.table.read(data_id=data_id) # -> list[<Example object at 0x0...>]
+# reading by unique data_id of article will return one object
+my_articles = obj1.table.read(data_id=article_one_data_id)[0] # -> [<Article object at 0x0...>]
 
-# or
+# or by kwargs
 
-# multiple attrs of object
-res1 = Example.resource.read(str_attr="Hello World!", int_attr=42) # -> list[list[<Example object at 0x0...,>, ...]]
+# multiple attrs of article
+my_articles = Article.resource.read(str_attr="Why Epure is the best ORM?", times_published=3) # -> [[<Article object at 0x0...,>, ...]]
 
-res1[0].int_attr # -> 42
-res1[0].str_attr # -> "Hello World!"
+my_articles[0].reporter # -> <Reporter object at 0x0...>
+my_articles[0].title # -> "Why Epure is the best ORM?"
 
 ```
 
 1. data_id is a unique UUID object identifier that Epure uses to discriminate different objects
 
-Read more about `.read()` :arrow_right: <a href="https://epurelib.github.io/latest/learn/joins/#advanced-example-with-two-joins">here</a> :arrow_left:
+!!! abstract "More on shortcut :material-arrow-right-top-bold: `.read()` method"
+    Read more about `.read()` :arrow_right: <a href="https://epurelib.github.io/latest/learn/joins/#advanced-example-with-two-joins">here</a> :arrow_left:
 
-Advanced example with JoinResource
+Creating more advanced _smart_ query with `#!python for` statement
 -----
 
-Check out what is JoinResource and more advanced example with join :arrow_right:: <a href="https://epurelib.github.io/latest/learn/joins/#advanced-example-with-two-joins">here</a> :arrow_left::
+!!! example "Example with creating long smart query with `#!python for` statement and other cool stuff"
+    Check out more on such example where we create a long smart query using `#!python for` statement :arrow_right: <a href="https://epurelib.github.io/latest/learn/joins/#advanced-example-with-two-joins">here</a> :arrow_left:
 
-Elist and Eset
+Example with join using JoinResource
 -----
+
+!!! question "What is join, JoinResource and how joining models works"
+    Check out what is JoinResource and more advanced example with join :arrow_right:: <a href="https://epurelib.github.io/latest/learn/joins/#advanced-example-with-two-joins">here</a> :arrow_left::
+
+Elist and Eset: easy store, easy load collections
+-----
+!!! quote "What is Elist and Eset"
+    Elist and Eset is {==__super convinient__==} when: you want to store your items in just a regular `#!py list` or `#!py set`...
+
+    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; ...but at the same time in DB 😋
 
 ### Elist
 
+
+
 <!-- Elist is really convenient in terms of using easy retrievable data collection. -->
 
-Elist is really convenient in terms of using easy savable and retrievable data collection.
+<!-- Elist is really convenient in terms of using easy savable and retrievable data collection. -->
 
-You can look at it like strictly typed list with an idea of simple saving and retrieving its contents from DB.
+You can look at `Elist` like __strictly typed__ `#!py list` with mechanism of simple saving :material-download: and retrieving :material-upload: its contents from DB.
 
-Elist can guarantee numerated order of objects when is used by user at a time.
+Elist can guarantee numerated order of objects when is used by user at a time
 
-But in cases of big system with multiple users please refer to <a href="https://epurelib.github.io/latest/#eset">Eset</a> :slight_smile:.
+But in cases of big system with multiple users please refer to <a href="https://epurelib.github.io/latest/#eset">Eset</a> 🙂
+
+<!-- Elist comes real handy when you want to store your instances in DB using just a regular python list :exploding_head: -->
+
+
 
 Let's look at an example:
 ???+ example "Elist example for storing and retrieving items"
@@ -224,39 +252,55 @@ Let's look at an example:
     from epure import epure, Elist
 
     @epure()
-    class Example:
-        int_attr:int = 42
-        str_attr:str = "Hello World!"
+    class House:
+        tenant_names:Elist[str]
+        house_number:int
+        street_name:str
+
+        def __init__(self, house_number, street_name, tenant_names):
+            self.house_number = house_number
+            self.street_name = street_name
+            self.tenant_names = tenant_names
 
     @epure()
-    class ElistExample:
-        elist_str:Elist[str] = Elist[str](["Like","a", "piece", "of", "cake"])
-        elist_epure:Elist[Example]
+    class District:
+        houses_list:Elist[House]
 
-    ex1 = Example()
-    ex1.int_attr = 68
+    house_one = House(42, "Crow Str.", Elist[str](["Mary", "Charles"]))
 
-    ex2 = Example()
+    house_two = House(14, "Babbidge Str.", Elist[str](["Daniel"]))
 
-    elist_ex = ElistExample()
-    elist_ex.elist_epure = Elist[Example]([ex1, ex2])
-    elist_ex.save() # (1)!
+    district = District()
+    district.houses_list = Elist[House]([house_one, house_two])
+    
+    district.save() # (1)!
 
-    elist_ex_read = ElistExample.resource.read(data_id = elist_ex.data_id)
+    district_retrived = District.resource.read(data_id = district.data_id)
 
-    elist_ex_read[0].elist_str[4] # -> "cake"
-    elist_ex_read[0].elist_epure[0].int_attr # -> 68
+    district_retrived[0].houses_list[0] # -> [<House object at 0x0...>]
+    district_retrived[0].houses_list[0].tenant_names[0] # -> "Mary"
     ```
 
     1. Saving this Epure instance with Elist field will triger saving for Elist
 
+!!! info "More about `Elist`"
+
 ### Eset
 
-Eset is similar to Elist, though it does not guarantee order of its stored contents.
+`Eset` is similar to `Elist`, __though__ (as much as `#!py set` differes from `#!py list`) `Eset` has no order of its stored contents.
 
-It is convenient in cases when you need store big chunks of data. You can then easily retrieve part of data stored in it based on criteria specified
+<!-- `Eset` {==__is convenient__==} in cases when you need store big chunks of data in a collection -  -->
 
-This is in a way our interpretation of many2many field.
+Because of the way `Eset` is built, it {==__is really convenient__==} when working with big chunks of data!
+
+You dont need to load whole Eset at a time: when `Eset` is retrived from DB - it will be empty by `#!js default` and is easily loaded by `.load()` method.
+
+(In future Eset will support partial loading, based on specified properties of objects)
+
+<!-- Then you can easily retrieve part of data stored in it based on kwargs (or other params) s -->
+
+In a way, `Eset` is Epure's interpretation of Many2Many field.
+
 
 ???+ example "Eset example for storing, loading and retrieving items"
 
@@ -298,6 +342,8 @@ This is in a way our interpretation of many2many field.
     1. Note that saving this will triger recursive saving for all elists and esets bounded to this object
     2. Eset is empty when is retrieved, you need to use .load() method of Eset to fill the eset with its content.
 
+!!! info "Read more on `Eset`"
+
 Serialization and deserialization of Epure objects
 -----
 
@@ -316,36 +362,37 @@ This section of library appeared mainly because there is no adequate solution fo
 
 File Ini Parser allows to easily work with sections of `.ini` file using dot (`.`) notation
 
-#### A small example
+!!! example "Using Ini File Parser"
 
-Save this as example.ini file:
+    Save this as example.ini file:
 
-```ini title="example.ini"
-db_host = localhost
+    ```ini title="example.ini"
+    db_host = localhost
 
-[general]
-db_port = 5432
+    [general]
+    db_port = 5432
 
-[epure.best.app.forever]
-friend = true
-```
+    [epure.best.app.forever]
+    friend = true
+    ```
 
-Now we can easily access fields of this ini file:
+    Now we can easily access fields of this ini file:
 
-```python hl_lines="5 7 9"
-from epure.files import IniFile
+    ```python hl_lines="5 7 9"
+    from epure.files import IniFile
 
-config = IniFile('./example.ini')
+    config = IniFile('./example.ini')
 
-config.db_host # -> "localhost"
+    config.db_host # -> "localhost"
 
-config.general.db_port # -> 5432
+    config.general.db_port # -> 5432
 
-config.epure.best.app.forever.friend # -> True
+    config.epure.best.app.forever.friend # -> True
 
-```
+    ```
 
-Learn more about Ini Parser :arrow_right: <a href="https://epurelib.github.io/latest/learn/ini_parser/">here</a> :arrow_left:
+!!! tip "Learn more"
+    Learn more about Ini Parser :arrow_right: <a href="https://epurelib.github.io/latest/learn/ini_parser/">here</a> :arrow_left:
 
 Developers
 -----
