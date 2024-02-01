@@ -238,16 +238,16 @@ Elist and Eset: easy store, easy load collections
 
 You can look at `Elist` like __strictly typed__ `#!py list` with mechanism of simple saving :material-download: and retrieving :material-upload: its contents from DB.
 
-Elist can guarantee numerated order of objects when is used by user at a time
+`Elist` can guarantee numerated order of objects when is used by user at a time
 
-But in cases of big system with multiple users please refer to <a href="https://epurelib.github.io/latest/#eset">Eset</a> 🙂
+But in cases of big system with multiple users please refer to <a href="https://epurelib.github.io/latest/#eset">`Eset`</a> 🙂
 
 <!-- Elist comes real handy when you want to store your instances in DB using just a regular python list :exploding_head: -->
 
 
-
 Let's look at an example:
-???+ example "Elist example for storing and retrieving items"
+???+ example "`Elist` example for storing and retrieving items"
+    We will create `House` and `District` classes. Both `House` and `District` will store a `Elist`.
     ```python hl_lines="10 19"
     from epure import epure, Elist
 
@@ -266,22 +266,36 @@ Let's look at an example:
     class District:
         houses_list:Elist[House]
 
+    ```
+    After we will create two instances of `House`, add them to `houses_list` (`Elist`) of `District` obj and save all them.
+    ??? question "Saving object with `Elist` or `Eset` field"
+        Note that saving object with `Elist` field will triger saving for all `Elist` or `Eset` fields of this object respectivly.
+    ```py
+
     house_one = House(42, "Crow Str.", Elist[str](["Mary", "Charles"]))
 
     house_two = House(14, "Babbidge Str.", Elist[str](["Daniel"]))
 
     district = District()
     district.houses_list = Elist[House]([house_one, house_two])
-    
+
     district.save() # (1)!
+
+    ```
+    
+    1. Saving this Epure instance with Elist field will triger saving for Elist
+
+    Then using `.read()` we will get our `District` object from DB (`district_retrived`) using `district.data_id` (unique `UUID` id).
+    `House` objects will be already present in `house_list` `Elist`
+    ```py
 
     district_retrived = District.resource.read(data_id = district.data_id)
 
     district_retrived[0].houses_list[0] # -> [<House object at 0x0...>]
     district_retrived[0].houses_list[0].tenant_names[0] # -> "Mary"
     ```
+    Working with `Elist` collection is really easy as you can see in this example
 
-    1. Saving this Epure instance with Elist field will triger saving for Elist
 
 !!! info "More about `Elist`"
 
@@ -302,41 +316,70 @@ You dont need to load whole Eset at a time: when `Eset` is retrived from DB - it
 In a way, `Eset` is Epure's interpretation of Many2Many field.
 
 
-???+ example "Eset example for storing, loading and retrieving items"
-
+???+ example "Eset with `#!js JSON` example for storing, loading and retrieving items"
+    Let's declare `Customer` and `ShipmentCompany`. 
+    
+    Because `ShipmentCompany.customers_set` `Elist` type is `#!py object` - instances of `Customer` will be stored as `#!js JSON`
     ```python hl_lines="1 18 20 22 28 32" 
     from epure import epure, Eset
 
-    @epure()
-    class Example:
-        int_attr:complex = 5 + 7j
-        str_attr:str = "Hello Sky!"
+    class Customer:
+        name:str
+        adress:str
+
+        def __init__(self, name, adress):
+            self.name = name
+            self.adress = adress
 
     @epure()
-    class EsetExample:
-        eset_str:Eset[str]
-        eset_epure:Eset[Example]
+    class ShipmentCompany:
+        customers_set:Eset[object]
+        offices_names:Eset[str] = Eset[str](["Charlie", "Bravo", "Alpha"])
 
-    ex1 = Example()
-    ex2 = Example()
+    ```
+    
+    `Eset` allows to store {==copious==} amounts of data, so __lets load it up__!
+    ??? success "Storing loads of instances in `big_customers_set`"
+        ```py
+        customer_1 = Customer("Sion Mccall", "Heathfield Road, 30")
+        customer_2 = Customer("Darcy Montes", "Ash Street, 13")
+        customer_3 = Customer("Isaiah Hughes", "Grasmere Avenue, 19")
+        customer_4 = Customer("Jodie Sandoval", " Meadow Rise, 15")
+        ...
+        ...
+        ...
+        customer_50 = Customer("Emily Mahoney", "Park Road, 62")
+        customer_51 = Customer("Inaaya Hodge", "Rectory Lane, 42")
+        customer_52 = Customer("Blanche Colon", "Ferndale Road, 10")
+        customer_54 = Customer("Lucia Davenport", "Warwick Street, 56")
+        customer_55 = Customer("Vivian Lin", "Carlton Road, 23")
+        customer_56 = Customer("Kane Flores", "Beaufort Road, 87")
 
-    eset_ex = EsetExample()
+        big_customers_set = Eset[object]([customer_1, ..., customer_56])
+        ```
+    
+    We will create our `shipment_company` and assign `big_customers_set` to its `customers_set`, then we will save it
 
-    eset_ex.eset_epure = Eset[Example]((ex1, ex2))
+    ```py
+    shipment_company = ShipmentCompany()
 
-    eset_ex.eset_str = Eset[str](("Grin", "like", "a", "Cheshire", "cat"))
+    shipment_company.customers_set = big_customers_set
 
-    eset_ex.save() # (1)!
+    shipment_company.save() # (1)!
 
-    eset_ex_read = EsetExample.resource.read(data_id = eset_ex.data_id)[0]
+    ```
+    Retriving is easily done with `read()`, and as you can see you need to `load()` `Eset` for it to be sub-loaded.
 
-    eset_ex_read.eset_epure # -> {}
-    eset_ex_read.eset_epure.load() # (2)!
-    eset_ex_read.eset_epure # -> {<Example object at 0x0...>, <Example object at 0x0...>}
+    ```py
+    retrieved_shipment_company = EsetExample.resource.read(data_id = eset_ex.data_id)[0]
 
-    eset_ex_read.eset_str # -> {}
-    eset_ex_read.eset_str.load() # (2)!
-    "".join(eset_ex_read.eset_str) # -> "Cheshire Grin cat like a"
+    retrieved_shipment_company.customers_set # -> {}
+    retrieved_shipment_company.customers_set.load() # (2)!
+    retrieved_shipment_company.customers_set # -> {<Customer object at 0x0...>, <Customer object at 0x0...>, ...}
+
+    retrieved_shipment_company.offices_names # -> {}
+    retrieved_shipment_company.offices_names.load() # (2)!
+    " ".join(retrieved_shipment_company.offices_names) # -> "Alpha Charlie Bravo"
     ```
 
     1. Note that saving this will triger recursive saving for all elists and esets bounded to this object
@@ -344,16 +387,16 @@ In a way, `Eset` is Epure's interpretation of Many2Many field.
 
 !!! info "Read more on `Eset`"
 
-Serialization and deserialization of Epure objects
+`#!js JSON` and `#!py dict` serialization and deserialization of Epure objects
 -----
 
 Epure allows to __serialize__ your "epurized" class `#!python object` to `#!js JSON` using `.to_dict()` and `.to_json()` methods 
 
 As much as it allows to __deserialize__ `#!js JSON` back to a Epure `#!python object` using `.from_dict()` and `.from_json()`
+!!! abstract "More on `#!js JSON` serialization and deserialization"
+    - For __serialization__ with `.to_dict()` and `.to_json()` example head down :arrow_right: <a href="https://epurelib.github.io/latest/learn/serialization_deserialization/serialization/">here</a> :arrow_left:
 
-For __serialization__ with `.to_dict()` and `.to_json()` example head down :arrow_right: <a href="https://epurelib.github.io/latest/learn/serialization_deserialization/serialization/">here</a> :arrow_left:
-
-And for __deserialization__ using `.from_dict()` and `.from_json()` check out example :arrow_right: <a href="https://epurelib.github.io/latest/learn/serialization_deserialization/deserialization/">here</a> :arrow_left:
+    - And for __deserialization__ using `.from_dict()` and `.from_json()` check out example :arrow_right: <a href="https://epurelib.github.io/latest/learn/serialization_deserialization/deserialization/">here</a> :arrow_left:
 
 Ini File Parser
 -----
