@@ -537,6 +537,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Magic @escript decorator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alien-cats-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alien Cats example 👽🐈
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#more-advanced-alien-cats-example-with-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      More Advanced Alien Cats 👽🐈 example with for
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -868,6 +892,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Magic @escript decorator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alien-cats-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alien Cats example 👽🐈
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#more-advanced-alien-cats-example-with-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      More Advanced Alien Cats 👽🐈 example with for
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -910,6 +958,7 @@
 <p>Only in method decorated by @escript, can be used instances of <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">self.dom</a>, <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">self.md</a> and method <a href="">self.model</a></p>
 </div>
 <p>Lets see an example:</p>
+<h3 id="alien-cats-example">Alien Cats example 👽🐈<a class="headerlink" href="#alien-cats-example" title="Permanent link">&para;</a></h3>
 <details class="example" open="open">
 <summary>Retrieving cats with more than one tail using <code class="language-python highlight"><span class="nd">@escript</span></code></summary>
 <p>For example you have a <code class="language-python highlight"><span class="k">class</span> <span class="nc">Cat</span></code>:
@@ -923,13 +972,13 @@
 And you want to get all the stored cats:</p>
 <ul>
 <li>
-<p>with more than one tail (lets assume there are some cat-alien species)</p>
+<p>with more than one tail (lets assume there are some cat-alien species 👽)</p>
 </li>
 <li>
 <p>and those cats who don't like catnip (a real weird cat-aliens)</p>
 </li>
 </ul>
-<p>Then we will define a method for <code class="language-python highlight"><span class="k">class</span> <span class="nc">Cat</span></code> decorated by <code class="language-python highlight"><span class="nd">@escript</span></code>:</p>
+<p>Then we will define a <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> method <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> for <code class="language-python highlight"><span class="k">class</span> <span class="nc">Cat</span></code> decorated by <code class="language-python highlight"><span class="nd">@escript</span></code>:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">...</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nd">@classmethod</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nd">@escript</span>
@@ -961,7 +1010,91 @@ First, because method is a classmethod, in cat variable will be assigned class.<
 </span></code></pre></div>
 </details>
 </details>
+<div class="admonition info">
+<p class="admonition-title">All avalible for <code>self.md</code> methods</p>
 <p>All the avalible methods (e.g. <code>==</code>, <code>like</code>, <code>is_not</code>, <code>_is</code> etc),  for <code>self.md</code> can be found in <a href="https://epurelib.github.io/0.1/learn/column_proxy_methods/">Column Proxy methods section</a></p>
+</div>
+<h3 id="more-advanced-alien-cats-example-with-for">More Advanced Alien Cats 👽🐈 example with <code class="language-py highlight"><span class="k">for</span></code><a class="headerlink" href="#more-advanced-alien-cats-example-with-for" title="Permanent link">&para;</a></h3>
+<p>So if we want to create something more complex, lets use <code class="language-py highlight"><span class="k">for</span></code> statement:</p>
+<details class="example" open="open">
+<summary>Creating advanced <em>smart</em> query with <code class="language-py highlight"><span class="k">for</span></code></summary>
+<p>So as in previous example you have a <code class="language-python highlight"><span class="k">class</span> <span class="nc">Cat</span></code>:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">class</span> <span class="nc">Cat</span><span class="p">:</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">paws_cntr</span><span class="p">:</span><span class="nb">int</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">name</span><span class="p">:</span><span class="nb">str</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">tail_cntr</span><span class="p">:</span><span class="nb">int</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="n">likes_catnip</span><span class="p">:</span><span class="nb">bool</span>
+</span></code></pre></div></p>
+<p>But this time you want to get <code>Cat</code>(s) that:</p>
+<ul>
+<li>has a tail (i.e <code>tail_cntr</code> is not `#!sql NULL``)</li>
+<li>has a name and name starts with letter <code>'C'</code></li>
+<li>has less than 5 paws or equally 8 paws (more like an octocat <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span>)</li>
+<li>likes catnip 🍀</li>
+</ul>
+<p>So we will define <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>magic</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> method for <code>Cat</code> class:</p>
+<p><div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="o">...</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="nd">@classmethod</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="nd">@escript</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="k">def</span> <span class="nf">get_cats_using_for</span><span class="p">(</span><span class="n">cat</span><span class="p">):</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a>    <span class="n">has_tail_query</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">tail_cntr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a>    <span class="n">name_query</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">cat</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s2">&quot;C%&quot;</span><span class="p">)</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a>    <span class="n">legs_query</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">paws_cntr</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="ow">or</span> <span class="n">cat</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">paws_cntr</span> <span class="o">==</span> <span class="mi">8</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12"></a>    <span class="n">catnip_query</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">likes_catnip</span> <span class="o">==</span> <span class="kc">True</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13"></a>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14"></a>    <span class="o">...</span>
+</span></code></pre></div></td></tr></table></div>
+After we created our queries, imagine: we want all to this conditions to meet and be <code class="language-py highlight"><span class="kc">True</span></code> at the same time. </p>
+<p>But what do we do? 🤔</p>
+<p>Create a long-long query, that is unreadable and to much hassle to edit? Nah ❌. </p>
+<p>I suggest to use <code class="language-py highlight"><span class="k">for</span></code> loop ✔️. </p>
+<p>This way, we can put them in a <code class="language-py highlight"><span class="nb">list</span></code> and iterate over it adding <code class="language-py highlight"><span class="ow">and</span></code> to each condition, sticking it all together
+<div class="language-py highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span>
+<span class="normal"><a href="#__codelineno-7-21">21</a></span>
+<span class="normal"><a href="#__codelineno-7-22">22</a></span>
+<span class="normal"><a href="#__codelineno-7-23">23</a></span>
+<span class="normal"><a href="#__codelineno-7-24">24</a></span>
+<span class="normal"><a href="#__codelineno-7-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15"></a>    <span class="o">...</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16"></a>    <span class="n">queries_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">name_query</span><span class="p">,</span> <span class="n">legs_query</span><span class="p">,</span> <span class="n">catnip_query</span><span class="p">]</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17"></a>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18"></a>    <span class="n">result_query</span> <span class="o">=</span> <span class="n">has_tail_query</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19"></a>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="hll">    <span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">queries_list</span><span class="p">:</span>
+</span></span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21"></a>       <span class="n">result_query</span> <span class="o">=</span> <span class="n">result_query</span> <span class="ow">and</span> <span class="n">query</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22"></a>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">result_query</span><span class="p">)</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24"></a>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25"></a>    <span class="n">res</span> <span class="c1"># [&lt;Cat object at 0x000001FFFC6800D0&gt;, &lt;Cat object at 0x000001FCFC6800D7&gt;, ...]</span>
+</span></code></pre></div></td></tr></table></div></p>
+<details class="note">
+<summary>line 18 <code>result_query = has_tail_query</code> explanation</summary>
+<p>This assignemnt made mainly made because we need to start somewhere and we cant use empty string ("") as a start.</p>
+</details>
+<p>This way we will get a long <em>smart</em> query without any hassle and code confusion.</p>
+</details>
 
 
 
