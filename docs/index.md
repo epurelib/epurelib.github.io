@@ -29,7 +29,7 @@ hide:
 ---
 
 Epure is python type-hints based ORM - you can store and retrieve data having no idea about database, table and columns. 
-All technical details hidden from you. Care only about your business logic.
+All technical details hidden from you. Care only about your business logic 🤑.
 
 Key features:
 
@@ -213,7 +213,7 @@ Creating more advanced _smart_ query with `#!python for` statement
 -----
 
 !!! example "Example with creating long smart query with `#!python for` statement and other cool stuff"
-    Check out more on such example where we create a long smart query using `#!python for` statement :arrow_right: <a href="https://epurelib.github.io/latest/learn/joins/#advanced-example-with-two-joins">here</a> :arrow_left:
+    Check out more on such example where we create a long smart query using `#!python for` statement :arrow_right: <a href="https://epurelib.github.io/latest/learn/escript_decorator/#more-advanced-alien-cats-example-with-for">here</a> :arrow_left:
 
 Example with join using JoinResource
 -----
@@ -298,10 +298,11 @@ Let's look at an example:
 
 
 !!! info "More about `Elist`"
+    More info and examples on Elist :arrow_right: <a href="https://epurelib.github.io/latest/learn/elist_eset/#elist">here</a> :arrow_left:
 
 ### Eset
 
-`Eset` is similar to `Elist`, __though__ (as much as `#!py set` differes from `#!py list`) `Eset` has no order of its stored contents.
+`Eset` is similar to <a href="https://epurelib.github.io/latest/#elist">`Elist`</a>, __though__ (as much as `#!py set` differes from `#!py list`) `Eset` has no order of its stored contents.
 
 <!-- `Eset` {==__is convenient__==} in cases when you need store big chunks of data in a collection -  -->
 
@@ -386,6 +387,7 @@ In a way, `Eset` is Epure's interpretation of Many2Many field.
     2. Eset is empty when is retrieved, you need to use .load() method of Eset to fill the eset with its content.
 
 !!! info "Read more on `Eset`"
+    More info and examples on Eset :arrow_right: <a href="https://epurelib.github.io/latest/learn/elist_eset/#eset">here</a> :arrow_left:
 
 `#!js JSON` and `#!py dict` serialization and deserialization of Epure objects
 -----
@@ -393,7 +395,7 @@ In a way, `Eset` is Epure's interpretation of Many2Many field.
 Epure allows to __serialize__ your "epurized" class `#!python object` to `#!js JSON` using `.to_dict()` and `.to_json()` methods 
 
 As much as it allows to __deserialize__ `#!js JSON` back to a Epure `#!python object` using `.from_dict()` and `.from_json()`
-!!! abstract "More on `#!js JSON` serialization and deserialization"
+!!! abstract "More on `#!js JSON` and `#!py dict` serialization and deserialization"
     - For __serialization__ with `.to_dict()` and `.to_json()` example head down :arrow_right: <a href="https://epurelib.github.io/latest/learn/serialization_deserialization/serialization/">here</a> :arrow_left:
 
     - And for __deserialization__ using `.from_dict()` and `.from_json()` check out example :arrow_right: <a href="https://epurelib.github.io/latest/learn/serialization_deserialization/deserialization/">here</a> :arrow_left:

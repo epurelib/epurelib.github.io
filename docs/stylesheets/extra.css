@@ -4,3 +4,7 @@
   border-left-width: 4px;
   font-size: 0.8rem;
 }
+
+:root > * {
+  --md-code-hl-operator-color: #3f6ec6;
+}
