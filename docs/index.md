@@ -207,9 +207,9 @@ my_articles[0].title # -> "Why Epure is the best ORM?"
 1. data_id is a unique UUID object identifier that Epure uses to discriminate different objects
 
 !!! abstract "More on shortcut :material-arrow-right-top-bold: `.read()` method"
-    Read more about `.read()` :arrow_right: <a href="https://epurelib.github.io/latest/learn/joins/#advanced-example-with-two-joins">here</a> :arrow_left:
+    Read more about `.read()` :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_read/#read">here</a> :arrow_left:
 
-Creating more advanced _smart_ query with `#!python for` statement
+Advanced example with _smart_ query, `#!python for` and cat aliens 👽🐈
 -----
 
 !!! example "Example with creating long smart query with `#!python for` statement and other cool stuff"

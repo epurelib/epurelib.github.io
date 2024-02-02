@@ -26,19 +26,25 @@ For type-hinting class attributes Epure supports:
 
     @epure()
     class AllSupportedTypes:
-        my_int:int
-        my_str:str
-        my_complex:complex
-        my_float:float
-        my_bytes:bytes
-        my_bool:bool
-        my_UUID:UUID
-        my_Epure:SomeEpureCls
+        my_int: int
+        my_str: str
+        my_complex: complex
+        my_float: float
+        my_bytes: bytes
+        my_bool: bool
+        my_UUID: UUID
+        my_Epure: SomeEpureCls
         my_elist: Elist[str]
         my_eset: Eset[bytes]
+        my_object: object
     ```
 
-## Storing Epure in another table and domain
+!!! question "`#!js JSON` and `#!py object` type"
+    class atribute with type `#!py object` will be saved as `#!js JSON` to DB
+
+    __So__ if you have a object and you dont know which type to use - just choose `#!py object` type 🙂
+
+## Storing Epure in another table and domain 
 
 ### Storing Epure in another table
 
