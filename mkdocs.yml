@@ -53,17 +53,19 @@ nav:
   # - Features: features.md
   - Learn: 
     - ./learn/learn.md
-    - Epure Essentials 🌌:
-      - "@escript decorator": ./learn/epure_essentials/escript_decorator.md
-      - Supported ColumnProxy methods with @escript decorator: ./learn/epure_essentials/column_proxy_methods.md
-      - "@epure() decorator, its supported types and overriding default storing for epure": ./learn/epure_essentials/epure_cls.md
-      - Reading from resource with `.read()`: ./learn/epure_essentials/epure_read.md
+    
     - Eset and Elist: ./learn/elist_eset.md
     - Join: ./learn/joins.md
     - Domain and Model: ./learn/domain_model.md
     - More about IniFile parser: ./learn/ini_parser.md
     - Supported DataBases: ./learn/supported_db.md
-    - "Serialization and Deserialization to `#!js JSON` and Dict": 
+    - Epure essentials ⭐:
+      - "@escript decorator and magic methods 🔮": ./learn/epure_essentials/escript_decorator.md
+      - Supported ColumnProxy methods with @escript decorator: ./learn/epure_essentials/column_proxy_methods.md
+      - "@epure() decorator and overriding storing for @epure": ./learn/epure_essentials/epure_cls.md
+      - Epure supported types: ./learn/epure_essentials/supported_types.md
+      - Reading from resource with `.read()`: ./learn/epure_essentials/epure_read.md
+    - Serialization and Deserialization to JSON and Dict ♻️: 
       - Serialization with to_dict and to_json: ./learn/serialization_deserialization/serialization.md
       - Deserialization with from_dict and from_json: ./learn/serialization_deserialization/deserialization.md
   - Help: help.md
