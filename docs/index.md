@@ -71,7 +71,7 @@ We will be using PostgresSQL for this example.
 
     If you dont know which type-hint you want to use, but still want to save your field: use `#!python object` type-hint and your instance will be saved as `#!js JSON`.
 
-    Read more about supported types for type-hinting :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_cls/#supported-types-for-type-hinting-class-attributes">here</a> :arrow_left:
+    Read more about supported types for type-hinting :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/supported_types.md">here</a> :arrow_left:
 
 ### Connect it
 
@@ -131,10 +131,10 @@ class Article:
 7. learn more about `#!python read()` here:
 
 !!! info "Supported by Epure type-hint types"
-    Read more about supported types for type-hinting :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_cls/#supported-types-for-type-hinting-class-attributes">here</a> :arrow_left:
+    Read more about supported types for type-hinting :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/epure_cls/#supported-types-for-type-hinting-class-attributes">here</a> :arrow_left:
 
 ??? tip ":magic_wand: _Magic_ :magic_wand: method and _smart queries_"
-    Read more about :magic_wand: _magic_ :magic_wand: methods and `#!python @escript` decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
+    Read more about :magic_wand: _magic_ :magic_wand: methods and `#!python @escript` decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
 
 ### Save it
 
@@ -173,7 +173,7 @@ my_articles[0].reporter # -> <Reporter object at 0x0...>
 my_articles[0].title # -> "Why Epure is the best ORM?"
 ```
 !!! info ":magic_wand: _Magic_ :magic_wand: method and _smart queries_"
-    Read more about :magic_wand: _magic_ :magic_wand: methods, `smart_queries` and `#!python @escript` decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
+    Read more about :magic_wand: _magic_ :magic_wand: methods, `smart_queries` and `#!python @escript` decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
 
 
 #### 2. Shortcut :material-arrow-right-top-bold: `#!python read()` with kwarg parameters
@@ -207,13 +207,13 @@ my_articles[0].title # -> "Why Epure is the best ORM?"
 1. data_id is a unique UUID object identifier that Epure uses to discriminate different objects
 
 !!! abstract "More on shortcut :material-arrow-right-top-bold: `.read()` method"
-    Read more about `.read()` :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_read/#read">here</a> :arrow_left:
+    Read more about `.read()` :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/epure_read/#read">here</a> :arrow_left:
 
 Advanced example with _smart_ query, `#!python for` and cat aliens 👽🐈
 -----
 
-!!! example "Example with creating long smart query with `#!python for` statement and other cool stuff"
-    Check out more on such example where we create a long smart query using `#!python for` statement :arrow_right: <a href="https://epurelib.github.io/latest/learn/escript_decorator/#more-advanced-alien-cats-example-with-for">here</a> :arrow_left:
+!!! example "Example with creating long _smart_ query with `#!python for` statement and other cool stuff"
+    Check out more on such example where we create a long _smart_ query using `#!python for` statement :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#more-advanced-alien-cats-example-with-for">here</a> :arrow_left:
 
 Example with join using JoinResource
 -----
@@ -306,7 +306,7 @@ Let's look at an example:
 
 <!-- `Eset` {==__is convenient__==} in cases when you need store big chunks of data in a collection -  -->
 
-Because of the way `Eset` is built, it {==__is really convenient__==} when working with big chunks of data!
+Because of the way `Eset` is built, it {==__is really convenient__==} when working with big chunks of data! 🤤
 
 You dont need to load whole Eset at a time: when `Eset` is retrived from DB - it will be empty by `#!js default` and is easily loaded by `.load()` method.
 
