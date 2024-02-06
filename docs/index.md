@@ -39,11 +39,13 @@ Key features:
 <!-- * **Concise**: Straight-to-the-point way of building queries -->
 <!-- * **Concise**: Smartest way in building :magic_wand: _magic_ :magic_wand: queries -->
 <!-- * **Lightweight structure**: Contrary to other python ORM - in Epure you have freedom to make structure for your project whatever you like -->
+
+<!-- * **Elegant**: Epure allows structure of your project to be as complicated or simple as you want -->
 <!-- * **Customizable**: Save your Epure in all forms and shapes -->
 * **Convenient**: Many useful and intuitive tools, like Elist, Eset, JoinResource and many more
 * **Fast**: Create tables based on your classes in no time
 * **Concise**: Encourages efficient building of flexible and _smart_ queries
-* **Elegant**: Epure allows structure of your project to be as complicated or simple as you want
+* **Simple, yet powerful**: Simple for novice, powerful for pro
 
 Installing
 ----------
@@ -97,13 +99,18 @@ log_level=3).connect() # (2)!
 Define a class that you want to save as a table and its :magic_wand: _magic_ :magic_wand: method, in our case `get_articles`:
 
 ```python
+# base class
+@epure()
+class Publication:
+    text_style:str = "scientific"
 
 @epure()
 class Reporter:
     full_name:str = "Victor Bennet"
 
-@epure() # (3)!
-class Article:
+@epure() # (1)!
+class Article(Publication):
+    # text_style: str = "scientific" # inheritss
     reporter:Reporter
     title:str
     times_published:NotNull[int] = 3
@@ -113,22 +120,16 @@ class Article:
         self.reporter = reporter
         self.title = title
 
-    @escript # (4)!
-    def get_articles(self):
-        md = self.md # (5)!
-        query = md.title in ("Why Epure is the best ORM?", "Why Elist is so powerfull?") # (6)!
-        # ↓↓↓ Will result in ↓↓↓
-        # query = "SELECT public.example.title IN ("Why Epure is the best ORM?", "Why Elist is so powerfull?")"
-        res = self.resource.read(query) # (7)!
-        return res
+    def get_articles_using_kwargs():
+
+        articles = self.resource.read(times_published=5) # -> [<Article object at 0x0...>, <Article object at 0x2...>]
+
+        return articles[0]
 
 ```
 
-3. `#!python @epure` is metaclass decorator function, that modifies class; more info here: 
-4. `#!python @escript` is method decorator for @epure decorated classes; more info here:
-5. note that md (short for `#!python Model`) is only available in @escript decorated method scope and only; more info here: 
-6. read more about supported SQL operators in `#!python Epure` like `#!python in` here:
-7. learn more about `#!python read()` here:
+1. `#!python @epure` is metaclass decorator function, that modifies class; more info here: 
+
 
 !!! info "Supported by Epure type-hint types"
     Read more about supported types for type-hinting :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/epure_cls/#supported-types-for-type-hinting-class-attributes">here</a> :arrow_left:
@@ -152,19 +153,51 @@ article_two.save()
 
 ### Retrieve it
 
-Now when your instances saved in DB table named `#!sql public.example`, we can talk about __creating__ __queries__ __variations__:
+Now when your instances saved in DB table named `#!sql public.article`, we can talk about __creating__ __queries__ __variations__:
 
-#### 1. Smart queries with use of `#!python @escript` magic method :star_struck:
+### 1. Smart queries with use of `#!python @escript` magic method :star_struck:
+
+!!! question "Bit of `#!py @escript`, `Model` and `Resource` theory 🧐"
+
+    Method itself becomes magical after we decorated it with `#!python @escript`. Every "epurized" class has its `Model` and `Resource`.
+
+    `Resource` is a field of `#!py class` that contains __all__ saved instances of this `#!py class`. 
+
+    `Model` is used to get data from `Resource`. With use of `Model`, we can address fields of class to construct _smart_ queries 😄
+    
+    <!-- It will take your expression and turn in into a smart query -->
+
 
 <!-- Let's do some magic  : -->
+We will define a :magic_wand: _magic_ :magic_wand: method `get_articles` for `#!py class Article`
 
-Method itself becomes magical after we decorated it with `#!python @escript`. It will take your smart query and will turn it into a `#!sql SQL` string.
 
-Passing it then to `#!python .read()` will retrieve `Reporter` object(s) with `title` value either: `#!python "Why Epure is the best ORM?"` or `#!python "Why Elist is so powerfull?"`.
+```py
+...
+@escript # (1)!
+def get_articles(self):
 
-And calling `#!python .smart_query_example()` method will :magic_wand: _magically_ :magic_wand: return your retrieved object. Viola!
+    md = self.md # (2)!
+
+    query = md.title in ("Why Epure is the best ORM?", "Why Elist is so powerfull?") # (3)!
+
+    articles = self.resource.read(query) # (4)!
+
+    return articles
+...
+```
+
+1. `#!python @escript` is method decorator for @epure decorated classes; more info here:
+2. note that md (short for `#!python Model`) is only available in @escript decorated method scope and only; more info here: 
+3. read more about supported SQL operators in `#!python Epure` like `#!python in` here:
+4. learn more about `#!python read()` here:
+
+Passing smart query then to `#!python .read()` will retrieve `Reporter` object(s) with `title` value either: `#!python "Why Epure is the best ORM?"` or `#!python "Why Elist is so powerfull?"`.
+
+And calling `#!python .smart_query_example()` our :magic_wand: _magic_ :magic_wand: method will return your retrieved object. ✨ Viola! ✨
 
 <!-- Calling this method we are reading data from resource and we will get Epure objects as result -->
+
 
 ```python hl_lines="1"
 my_articles = article_one.get_articles() # -> [<Article object at 0x0...>, <Article object at 0x2...>]
@@ -176,41 +209,40 @@ my_articles[0].title # -> "Why Epure is the best ORM?"
     <!-- Read more about :magic_wand: _magic_ :magic_wand: methods, `smart_queries` and `#!python @escript` decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> :arrow_left: -->
 
 
-    Read more about :magic_wand: _magic_ :magic_wand: methods, `smart_queries` and advanced work with Models :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
+    Read more about :magic_wand: _magic_ :magic_wand: methods, `smart_queries` and __advanced__ work with Models :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
 
 
-#### 2. Shortcut :material-arrow-right-top-bold: `#!python read()` with kwarg parameters
+### 2. Shortcut :material-arrow-right-top-bold: `#!py read()` with `#!py **kwargs` parameters
 
-Alternatively if you:
+<!-- Alternatively if you: -->
 
-- know attribute by which you want to get set of objects
+<!-- - know attribute by which you want to get set of objects -->
 
-- have `data_id` (`#!python UUID`) of specific object
+<!-- - have `data_id` (`#!python UUID`) of specific object -->
 
-you can use `.read()` method that takes key-word arguments and allows this ready to hand approach of getting objects
-<!-- or you have a unique data_id of the object and you want to straight up retrieve it -->
+<!-- you can use `.read()` method that takes key-word arguments and allows this ready to hand approach of getting objects -->
 
-```python hl_lines="4 9"
+<!-- ```python hl_lines="4 9" -->
 
-article_one_data_id = article_one.data_id # -> UUID4 # (1)!
+<!-- article_one_data_id = article_one.data_id # -> UUID4 # (1)! -->
 
-# reading by unique data_id of article will return one object
-my_articles = obj1.table.read(data_id=article_one_data_id)[0] # -> [<Article object at 0x0...>]
+<!-- # reading by unique data_id of article will return one object -->
+<!-- my_articles = obj1.table.read(data_id=article_one_data_id)[0] # -> [<Article object at 0x0...>] -->
 
-# or by kwargs
+<!-- # or by kwargs -->
 
-# multiple attrs of article
-my_articles = Article.resource.read(str_attr="Why Epure is the best ORM?", times_published=3) # -> [[<Article object at 0x0...,>, ...]]
+<!-- # multiple attrs of article -->
+<!-- my_articles = Article.resource.read(str_attr="Why Epure is the best ORM?", times_published=3) # -> [[<Article object at 0x0...,>, ...]] -->
 
-my_articles[0].reporter # -> <Reporter object at 0x0...>
-my_articles[0].title # -> "Why Epure is the best ORM?"
+<!-- my_articles[0].reporter # -> <Reporter object at 0x0...> -->
+<!-- my_articles[0].title # -> "Why Epure is the best ORM?" -->
 
-```
+<!-- ``` -->
 
-1. data_id is a unique UUID object identifier that Epure uses to discriminate different objects
+<!-- 1. data_id is a unique UUID object identifier that Epure uses to discriminate different objects -->
 
-!!! abstract "More on shortcut :material-arrow-right-top-bold: `.read()` method"
-    Read more about `.read()` :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/epure_read/#read">here</a> :arrow_left:
+!!! success "More on shortcut :material-arrow-right-top-bold: `.read()` method"
+    Read more about retrieving data using kwargs with `.read()` method :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/epure_read/#read">here</a> :arrow_left:
 
 Advanced example with _smart_ query, `#!python for` and cat aliens 👽🐈
 -----
