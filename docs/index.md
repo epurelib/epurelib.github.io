@@ -173,7 +173,10 @@ my_articles[0].reporter # -> <Reporter object at 0x0...>
 my_articles[0].title # -> "Why Epure is the best ORM?"
 ```
 !!! info ":magic_wand: _Magic_ :magic_wand: method and _smart queries_"
-    Read more about :magic_wand: _magic_ :magic_wand: methods, `smart_queries` and `#!python @escript` decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
+    <!-- Read more about :magic_wand: _magic_ :magic_wand: methods, `smart_queries` and `#!python @escript` decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> :arrow_left: -->
+
+
+    Read more about :magic_wand: _magic_ :magic_wand: methods, `smart_queries` and advanced work with Models :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
 
 
 #### 2. Shortcut :material-arrow-right-top-bold: `#!python read()` with kwarg parameters
@@ -236,11 +239,17 @@ Elist and Eset: easy store, easy load collections
 
 <!-- Elist is really convenient in terms of using easy savable and retrievable data collection. -->
 
-You can look at `Elist` like __strictly typed__ `#!py list` with mechanism of simple saving :material-download: and retrieving :material-upload: its contents from DB.
+<!-- You can look at `Elist` like __strictly typed__ `#!py list` with mechanism of simple saving :material-download: and retrieving :material-upload: its contents from DB. -->
 
-`Elist` can guarantee numerated order of objects when is used by user at a time
+You can look at `Elist` like __strictly typed__ `#!py list` with mechanism of easy saving :material-download: and retrieving :material-upload: its contents from DB.
 
-But in cases of big system with multiple users please refer to <a href="https://epurelib.github.io/latest/#eset">`Eset`</a> 🙂
+!!! warning "Elist is not multiuser-friendly"
+
+    <!-- `Elist` can guarantee numerated order of objects when is used by user at a time -->
+
+    `Elist` can __only__ guarantee numerated order of __small__ collections in __single-user__ aplications.
+
+    In cases of __big system__ with multiple users please refer to <a href="https://epurelib.github.io/latest/#eset">`Eset`</a> 🙂
 
 <!-- Elist comes real handy when you want to store your instances in DB using just a regular python list :exploding_head: -->
 
