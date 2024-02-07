@@ -102,19 +102,19 @@ Define a class that you want to save as a table and its :magic_wand: _magic_ :ma
 # base class
 @epure()
 class Publication:
-    text_style:str = "scientific"
+    text_style: str = "scientific"
 
 @epure()
 class Reporter:
-    full_name:str = "Victor Bennet"
+    full_name: str = "Victor Bennet"
 
 @epure() # (1)!
 class Article(Publication):
-    # text_style: str = "scientific" # inheritss
-    reporter:Reporter
-    title:str
-    times_published:NotNull[int] = 3
-    authors:List[str] = ["Charles Dickens", "Frank Herbert"]
+    # text_style: str = "scientific" # inherits
+    reporter: Reporter
+    title: str
+    times_published: NotNull[int] = 3
+    authors: List[str] = ["Charles Dickens", "Frank Herbert"]
 
     def __init__(self, reporter, title):
         self.reporter = reporter
@@ -146,16 +146,18 @@ my_reporter = Reporter()
 
 article_one = Article(my_reporter, "Why Epure is the best ORM?")
 article_one.save()
+articles.append(article_one)
 
 article_two = Article(my_reporter, "Why Eset is so magnificent?")
 article_two.save()
+articles.append(article_two)
 ```
 
 ### Retrieve it
 
 Now when your instances saved in DB table named `#!sql public.article`, we can talk about __creating__ __queries__ __variations__:
 
-### 1. Smart queries with use of `#!python @escript` magic method :star_struck:
+### 1. _Smart_ queries with use of `#!python @escript` magic method :star_struck:
 
 !!! question "Bit of `#!py @escript`, `Model` and `Resource` theory 🧐"
 
@@ -164,8 +166,6 @@ Now when your instances saved in DB table named `#!sql public.article`, we can t
     `Resource` is a field of `#!py class` that contains __all__ saved instances of this `#!py class`. 
 
     `Model` is used to get data from `Resource`. With use of `Model`, we can address fields of class to construct _smart_ queries 😄
-    
-    <!-- It will take your expression and turn in into a smart query -->
 
 
 <!-- Let's do some magic  : -->
@@ -177,9 +177,9 @@ We will define a :magic_wand: _magic_ :magic_wand: method `get_articles` for `#!
 @escript # (1)!
 def get_articles(self):
 
-    md = self.md # (2)!
+    model = self.md # (2)!
 
-    query = md.title in ("Why Epure is the best ORM?", "Why Elist is so powerfull?") # (3)!
+    query = model.title in ("Why Epure is the best ORM?", "Why Elist is so powerfull?") # (3)!
 
     articles = self.resource.read(query) # (4)!
 
@@ -192,9 +192,11 @@ def get_articles(self):
 3. read more about supported SQL operators in `#!python Epure` like `#!python in` here:
 4. learn more about `#!python read()` here:
 
+Resource implements CRUD interface, you can create (`.create()`), update (`.update()`), delete (`.delete()`) and read (`.read()`).
+
 Passing smart query then to `#!python .read()` will retrieve `Reporter` object(s) with `title` value either: `#!python "Why Epure is the best ORM?"` or `#!python "Why Elist is so powerfull?"`.
 
-And calling `#!python .smart_query_example()` our :magic_wand: _magic_ :magic_wand: method will return your retrieved object. ✨ Viola! ✨
+And calling `#!python .smart_query_example()`, our :magic_wand: _magic_ :magic_wand: method will return your retrieved object. ✨ Viola! ✨
 
 <!-- Calling this method we are reading data from resource and we will get Epure objects as result -->
 
