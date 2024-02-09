@@ -184,24 +184,25 @@ def get_articles(self):
 2. note that md (short for `#!python Model`) is only available in @escript decorated method scope and only; more info here: 
 
 
-One way is if we want to use `#!py for` cycle, we can initialize our query by `#!py True` statement 
+One way is if we want to use `#!py for` cycle, then we need to __explicitly initialize__ our `query` by `#!py False` statement, 
+this way `#!py False` will be our starting point in building of _smart_ query
+and therefore start of combinining these titles one by one using `#!py or`
 
-and then start combinining these titles by one using `#!py or` 
 ```py linenums="8"
-    query = True
+    query = False
 
     for name in title_names:
         query = query or model.title == name
 ```
 Or we can just use `#!py in` and we will get same result 😃:
 ```py linenums="12"
-    query = model.title in titles # (1)!
+    query = model.title in title_names # (1)!
 ```
 
 1. read more about supported SQL operators in `#!python Epure` like `#!python in` here:
 
 
-Passing _smart_ query then to `#!python .read()` will retrieve `Reporter` object(s) with `title` value either: `#!python "Why Epure is the best ORM?"` or `#!python "Why Elist is so powerfull?"`.
+Passing _smart_ query then to `#!python .read()` will retrieve `Reporter` object(s) with `title` value either: `#!python "Why Epure is the best ORM?"`,  `#!python "Why Elist is so powerfull?"` or `#!py "What is magic method?"`.
 ```py linenums="13"
 
     articles = self.resource.read(query) # (1)!

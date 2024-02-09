@@ -131,9 +131,9 @@ So if we want to create something more complex, lets use `#!py for` statement:
     This way, we can put them in a `#!py list` and iterate over it adding `#!py and` to each condition, sticking it all together
     ```py linenums="15" hl_lines="6"
         ...
-        queries_list = [name_query, legs_query, catnip_query]
+        queries_list = [name_query, legs_query, catnip_query, has_tail_query]
 
-        result_query = has_tail_query
+        result_query = True
 
         for query in queries_list:
            result_query = result_query and query
