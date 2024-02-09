@@ -233,7 +233,7 @@ Eset is convinient when you:
         ```python
         @epure()
         class MyEpureCls:
-            myElist:Eset[str] = Elist[str](["puss", "in", "boots"]) # this will be stored as "my_epure_cls__myelist"
+            myEset:Eset[str] = Eset[str](["puss", "in", "boots"]) # this will be stored as "my_epure_cls__myeset"
         ```
         
 
@@ -245,13 +245,13 @@ Eset is convinient when you:
     ??? example "Example of not bounded to class Eset"
         ```python
         class MyBasicCls:
-            my_elist_epure:Eset[MyEpureCls] # this will be stored as "eset__my_epure_cls"
+            my_eset_epure:Eset[MyEpureCls] # this will be stored as "eset__my_epure_cls"
         ```
 
         or
 
         ```python
-        my_elist_epure:Eset[str] # this will be stored as "eset__str"
+        my_eset_epure:Eset[str] # this will be stored as "eset__str"
         ```
 
 ???+ example "Example of creating Eset, saving, deleting its contents"
@@ -263,14 +263,14 @@ Eset is convinient when you:
     class SomeEpureEset:
         my_eset_field:Eset[str] = Eset[str](["knowledge", "is", "power"])
 
-    my_inst = SomeEpureElist()
+    my_inst = SomeEpureEset()
 
     my_inst.save() # this will triger recursive save for
                    # all esets, elists and its internal epure vals to save()
 
     data_id = my_inst.data_id
 
-    res = SomeEpureElist.resource.read(data_id = data_id)
+    res = SomeEpureEset.resource.read(data_id = data_id)
 
     res[0].my_eset_field.load()
 

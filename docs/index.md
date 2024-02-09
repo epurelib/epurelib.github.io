@@ -45,7 +45,7 @@ Key features:
 * **Convenient**: Many useful and intuitive tools, like Elist, Eset, JoinResource and many more
 * **Fast**: Create tables based on your classes in no time
 * **Concise**: Encourages efficient building of flexible and _smart_ queries
-* **Simple, yet powerful**: Simple for novice, powerful for pro
+* **Simple, yet powerful**: Simple for novice, powerful for expert
 
 Installing
 ----------
@@ -146,11 +146,9 @@ my_reporter = Reporter()
 
 article_one = Article(my_reporter, "Why Epure is the best ORM?")
 article_one.save()
-articles.append(article_one)
 
 article_two = Article(my_reporter, "Why Eset is so magnificent?")
 article_two.save()
-articles.append(article_two)
 ```
 
 ### Retrieve it
@@ -171,30 +169,52 @@ Now when your instances saved in DB table named `#!sql public.article`, we can t
 <!-- Let's do some magic  : -->
 We will define a :magic_wand: _magic_ :magic_wand: method `get_articles` for `#!py class Article`
 
-
-```py
+Imagine if we want to get all stored articles with names that are defined in `#!py list` of title names:
+```py linenums="1"
 ...
 @escript # (1)!
 def get_articles(self):
 
     model = self.md # (2)!
 
-    query = model.title in ("Why Epure is the best ORM?", "Why Elist is so powerfull?") # (3)!
+    title_names = ["Why Epure is the best ORM?", "Why Elist is so powerfull?", "What is magic method?"]
+```
 
-    articles = self.resource.read(query) # (4)!
+1. `#!python @escript` is method decorator for @epure decorated classes; more info here:
+2. note that md (short for `#!python Model`) is only available in @escript decorated method scope and only; more info here: 
+
+
+One way is if we want to use `#!py for` cycle, we can initialize our query by `#!py True` statement 
+
+and then start combinining these titles by one using `#!py or` 
+```py linenums="8"
+    query = True
+
+    for name in title_names:
+        query = query or model.title == name
+```
+Or we can just use `#!py in` and we will get same result 😃:
+```py linenums="12"
+    query = model.title in titles # (1)!
+```
+
+1. read more about supported SQL operators in `#!python Epure` like `#!python in` here:
+
+
+Passing _smart_ query then to `#!python .read()` will retrieve `Reporter` object(s) with `title` value either: `#!python "Why Epure is the best ORM?"` or `#!python "Why Elist is so powerfull?"`.
+```py linenums="13"
+
+    articles = self.resource.read(query) # (1)!
 
     return articles
 ...
 ```
 
-1. `#!python @escript` is method decorator for @epure decorated classes; more info here:
-2. note that md (short for `#!python Model`) is only available in @escript decorated method scope and only; more info here: 
-3. read more about supported SQL operators in `#!python Epure` like `#!python in` here:
-4. learn more about `#!python read()` here:
+1. learn more about `#!python read()` here:
 
-Resource implements CRUD interface, you can create (`.create()`), update (`.update()`), delete (`.delete()`) and read (`.read()`).
+`Resource` implements CRUD interface, you can create (`.create()`), update (`.update()`), delete (`.delete()`) and read (`.read()`).
 
-Passing smart query then to `#!python .read()` will retrieve `Reporter` object(s) with `title` value either: `#!python "Why Epure is the best ORM?"` or `#!python "Why Elist is so powerfull?"`.
+
 
 And calling `#!python .smart_query_example()`, our :magic_wand: _magic_ :magic_wand: method will return your retrieved object. ✨ Viola! ✨
 
