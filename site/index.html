@@ -1367,7 +1367,7 @@ We will be using PostgresSQL for this example.</p>
 <p>Read more about GresDB class and supported by Epure DataBases <img alt="➡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/27a1.svg" title=":arrow_right:" /> <a href="https://epurelib.github.io/latest/learn/supported_db/#supported-dbs-for-epure">here</a> <img alt="⬅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/2b05.svg" title=":arrow_left:" /></p>
 </div>
 <h3 id="define-it">Define it<a class="headerlink" href="#define-it" title="Permanent link">&para;</a></h3>
-<p>Define a class that you want to save as a table and its <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>magic</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> method, in our case <code>get_articles</code>:</p>
+<p>Define a class that you want to save as a table:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># base class</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@epure</span><span class="p">()</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">class</span> <span class="nc">Publication</span><span class="p">:</span>
@@ -1421,7 +1421,10 @@ We will be using PostgresSQL for this example.</p>
 <h3 id="1-smart-queries-with-use-of-escript-magic-method">1. <em>Smart</em> queries with use of <code class="language-python highlight"><span class="nd">@escript</span></code> magic method <img alt="🤩" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f929.svg" title=":star_struck:" /><a class="headerlink" href="#1-smart-queries-with-use-of-escript-magic-method" title="Permanent link">&para;</a></h3>
 <div class="admonition question">
 <p class="admonition-title">Bit of <code class="language-py highlight"><span class="nd">@escript</span></code>, <code>Model</code> and <code>Resource</code> theory 🧐</p>
-<p>Method itself becomes magical after we decorated it with <code class="language-python highlight"><span class="nd">@escript</span></code>. Every "epurized" class has its <code>Model</code> and <code>Resource</code>.</p>
+<p class="annotate">Method itself becomes magical after we decorated it with <code class="language-python highlight"><span class="nd">@escript</span></code>. Every "epurized"(1) class has its <code>Model</code> and <code>Resource</code>.</p>
+<ol>
+<li>"epurized" class - is <code class="language-py highlight"><span class="k">class</span></code> that was decorated by <code>@epure()</code> decorator</li>
+</ol>
 <p><code>Resource</code> is a field of <code class="language-py highlight"><span class="k">class</span></code> that contains <strong>all</strong> saved instances of this <code class="language-py highlight"><span class="k">class</span></code>. </p>
 <p><code>Model</code> is used to get data from <code>Resource</code>. With use of <code>Model</code>, we can address fields of class to construct <em>smart</em> queries 😄</p>
 </div>
