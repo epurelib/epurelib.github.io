@@ -734,6 +734,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#using-read-with-kwargs-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using read() with **kwargs parameters
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -947,6 +956,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#using-read-with-kwargs-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using read() with **kwargs parameters
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -999,6 +1017,34 @@ Or <code class="language-python highlight"><span class="nd">@escript</span></cod
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>MyEpure.resource.read(query) # [[&lt;MyEpure obj&gt;, &lt;MyEpure obj&gt;]]
 </span></code></pre></div></p>
 </details>
+<h3 id="using-read-with-kwargs-parameters">Using <code class="language-py highlight"><span class="n">read</span><span class="p">()</span></code> with <code class="language-py highlight"><span class="o">**</span><span class="n">kwargs</span></code> parameters<a class="headerlink" href="#using-read-with-kwargs-parameters" title="Permanent link">&para;</a></h3>
+<p><code class="language-py highlight"><span class="o">**</span><span class="n">kwargs</span></code> with <code class="language-py highlight"><span class="n">read</span><span class="p">()</span></code> is convinient when you:</p>
+<ul>
+<li>
+<p>know attribute by which you want to get set of objects</p>
+</li>
+<li>
+<p>have <code>data_id</code> (<code class="language-python highlight"><span class="n">UUID</span></code>) of specific object</p>
+</li>
+</ul>
+<p>Then you can use <code>.read()</code> method that takes key-word arguments and allows this ready to hand approach of getting objects:</p>
+<div class="admonition example">
+<p class="admonition-title">Using <code class="language-py highlight"><span class="n">read</span><span class="p">()</span></code> with <code class="language-py highlight"><span class="o">**</span><span class="n">kwargs</span></code></p>
+<p>We will take <code>data_id</code> (<code>UUID</code>) from saved object:</p>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">article_one_data_id</span> <span class="o">=</span> <span class="n">article_one</span><span class="o">.</span><span class="n">data_id</span> <span class="c1"># -&gt; UUID4 # (1)!</span>
+</span></code></pre></div>
+Passing <code>UUID</code> as <code>data_id</code> kwarg will return <code class="language-py highlight"><span class="nb">object</span></code> with that specific <code>UUID</code>:
+<div class="language-py highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># reading by unique data_id of article will return one object</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">my_articles</span> <span class="o">=</span> <span class="n">obj1</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_id</span><span class="o">=</span><span class="n">article_one_data_id</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># -&gt; [&lt;Article object at 0x0...&gt;]</span>
+</span></code></pre></div>
+Or if you want to retrieve saved instances by some attribute of <code class="language-py highlight"><span class="nb">object</span></code>:
+<div class="language-py highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># multiple attrs of article</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">my_articles</span> <span class="o">=</span> <span class="n">Article</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">str_attr</span><span class="o">=</span><span class="s2">&quot;Why Epure is the best ORM?&quot;</span><span class="p">,</span> <span class="n">times_published</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># -&gt; [[&lt;Article object at 0x0...,&gt;, ...]]</span>
+</span></code></pre></div></p>
+<ol>
+<li>data_id is a unique UUID object identifier that Epure uses to discriminate different objects</li>
+</ol>
+</div>
 
 
 
