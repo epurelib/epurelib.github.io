@@ -17,7 +17,7 @@ hide:
 </p>
 
 <p align="center">
-    <em>The purest architecture, intuitive EList, smart queries, concise syntax</em>
+    <em>New way to store data, smart query constructor, concise syntax</em>
 </p>
 
 ---
