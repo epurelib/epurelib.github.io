@@ -434,8 +434,7 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Retrieve it">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#1-smart-queries-with-use-of-escript-magic-method" class="md-nav__link">
@@ -447,16 +446,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-shortcut-read-with-kwarg-parameters" class="md-nav__link">
+  <a href="#2-shortcut-read-with-kwargs-parameters" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Shortcut  read() with kwarg parameters
+      2. Shortcut  read() with **kwargs parameters
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1160,8 +1154,7 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Retrieve it">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#1-smart-queries-with-use-of-escript-magic-method" class="md-nav__link">
@@ -1173,16 +1166,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-shortcut-read-with-kwarg-parameters" class="md-nav__link">
+  <a href="#2-shortcut-read-with-kwargs-parameters" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Shortcut  read() with kwarg parameters
+      2. Shortcut  read() with **kwargs parameters
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1336,12 +1324,14 @@ All technical details hidden from you. Care only about your business logic 🤑.
 <!-- * **Concise**: Straight-to-the-point way of building queries -->
 <!-- * **Concise**: Smartest way in building :magic_wand: _magic_ :magic_wand: queries -->
 <!-- * **Lightweight structure**: Contrary to other python ORM - in Epure you have freedom to make structure for your project whatever you like -->
+
+<!-- * **Elegant**: Epure allows structure of your project to be as complicated or simple as you want -->
 <!-- * **Customizable**: Save your Epure in all forms and shapes -->
 <ul>
 <li><strong>Convenient</strong>: Many useful and intuitive tools, like Elist, Eset, JoinResource and many more</li>
 <li><strong>Fast</strong>: Create tables based on your classes in no time</li>
 <li><strong>Concise</strong>: Encourages efficient building of flexible and <em>smart</em> queries</li>
-<li><strong>Elegant</strong>: Epure allows structure of your project to be as complicated or simple as you want</li>
+<li><strong>Simple, yet powerful</strong>: Simple for novice, powerful for expert</li>
 </ul>
 <h2 id="installing">Installing<a class="headerlink" href="#installing" title="Permanent link">&para;</a></h2>
 <p>Install and update using <a href="https://pip.pypa.io/en/stable/getting-started/"><code>pip</code></a>:</p>
@@ -1378,36 +1368,35 @@ We will be using PostgresSQL for this example.</p>
 </div>
 <h3 id="define-it">Define it<a class="headerlink" href="#define-it" title="Permanent link">&para;</a></h3>
 <p>Define a class that you want to save as a table and its <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>magic</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> method, in our case <code>get_articles</code>:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@epure</span><span class="p">()</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">class</span> <span class="nc">Reporter</span><span class="p">:</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">full_name</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Victor Bennet&quot;</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nd">@epure</span><span class="p">()</span> <span class="c1"># (3)!</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">class</span> <span class="nc">Article</span><span class="p">:</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">reporter</span><span class="p">:</span><span class="n">Reporter</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">title</span><span class="p">:</span><span class="nb">str</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">times_published</span><span class="p">:</span><span class="n">NotNull</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="n">authors</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Charles Dickens&quot;</span><span class="p">,</span> <span class="s2">&quot;Frank Herbert&quot;</span><span class="p">]</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reporter</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reporter</span> <span class="o">=</span> <span class="n">reporter</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="nd">@escript</span> <span class="c1"># (4)!</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="k">def</span> <span class="nf">get_articles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>        <span class="n">md</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">md</span> <span class="c1"># (5)!</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="n">query</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">title</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;Why Epure is the best ORM?&quot;</span><span class="p">,</span> <span class="s2">&quot;Why Elist is so powerfull?&quot;</span><span class="p">)</span> <span class="c1"># (6)!</span>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>        <span class="c1"># ↓↓↓ Will result in ↓↓↓</span>
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>        <span class="c1"># query = &quot;SELECT public.example.title IN (&quot;Why Epure is the best ORM?&quot;, &quot;Why Elist is so powerfull?&quot;)&quot;</span>
-</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="c1"># (7)!</span>
-</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>        <span class="k">return</span> <span class="n">res</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># base class</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">class</span> <span class="nc">Publication</span><span class="p">:</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">text_style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;scientific&quot;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">class</span> <span class="nc">Reporter</span><span class="p">:</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">full_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Victor Bennet&quot;</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nd">@epure</span><span class="p">()</span> <span class="c1"># (1)!</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">class</span> <span class="nc">Article</span><span class="p">(</span><span class="n">Publication</span><span class="p">):</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="c1"># text_style: str = &quot;scientific&quot; # inherits</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="n">reporter</span><span class="p">:</span> <span class="n">Reporter</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="n">times_published</span><span class="p">:</span> <span class="n">NotNull</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="n">authors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Charles Dickens&quot;</span><span class="p">,</span> <span class="s2">&quot;Frank Herbert&quot;</span><span class="p">]</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reporter</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reporter</span> <span class="o">=</span> <span class="n">reporter</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>    <span class="k">def</span> <span class="nf">get_articles_using_kwargs</span><span class="p">():</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>        <span class="n">articles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">times_published</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># -&gt; [&lt;Article object at 0x0...&gt;, &lt;Article object at 0x2...&gt;]</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>        <span class="k">return</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></code></pre></div>
 <ol>
 <li><code class="language-python highlight"><span class="nd">@epure</span></code> is metaclass decorator function, that modifies class; more info here: </li>
-<li><code class="language-python highlight"><span class="nd">@escript</span></code> is method decorator for @epure decorated classes; more info here:</li>
-<li>note that md (short for <code class="language-python highlight"><span class="n">Model</span></code>) is only available in @escript decorated method scope and only; more info here: </li>
-<li>read more about supported SQL operators in <code class="language-python highlight"><span class="n">Epure</span></code> like <code class="language-python highlight"><span class="ow">in</span></code> here:</li>
-<li>learn more about <code class="language-python highlight"><span class="n">read</span><span class="p">()</span></code> here:</li>
 </ol>
 <div class="admonition info">
 <p class="admonition-title">Supported by Epure type-hint types</p>
@@ -1428,56 +1417,109 @@ We will be using PostgresSQL for this example.</p>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">article_two</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 </span></code></pre></div>
 <h3 id="retrieve-it">Retrieve it<a class="headerlink" href="#retrieve-it" title="Permanent link">&para;</a></h3>
-<p>Now when your instances saved in DB table named <code class="language-sql highlight"><span class="k">public</span><span class="p">.</span><span class="n">example</span></code>, we can talk about <strong>creating</strong> <strong>queries</strong> <strong>variations</strong>:</p>
-<h4 id="1-smart-queries-with-use-of-escript-magic-method">1. Smart queries with use of <code class="language-python highlight"><span class="nd">@escript</span></code> magic method <img alt="🤩" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f929.svg" title=":star_struck:" /><a class="headerlink" href="#1-smart-queries-with-use-of-escript-magic-method" title="Permanent link">&para;</a></h4>
+<p>Now when your instances saved in DB table named <code class="language-sql highlight"><span class="k">public</span><span class="p">.</span><span class="n">article</span></code>, we can talk about <strong>creating</strong> <strong>queries</strong> <strong>variations</strong>:</p>
+<h3 id="1-smart-queries-with-use-of-escript-magic-method">1. <em>Smart</em> queries with use of <code class="language-python highlight"><span class="nd">@escript</span></code> magic method <img alt="🤩" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f929.svg" title=":star_struck:" /><a class="headerlink" href="#1-smart-queries-with-use-of-escript-magic-method" title="Permanent link">&para;</a></h3>
+<div class="admonition question">
+<p class="admonition-title">Bit of <code class="language-py highlight"><span class="nd">@escript</span></code>, <code>Model</code> and <code>Resource</code> theory 🧐</p>
+<p>Method itself becomes magical after we decorated it with <code class="language-python highlight"><span class="nd">@escript</span></code>. Every "epurized" class has its <code>Model</code> and <code>Resource</code>.</p>
+<p><code>Resource</code> is a field of <code class="language-py highlight"><span class="k">class</span></code> that contains <strong>all</strong> saved instances of this <code class="language-py highlight"><span class="k">class</span></code>. </p>
+<p><code>Model</code> is used to get data from <code>Resource</code>. With use of <code>Model</code>, we can address fields of class to construct <em>smart</em> queries 😄</p>
+</div>
 <!-- Let's do some magic  : -->
-
-<p>Method itself becomes magical after we decorated it with <code class="language-python highlight"><span class="nd">@escript</span></code>. It will take your smart query and will turn it into a <code class="language-sql highlight"><span class="k">SQL</span></code> string.</p>
-<p>Passing it then to <code class="language-python highlight"><span class="o">.</span><span class="n">read</span><span class="p">()</span></code> will retrieve <code>Reporter</code> object(s) with <code>title</code> value either: <code class="language-python highlight"><span class="s2">&quot;Why Epure is the best ORM?&quot;</span></code> or <code class="language-python highlight"><span class="s2">&quot;Why Elist is so powerfull?&quot;</span></code>.</p>
-<p>And calling <code class="language-python highlight"><span class="o">.</span><span class="n">smart_query_example</span><span class="p">()</span></code> method will <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>magically</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> return your retrieved object. Viola!</p>
+<p>We will define a <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>magic</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> method <code>get_articles</code> for <code class="language-py highlight"><span class="k">class</span> <span class="nc">Article</span></code></p>
+<p>Imagine if we want to get all stored articles with names that are defined in <code class="language-py highlight"><span class="nb">list</span></code> of title names:
+<div class="language-py highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span>
+<span class="normal"><a href="#__codelineno-5-6">6</a></span>
+<span class="normal"><a href="#__codelineno-5-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="o">...</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="nd">@escript</span> <span class="c1"># (1)!</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="k">def</span> <span class="nf">get_articles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5"></a>    <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">md</span> <span class="c1"># (2)!</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7"></a>    <span class="n">title_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Why Epure is the best ORM?&quot;</span><span class="p">,</span> <span class="s2">&quot;Why Elist is so powerfull?&quot;</span><span class="p">,</span> <span class="s2">&quot;What is magic method?&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div></p>
+<ol>
+<li><code class="language-python highlight"><span class="nd">@escript</span></code> is method decorator for @epure decorated classes; more info here:</li>
+<li>note that md (short for <code class="language-python highlight"><span class="n">Model</span></code>) is only available in @escript decorated method scope and only; more info here: </li>
+</ol>
+<p>One way is if we want to use <code class="language-py highlight"><span class="k">for</span></code> cycle, then we need to <strong>explicitly initialize</strong> our <code>query</code> by <code class="language-py highlight"><span class="kc">False</span></code> statement, 
+this way <code class="language-py highlight"><span class="kc">False</span></code> will be our starting point in building of <em>smart</em> query
+and therefore start of combinining these titles one by one using <code class="language-py highlight"><span class="ow">or</span></code></p>
+<p><div class="language-py highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a>    <span class="n">query</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a>    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">title_names</span><span class="p">:</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a>        <span class="n">query</span> <span class="o">=</span> <span class="n">query</span> <span class="ow">or</span> <span class="n">model</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="n">name</span>
+</span></code></pre></div></td></tr></table></div>
+Or we can just use <code class="language-py highlight"><span class="ow">in</span></code> and we will get same result 😃:
+<div class="language-py highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a>    <span class="n">query</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">title</span> <span class="ow">in</span> <span class="n">title_names</span> <span class="c1"># (1)!</span>
+</span></code></pre></div></td></tr></table></div></p>
+<ol>
+<li>read more about supported SQL operators in <code class="language-python highlight"><span class="n">Epure</span></code> like <code class="language-python highlight"><span class="ow">in</span></code> here:</li>
+</ol>
+<p>Passing <em>smart</em> query then to <code class="language-python highlight"><span class="o">.</span><span class="n">read</span><span class="p">()</span></code> will retrieve <code>Reporter</code> object(s) with <code>title</code> value either: <code class="language-python highlight"><span class="s2">&quot;Why Epure is the best ORM?&quot;</span></code>,  <code class="language-python highlight"><span class="s2">&quot;Why Elist is so powerfull?&quot;</span></code> or <code class="language-py highlight"><span class="s2">&quot;What is magic method?&quot;</span></code>.
+<div class="language-py highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13"></a>    <span class="n">articles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="c1"># (1)!</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14"></a>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15"></a>    <span class="k">return</span> <span class="n">articles</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="o">...</span>
+</span></code></pre></div></td></tr></table></div></p>
+<ol>
+<li>learn more about <code class="language-python highlight"><span class="n">read</span><span class="p">()</span></code> here:</li>
+</ol>
+<p><code>Resource</code> implements CRUD interface, you can create (<code>.create()</code>), update (<code>.update()</code>), delete (<code>.delete()</code>) and read (<code>.read()</code>).</p>
+<p>And calling <code class="language-python highlight"><span class="o">.</span><span class="n">smart_query_example</span><span class="p">()</span></code>, our <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>magic</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> method will return your retrieved object. ✨ Viola! ✨</p>
 <!-- Calling this method we are reading data from resource and we will get Epure objects as result -->
 
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="hll"><span class="n">my_articles</span> <span class="o">=</span> <span class="n">article_one</span><span class="o">.</span><span class="n">get_articles</span><span class="p">()</span> <span class="c1"># -&gt; [&lt;Article object at 0x0...&gt;, &lt;Article object at 0x2...&gt;]</span>
-</span></span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">my_articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reporter</span> <span class="c1"># -&gt; &lt;Reporter object at 0x0...&gt;</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">my_articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">title</span> <span class="c1"># -&gt; &quot;Why Epure is the best ORM?&quot;</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="hll"><span class="n">my_articles</span> <span class="o">=</span> <span class="n">article_one</span><span class="o">.</span><span class="n">get_articles</span><span class="p">()</span> <span class="c1"># -&gt; [&lt;Article object at 0x0...&gt;, &lt;Article object at 0x2...&gt;]</span>
+</span></span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">my_articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reporter</span> <span class="c1"># -&gt; &lt;Reporter object at 0x0...&gt;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">my_articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">title</span> <span class="c1"># -&gt; &quot;Why Epure is the best ORM?&quot;</span>
 </span></code></pre></div>
 <div class="admonition info">
 <p class="admonition-title"><img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>Magic</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> method and <em>smart queries</em></p>
-<p>Read more about <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>magic</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> methods, <code>smart_queries</code> and <code class="language-python highlight"><span class="nd">@escript</span></code> decorator <img alt="➡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/27a1.svg" title=":arrow_right:" /> <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> <img alt="⬅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/2b05.svg" title=":arrow_left:" /></p>
+<!-- Read more about :magic_wand: _magic_ :magic_wand: methods, <code>smart_queries</code> and <code class="language-python highlight"><span class="nd">@escript</span></code> decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> :arrow_left: -->
+<p>Read more about <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>magic</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> methods, <code>smart_queries</code> and <strong>advanced</strong> work with Models <img alt="➡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/27a1.svg" title=":arrow_right:" /> <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> <img alt="⬅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/2b05.svg" title=":arrow_left:" /></p>
 </div>
-<h4 id="2-shortcut-read-with-kwarg-parameters">2. Shortcut <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 13.5C3 9.36 6.36 6 10.5 6H13V2l7 6-7 6v-4h-2.5C8.57 10 7 11.57 7 13.5V21H3v-7.5Z"/></svg></span> <code class="language-python highlight"><span class="n">read</span><span class="p">()</span></code> with kwarg parameters<a class="headerlink" href="#2-shortcut-read-with-kwarg-parameters" title="Permanent link">&para;</a></h4>
-<p>Alternatively if you:</p>
-<ul>
-<li>
-<p>know attribute by which you want to get set of objects</p>
-</li>
-<li>
-<p>have <code>data_id</code> (<code class="language-python highlight"><span class="n">UUID</span></code>) of specific object</p>
-</li>
-</ul>
-<p>you can use <code>.read()</code> method that takes key-word arguments and allows this ready to hand approach of getting objects</p>
-<!-- or you have a unique data_id of the object and you want to straight up retrieve it -->
+<h3 id="2-shortcut-read-with-kwargs-parameters">2. Shortcut <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 13.5C3 9.36 6.36 6 10.5 6H13V2l7 6-7 6v-4h-2.5C8.57 10 7 11.57 7 13.5V21H3v-7.5Z"/></svg></span> <code class="language-py highlight"><span class="n">read</span><span class="p">()</span></code> with <code class="language-py highlight"><span class="o">**</span><span class="n">kwargs</span></code> parameters<a class="headerlink" href="#2-shortcut-read-with-kwargs-parameters" title="Permanent link">&para;</a></h3>
+<!-- Alternatively if you: -->
 
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">article_one_data_id</span> <span class="o">=</span> <span class="n">article_one</span><span class="o">.</span><span class="n">data_id</span> <span class="c1"># -&gt; UUID4 # (1)!</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># reading by unique data_id of article will return one object</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="hll"><span class="n">my_articles</span> <span class="o">=</span> <span class="n">obj1</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_id</span><span class="o">=</span><span class="n">article_one_data_id</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># -&gt; [&lt;Article object at 0x0...&gt;]</span>
-</span></span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># or by kwargs</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c1"># multiple attrs of article</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="hll"><span class="n">my_articles</span> <span class="o">=</span> <span class="n">Article</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">str_attr</span><span class="o">=</span><span class="s2">&quot;Why Epure is the best ORM?&quot;</span><span class="p">,</span> <span class="n">times_published</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># -&gt; [[&lt;Article object at 0x0...,&gt;, ...]]</span>
-</span></span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">my_articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reporter</span> <span class="c1"># -&gt; &lt;Reporter object at 0x0...&gt;</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="n">my_articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">title</span> <span class="c1"># -&gt; &quot;Why Epure is the best ORM?&quot;</span>
-</span></code></pre></div>
-<ol>
-<li>data_id is a unique UUID object identifier that Epure uses to discriminate different objects</li>
-</ol>
-<div class="admonition abstract">
+<!-- - know attribute by which you want to get set of objects -->
+
+<!-- - have `data_id` (`#!python UUID`) of specific object -->
+
+<!-- you can use `.read()` method that takes key-word arguments and allows this ready to hand approach of getting objects -->
+
+<!-- ```python hl_lines="4 9" -->
+
+<!-- article_one_data_id = article_one.data_id # -> UUID4 # (1)! -->
+
+<!-- # reading by unique data_id of article will return one object -->
+<!-- my_articles = obj1.table.read(data_id=article_one_data_id)[0] # -> [<Article object at 0x0...>] -->
+
+<!-- # or by kwargs -->
+
+<!-- # multiple attrs of article -->
+<!-- my_articles = Article.resource.read(str_attr="Why Epure is the best ORM?", times_published=3) # -> [[<Article object at 0x0...,>, ...]] -->
+
+<!-- my_articles[0].reporter # -> <Reporter object at 0x0...> -->
+<!-- my_articles[0].title # -> "Why Epure is the best ORM?" -->
+
+<!-- ``` -->
+
+<!-- 1. data_id is a unique UUID object identifier that Epure uses to discriminate different objects -->
+
+<div class="admonition success">
 <p class="admonition-title">More on shortcut <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 13.5C3 9.36 6.36 6 10.5 6H13V2l7 6-7 6v-4h-2.5C8.57 10 7 11.57 7 13.5V21H3v-7.5Z"/></svg></span> <code>.read()</code> method</p>
-<p>Read more about <code>.read()</code> <img alt="➡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/27a1.svg" title=":arrow_right:" /> <a href="https://epurelib.github.io/latest/learn/epure_essentials/epure_read/#read">here</a> <img alt="⬅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/2b05.svg" title=":arrow_left:" /></p>
+<p>Read more about retrieving data using kwargs with <code>.read()</code> method <img alt="➡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/27a1.svg" title=":arrow_right:" /> <a href="https://epurelib.github.io/latest/learn/epure_essentials/epure_read/#read">here</a> <img alt="⬅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/2b05.svg" title=":arrow_left:" /></p>
 </div>
 <h2 id="advanced-example-with-smart-query-for-and-cat-aliens">Advanced example with <em>smart</em> query, <code class="language-python highlight"><span class="k">for</span></code> and cat aliens 👽🐈<a class="headerlink" href="#advanced-example-with-smart-query-for-and-cat-aliens" title="Permanent link">&para;</a></h2>
 <div class="admonition example">
@@ -1500,55 +1542,61 @@ We will be using PostgresSQL for this example.</p>
 
 <!-- Elist is really convenient in terms of using easy savable and retrievable data collection. -->
 
-<p>You can look at <code>Elist</code> like <strong>strictly typed</strong> <code class="language-py highlight"><span class="nb">list</span></code> with mechanism of simple saving <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> and retrieving <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16v-6H5l7-7 7 7h-4v6H9m-4 4v-2h14v2H5Z"/></svg></span> its contents from DB.</p>
-<p><code>Elist</code> can guarantee numerated order of objects when is used by user at a time</p>
-<p>But in cases of big system with multiple users please refer to <a href="https://epurelib.github.io/latest/#eset"><code>Eset</code></a> 🙂</p>
+<!-- You can look at `Elist` like __strictly typed__ `#!py list` with mechanism of simple saving :material-download: and retrieving :material-upload: its contents from DB. -->
+
+<p>You can look at <code>Elist</code> like <strong>strictly typed</strong> <code class="language-py highlight"><span class="nb">list</span></code> with mechanism of easy saving <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> and retrieving <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16v-6H5l7-7 7 7h-4v6H9m-4 4v-2h14v2H5Z"/></svg></span> its contents from DB.</p>
+<div class="admonition warning">
+<p class="admonition-title">Elist is not multiuser-friendly</p>
+<!-- <code>Elist</code> can guarantee numerated order of objects when is used by user at a time -->
+<p><code>Elist</code> can <strong>only</strong> guarantee numerated order of <strong>small</strong> collections in <strong>single-user</strong> aplications.</p>
+<p>In cases of <strong>big system</strong> with multiple users please refer to <a href="https://epurelib.github.io/latest/#eset"><code>Eset</code></a> 🙂</p>
+</div>
 <!-- Elist comes real handy when you want to store your instances in DB using just a regular python list :exploding_head: -->
 
 <p>Let's look at an example:</p>
 <details class="example" open="open">
 <summary><code>Elist</code> example for storing and retrieving items</summary>
 <p>We will create <code>House</code> and <code>District</code> classes. Both <code>House</code> and <code>District</code> will store a <code>Elist</code>.
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">epure</span> <span class="kn">import</span> <span class="n">epure</span><span class="p">,</span> <span class="n">Elist</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nd">@epure</span><span class="p">()</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">class</span> <span class="nc">House</span><span class="p">:</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="n">tenant_names</span><span class="p">:</span><span class="n">Elist</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="n">house_number</span><span class="p">:</span><span class="nb">int</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="n">street_name</span><span class="p">:</span><span class="nb">str</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">house_number</span><span class="p">,</span> <span class="n">street_name</span><span class="p">,</span> <span class="n">tenant_names</span><span class="p">):</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">house_number</span> <span class="o">=</span> <span class="n">house_number</span>
-</span></span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">street_name</span> <span class="o">=</span> <span class="n">street_name</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">tenant_names</span> <span class="o">=</span> <span class="n">tenant_names</span>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="nd">@epure</span><span class="p">()</span>
-</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="k">class</span> <span class="nc">District</span><span class="p">:</span>
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>    <span class="n">houses_list</span><span class="p">:</span><span class="n">Elist</span><span class="p">[</span><span class="n">House</span><span class="p">]</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span> <span class="nn">epure</span> <span class="kn">import</span> <span class="n">epure</span><span class="p">,</span> <span class="n">Elist</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">class</span> <span class="nc">House</span><span class="p">:</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">tenant_names</span><span class="p">:</span><span class="n">Elist</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="n">house_number</span><span class="p">:</span><span class="nb">int</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="n">street_name</span><span class="p">:</span><span class="nb">str</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">house_number</span><span class="p">,</span> <span class="n">street_name</span><span class="p">,</span> <span class="n">tenant_names</span><span class="p">):</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">house_number</span> <span class="o">=</span> <span class="n">house_number</span>
+</span></span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">street_name</span> <span class="o">=</span> <span class="n">street_name</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">tenant_names</span> <span class="o">=</span> <span class="n">tenant_names</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="k">class</span> <span class="nc">District</span><span class="p">:</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>    <span class="n">houses_list</span><span class="p">:</span><span class="n">Elist</span><span class="p">[</span><span class="n">House</span><span class="p">]</span>
 </span></code></pre></div>
 After we will create two instances of <code>House</code>, add them to <code>houses_list</code> (<code>Elist</code>) of <code>District</code> obj and save all them.</p>
 <details class="question">
 <summary>Saving object with <code>Elist</code> or <code>Eset</code> field</summary>
 <p>Note that saving object with <code>Elist</code> field will triger saving for all <code>Elist</code> or <code>Eset</code> fields of this object respectivly.</p>
 </details>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">house_one</span> <span class="o">=</span> <span class="n">House</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="s2">&quot;Crow Str.&quot;</span><span class="p">,</span> <span class="n">Elist</span><span class="p">[</span><span class="nb">str</span><span class="p">]([</span><span class="s2">&quot;Mary&quot;</span><span class="p">,</span> <span class="s2">&quot;Charles&quot;</span><span class="p">]))</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">house_two</span> <span class="o">=</span> <span class="n">House</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="s2">&quot;Babbidge Str.&quot;</span><span class="p">,</span> <span class="n">Elist</span><span class="p">[</span><span class="nb">str</span><span class="p">]([</span><span class="s2">&quot;Daniel&quot;</span><span class="p">]))</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">district</span> <span class="o">=</span> <span class="n">District</span><span class="p">()</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">district</span><span class="o">.</span><span class="n">houses_list</span> <span class="o">=</span> <span class="n">Elist</span><span class="p">[</span><span class="n">House</span><span class="p">]([</span><span class="n">house_one</span><span class="p">,</span> <span class="n">house_two</span><span class="p">])</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="n">district</span><span class="o">.</span><span class="n">save</span><span class="p">()</span> <span class="c1"># (1)!</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">house_one</span> <span class="o">=</span> <span class="n">House</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="s2">&quot;Crow Str.&quot;</span><span class="p">,</span> <span class="n">Elist</span><span class="p">[</span><span class="nb">str</span><span class="p">]([</span><span class="s2">&quot;Mary&quot;</span><span class="p">,</span> <span class="s2">&quot;Charles&quot;</span><span class="p">]))</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">house_two</span> <span class="o">=</span> <span class="n">House</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="s2">&quot;Babbidge Str.&quot;</span><span class="p">,</span> <span class="n">Elist</span><span class="p">[</span><span class="nb">str</span><span class="p">]([</span><span class="s2">&quot;Daniel&quot;</span><span class="p">]))</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">district</span> <span class="o">=</span> <span class="n">District</span><span class="p">()</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">district</span><span class="o">.</span><span class="n">houses_list</span> <span class="o">=</span> <span class="n">Elist</span><span class="p">[</span><span class="n">House</span><span class="p">]([</span><span class="n">house_one</span><span class="p">,</span> <span class="n">house_two</span><span class="p">])</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="n">district</span><span class="o">.</span><span class="n">save</span><span class="p">()</span> <span class="c1"># (1)!</span>
 </span></code></pre></div>
 <ol>
 <li>Saving this Epure instance with Elist field will triger saving for Elist</li>
 </ol>
 <p>Then using <code>.read()</code> we will get our <code>District</code> object from DB (<code>district_retrived</code>) using <code>district.data_id</code> (unique <code>UUID</code> id).
 <code>House</code> objects will be already present in <code>house_list</code> <code>Elist</code>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">district_retrived</span> <span class="o">=</span> <span class="n">District</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_id</span> <span class="o">=</span> <span class="n">district</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">district_retrived</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">houses_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># -&gt; [&lt;House object at 0x0...&gt;]</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">district_retrived</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">houses_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tenant_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># -&gt; &quot;Mary&quot;</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">district_retrived</span> <span class="o">=</span> <span class="n">District</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_id</span> <span class="o">=</span> <span class="n">district</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">district_retrived</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">houses_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># -&gt; [&lt;House object at 0x0...&gt;]</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">district_retrived</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">houses_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tenant_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># -&gt; &quot;Mary&quot;</span>
 </span></code></pre></div>
 Working with <code>Elist</code> collection is really easy as you can see in this example</p>
 </details>
@@ -1570,58 +1618,58 @@ Working with <code>Elist</code> collection is really easy as you can see in this
 <summary>Eset with <code class="language-js highlight"><span class="nb">JSON</span></code> example for storing, loading and retrieving items</summary>
 <p>Let's declare <code>Customer</code> and <code>ShipmentCompany</code>. </p>
 <p>Because <code>ShipmentCompany.customers_set</code> <code>Elist</code> type is <code class="language-py highlight"><span class="nb">object</span></code> - instances of <code>Customer</code> will be stored as <code class="language-js highlight"><span class="nb">JSON</span></code>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="hll"><span class="kn">from</span> <span class="nn">epure</span> <span class="kn">import</span> <span class="n">epure</span><span class="p">,</span> <span class="n">Eset</span>
-</span></span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">class</span> <span class="nc">Customer</span><span class="p">:</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">name</span><span class="p">:</span><span class="nb">str</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">adress</span><span class="p">:</span><span class="nb">str</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">adress</span><span class="p">):</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">adress</span> <span class="o">=</span> <span class="n">adress</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="nd">@epure</span><span class="p">()</span>
-</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="k">class</span> <span class="nc">ShipmentCompany</span><span class="p">:</span>
-</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>    <span class="n">customers_set</span><span class="p">:</span><span class="n">Eset</span><span class="p">[</span><span class="nb">object</span><span class="p">]</span>
-</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>    <span class="n">offices_names</span><span class="p">:</span><span class="n">Eset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Eset</span><span class="p">[</span><span class="nb">str</span><span class="p">]([</span><span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="s2">&quot;Bravo&quot;</span><span class="p">,</span> <span class="s2">&quot;Alpha&quot;</span><span class="p">])</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="hll"><span class="kn">from</span> <span class="nn">epure</span> <span class="kn">import</span> <span class="n">epure</span><span class="p">,</span> <span class="n">Eset</span>
+</span></span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">class</span> <span class="nc">Customer</span><span class="p">:</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="n">name</span><span class="p">:</span><span class="nb">str</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="n">adress</span><span class="p">:</span><span class="nb">str</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">adress</span><span class="p">):</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">adress</span> <span class="o">=</span> <span class="n">adress</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="k">class</span> <span class="nc">ShipmentCompany</span><span class="p">:</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>    <span class="n">customers_set</span><span class="p">:</span><span class="n">Eset</span><span class="p">[</span><span class="nb">object</span><span class="p">]</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>    <span class="n">offices_names</span><span class="p">:</span><span class="n">Eset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Eset</span><span class="p">[</span><span class="nb">str</span><span class="p">]([</span><span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="s2">&quot;Bravo&quot;</span><span class="p">,</span> <span class="s2">&quot;Alpha&quot;</span><span class="p">])</span>
 </span></code></pre></div></p>
 <p><code>Eset</code> allows to store <mark class="critic">copious</mark> amounts of data, so <strong>lets load it up</strong>!</p>
 <details class="success">
 <summary>Storing loads of instances in <code>big_customers_set</code></summary>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">customer_1</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Sion Mccall&quot;</span><span class="p">,</span> <span class="s2">&quot;Heathfield Road, 30&quot;</span><span class="p">)</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">customer_2</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Darcy Montes&quot;</span><span class="p">,</span> <span class="s2">&quot;Ash Street, 13&quot;</span><span class="p">)</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">customer_3</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Isaiah Hughes&quot;</span><span class="p">,</span> <span class="s2">&quot;Grasmere Avenue, 19&quot;</span><span class="p">)</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">customer_4</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Jodie Sandoval&quot;</span><span class="p">,</span> <span class="s2">&quot; Meadow Rise, 15&quot;</span><span class="p">)</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="o">...</span>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="o">...</span>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="o">...</span>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="n">customer_50</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Emily Mahoney&quot;</span><span class="p">,</span> <span class="s2">&quot;Park Road, 62&quot;</span><span class="p">)</span>
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="n">customer_51</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Inaaya Hodge&quot;</span><span class="p">,</span> <span class="s2">&quot;Rectory Lane, 42&quot;</span><span class="p">)</span>
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="n">customer_52</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Blanche Colon&quot;</span><span class="p">,</span> <span class="s2">&quot;Ferndale Road, 10&quot;</span><span class="p">)</span>
-</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="n">customer_54</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Lucia Davenport&quot;</span><span class="p">,</span> <span class="s2">&quot;Warwick Street, 56&quot;</span><span class="p">)</span>
-</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="n">customer_55</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Vivian Lin&quot;</span><span class="p">,</span> <span class="s2">&quot;Carlton Road, 23&quot;</span><span class="p">)</span>
-</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="n">customer_56</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Kane Flores&quot;</span><span class="p">,</span> <span class="s2">&quot;Beaufort Road, 87&quot;</span><span class="p">)</span>
-</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>
-</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="n">big_customers_set</span> <span class="o">=</span> <span class="n">Eset</span><span class="p">[</span><span class="nb">object</span><span class="p">]([</span><span class="n">customer_1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">customer_56</span><span class="p">])</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">customer_1</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Sion Mccall&quot;</span><span class="p">,</span> <span class="s2">&quot;Heathfield Road, 30&quot;</span><span class="p">)</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">customer_2</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Darcy Montes&quot;</span><span class="p">,</span> <span class="s2">&quot;Ash Street, 13&quot;</span><span class="p">)</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">customer_3</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Isaiah Hughes&quot;</span><span class="p">,</span> <span class="s2">&quot;Grasmere Avenue, 19&quot;</span><span class="p">)</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">customer_4</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Jodie Sandoval&quot;</span><span class="p">,</span> <span class="s2">&quot; Meadow Rise, 15&quot;</span><span class="p">)</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="o">...</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="o">...</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="o">...</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="n">customer_50</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Emily Mahoney&quot;</span><span class="p">,</span> <span class="s2">&quot;Park Road, 62&quot;</span><span class="p">)</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="n">customer_51</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Inaaya Hodge&quot;</span><span class="p">,</span> <span class="s2">&quot;Rectory Lane, 42&quot;</span><span class="p">)</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="n">customer_52</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Blanche Colon&quot;</span><span class="p">,</span> <span class="s2">&quot;Ferndale Road, 10&quot;</span><span class="p">)</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="n">customer_54</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Lucia Davenport&quot;</span><span class="p">,</span> <span class="s2">&quot;Warwick Street, 56&quot;</span><span class="p">)</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="n">customer_55</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Vivian Lin&quot;</span><span class="p">,</span> <span class="s2">&quot;Carlton Road, 23&quot;</span><span class="p">)</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="n">customer_56</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="s2">&quot;Kane Flores&quot;</span><span class="p">,</span> <span class="s2">&quot;Beaufort Road, 87&quot;</span><span class="p">)</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="n">big_customers_set</span> <span class="o">=</span> <span class="n">Eset</span><span class="p">[</span><span class="nb">object</span><span class="p">]([</span><span class="n">customer_1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">customer_56</span><span class="p">])</span>
 </span></code></pre></div>
 </details>
 <p>We will create our <code>shipment_company</code> and assign <code>big_customers_set</code> to its <code>customers_set</code>, then we will save it</p>
-<p><div class="language-py highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">shipment_company</span> <span class="o">=</span> <span class="n">ShipmentCompany</span><span class="p">()</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">shipment_company</span><span class="o">.</span><span class="n">customers_set</span> <span class="o">=</span> <span class="n">big_customers_set</span>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">shipment_company</span><span class="o">.</span><span class="n">save</span><span class="p">()</span> <span class="c1"># (1)!</span>
+<p><div class="language-py highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">shipment_company</span> <span class="o">=</span> <span class="n">ShipmentCompany</span><span class="p">()</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">shipment_company</span><span class="o">.</span><span class="n">customers_set</span> <span class="o">=</span> <span class="n">big_customers_set</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="n">shipment_company</span><span class="o">.</span><span class="n">save</span><span class="p">()</span> <span class="c1"># (1)!</span>
 </span></code></pre></div>
 Retriving is easily done with <code>read()</code>, and as you can see you need to <code>load()</code> <code>Eset</code> for it to be sub-loaded.</p>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">retrieved_shipment_company</span> <span class="o">=</span> <span class="n">EsetExample</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_id</span> <span class="o">=</span> <span class="n">eset_ex</span><span class="o">.</span><span class="n">data_id</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">customers_set</span> <span class="c1"># -&gt; {}</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">customers_set</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="c1"># (2)!</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">customers_set</span> <span class="c1"># -&gt; {&lt;Customer object at 0x0...&gt;, &lt;Customer object at 0x0...&gt;, ...}</span>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">offices_names</span> <span class="c1"># -&gt; {}</span>
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">offices_names</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="c1"># (2)!</span>
-</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">offices_names</span><span class="p">)</span> <span class="c1"># -&gt; &quot;Alpha Charlie Bravo&quot;</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">retrieved_shipment_company</span> <span class="o">=</span> <span class="n">EsetExample</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_id</span> <span class="o">=</span> <span class="n">eset_ex</span><span class="o">.</span><span class="n">data_id</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">customers_set</span> <span class="c1"># -&gt; {}</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">customers_set</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="c1"># (2)!</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">customers_set</span> <span class="c1"># -&gt; {&lt;Customer object at 0x0...&gt;, &lt;Customer object at 0x0...&gt;, ...}</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">offices_names</span> <span class="c1"># -&gt; {}</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">offices_names</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="c1"># (2)!</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">offices_names</span><span class="p">)</span> <span class="c1"># -&gt; &quot;Alpha Charlie Bravo&quot;</span>
 </span></code></pre></div>
 <ol>
 <li>Note that saving this will triger recursive saving for all elists and esets bounded to this object</li>
@@ -1652,24 +1700,24 @@ Retriving is easily done with <code>read()</code>, and as you can see you need t
 <div class="admonition example">
 <p class="admonition-title">Using Ini File Parser</p>
 <p>Save this as example.ini file:</p>
-<div class="language-ini highlight"><span class="filename">example.ini</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="na">db_host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">localhost</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">[general]</span>
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="na">db_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">5432</span>
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="k">[epure.best.app.forever]</span>
-</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="na">friend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
+<div class="language-ini highlight"><span class="filename">example.ini</span><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="na">db_host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">localhost</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">[general]</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="na">db_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">5432</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="k">[epure.best.app.forever]</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="na">friend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
 </span></code></pre></div>
 <p>Now we can easily access fields of this ini file:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span> <span class="nn">epure.files</span> <span class="kn">import</span> <span class="n">IniFile</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">config</span> <span class="o">=</span> <span class="n">IniFile</span><span class="p">(</span><span class="s1">&#39;./example.ini&#39;</span><span class="p">)</span>
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="hll"><span class="n">config</span><span class="o">.</span><span class="n">db_host</span> <span class="c1"># -&gt; &quot;localhost&quot;</span>
-</span></span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
-</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="hll"><span class="n">config</span><span class="o">.</span><span class="n">general</span><span class="o">.</span><span class="n">db_port</span> <span class="c1"># -&gt; 5432</span>
-</span></span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>
-</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="hll"><span class="n">config</span><span class="o">.</span><span class="n">epure</span><span class="o">.</span><span class="n">best</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">forever</span><span class="o">.</span><span class="n">friend</span> <span class="c1"># -&gt; True</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">from</span> <span class="nn">epure.files</span> <span class="kn">import</span> <span class="n">IniFile</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="n">config</span> <span class="o">=</span> <span class="n">IniFile</span><span class="p">(</span><span class="s1">&#39;./example.ini&#39;</span><span class="p">)</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="hll"><span class="n">config</span><span class="o">.</span><span class="n">db_host</span> <span class="c1"># -&gt; &quot;localhost&quot;</span>
+</span></span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="hll"><span class="n">config</span><span class="o">.</span><span class="n">general</span><span class="o">.</span><span class="n">db_port</span> <span class="c1"># -&gt; 5432</span>
+</span></span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="hll"><span class="n">config</span><span class="o">.</span><span class="n">epure</span><span class="o">.</span><span class="n">best</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">forever</span><span class="o">.</span><span class="n">friend</span> <span class="c1"># -&gt; True</span>
 </span></span></code></pre></div>
 </div>
 <div class="admonition tip">

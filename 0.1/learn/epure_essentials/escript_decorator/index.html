@@ -1155,9 +1155,9 @@ After we created our queries, imagine: we want all to this conditions to meet an
 <span class="normal"><a href="#__codelineno-7-23">23</a></span>
 <span class="normal"><a href="#__codelineno-7-24">24</a></span>
 <span class="normal"><a href="#__codelineno-7-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15"></a>    <span class="o">...</span>
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16"></a>    <span class="n">queries_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">name_query</span><span class="p">,</span> <span class="n">legs_query</span><span class="p">,</span> <span class="n">catnip_query</span><span class="p">]</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16"></a>    <span class="n">queries_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">name_query</span><span class="p">,</span> <span class="n">legs_query</span><span class="p">,</span> <span class="n">catnip_query</span><span class="p">,</span> <span class="n">has_tail_query</span><span class="p">]</span>
 </span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17"></a>
-</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18"></a>    <span class="n">result_query</span> <span class="o">=</span> <span class="n">has_tail_query</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18"></a>    <span class="n">result_query</span> <span class="o">=</span> <span class="kc">True</span>
 </span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19"></a>
 </span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="hll">    <span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">queries_list</span><span class="p">:</span>
 </span></span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21"></a>       <span class="n">result_query</span> <span class="o">=</span> <span class="n">result_query</span> <span class="ow">and</span> <span class="n">query</span>
