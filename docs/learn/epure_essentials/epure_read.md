@@ -42,3 +42,37 @@ Read takes either key-word arguments or result of creating query with `#!python 
 
     ```
 
+### Using `#!py read()` with `#!py **kwargs` parameters
+
+`#!py **kwargs` with `#!py read()` is convinient when you:
+
+- know attribute by which you want to get set of objects
+
+- have `data_id` (`#!python UUID`) of specific object
+
+Then you can use `.read()` method that takes key-word arguments and allows this ready to hand approach of getting objects:
+
+!!! example "Using `#!py read()` with `#!py **kwargs`"
+
+    We will take `data_id` (`UUID`) from saved object:
+
+    ```python hl_lines="4 9"
+
+    article_one_data_id = article_one.data_id # -> UUID4 # (1)!
+    ```
+    Passing `UUID` as `data_id` kwarg will return `#!py object` with that specific `UUID`:
+    ```py
+
+    # reading by unique data_id of article will return one object
+    my_articles = obj1.table.read(data_id=article_one_data_id)[0] # -> [<Article object at 0x0...>]
+
+    ```
+    Or if you want to retrieve saved instances by some attribute of `#!py object`:
+    ```py
+
+    # multiple attrs of article
+    my_articles = Article.resource.read(str_attr="Why Epure is the best ORM?", times_published=3) # -> [[<Article object at 0x0...,>, ...]]
+
+    ```
+
+    1. data_id is a unique UUID object identifier that Epure uses to discriminate different objects

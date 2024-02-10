@@ -96,7 +96,7 @@ log_level=3).connect() # (2)!
 
 ### Define it
 
-Define a class that you want to save as a table and its :magic_wand: _magic_ :magic_wand: method, in our case `get_articles`:
+Define a class that you want to save as a table:
 
 ```python
 # base class
@@ -159,7 +159,10 @@ Now when your instances saved in DB table named `#!sql public.article`, we can t
 
 !!! question "Bit of `#!py @escript`, `Model` and `Resource` theory 🧐"
 
-    Method itself becomes magical after we decorated it with `#!python @escript`. Every "epurized" class has its `Model` and `Resource`.
+    Method itself becomes magical after we decorated it with `#!python @escript`. Every "epurized"(1) class has its `Model` and `Resource`.
+    { .annotate }
+
+    1. "epurized" class - is `#!py class` that was decorated by `@epure()` decorator
 
     `Resource` is a field of `#!py class` that contains __all__ saved instances of this `#!py class`. 
 
