@@ -98,7 +98,7 @@ log_level=3).connect() # (2)!
 
 Define a class that you want to save as a table:
 
-```python
+```python hl_lines="20"
 # base class
 @epure()
 class Publication:
@@ -108,6 +108,9 @@ class Publication:
 class Reporter:
     full_name: str = "Victor Bennet"
 
+class Publisher:
+    publisher_name = "Future CodeWeave"
+
 @epure() # (1)!
 class Article(Publication):
     # text_style: str = "scientific" # inherits
@@ -115,6 +118,7 @@ class Article(Publication):
     title: str
     times_published: NotNull[int] = 3
     authors: List[str] = ["Charles Dickens", "Frank Herbert"]
+    publisher: object = Publisher()
 
     def __init__(self, reporter, title):
         self.reporter = reporter
@@ -137,6 +141,8 @@ class Article(Publication):
 ??? tip ":magic_wand: _Magic_ :magic_wand: method and _smart queries_"
     Read more about :magic_wand: _magic_ :magic_wand: methods and `#!python @escript` decorator :arrow_right: <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> :arrow_left:
 
+!!! question "`#!py object` type in type-hinting of a class"
+    The `Article` class has a field `publisher`, and is initialized by instance of not _epurized_ class, so if we dont know by which type we want to save an object like __this__ - we can simply type hint it by `#!py object` type!
 ### Save it
 
 Create and save instances of your class as such:
@@ -299,15 +305,20 @@ Elist and Eset: easy store, easy load collections
 
 <!-- You can look at `Elist` like __strictly typed__ `#!py list` with mechanism of simple saving :material-download: and retrieving :material-upload: its contents from DB. -->
 
-You can look at `Elist` like __strictly typed__ `#!py list` with mechanism of easy saving :material-download: and retrieving :material-upload: its contents from DB.
+`Elist` - is simple tool to store small collections in single-user aplications.
 
-!!! warning "Elist is not multiuser-friendly"
+You can look at `Elist` like generic __strictly typed__ `#!py list` with mechanism of easy saving :material-download: and retrieving :material-upload: its contents from DB.
+
+`Elist` is a __strictly typed__ `#!py list` because it can only store instances of subscripted (defined) for `Elist` type 
+({==e.g==} `#!py Elist[str]` __can't__ store `#!py int` value)
+
+!!! danger "`Elist` is not multiuser-friendly"
 
     <!-- `Elist` can guarantee numerated order of objects when is used by user at a time -->
 
-    `Elist` can __only__ guarantee numerated order of __small__ collections in __single-user__ aplications.
+    `Elist` __does not__ guarantee numerated order of __big collections__ in __multi-user__ aplications.
 
-    In cases of __big system__ with multiple users please refer to <a href="https://epurelib.github.io/latest/#eset">`Eset`</a> 🙂
+    In cases of __big collections__ with multiple users use <a href="https://epurelib.github.io/latest/#eset">`Eset`</a>!
 
 <!-- Elist comes real handy when you want to store your instances in DB using just a regular python list :exploding_head: -->
 
@@ -364,8 +375,8 @@ Let's look at an example:
     Working with `Elist` collection is really easy as you can see in this example
 
 
-!!! info "More about `Elist`"
-    More info and examples on Elist :arrow_right: <a href="https://epurelib.github.io/latest/learn/elist_eset/#elist">here</a> :arrow_left:
+!!! info "How to store `Elist` outside of class, more examples and etc."
+    How to store Elist outside class field, examples on Elist :arrow_right: <a href="https://epurelib.github.io/latest/learn/elist_eset/#elist">here</a> :arrow_left:
 
 ### Eset
 
@@ -441,13 +452,13 @@ In a way, `Eset` is Epure's interpretation of Many2Many field.
     ```py
     retrieved_shipment_company = EsetExample.resource.read(data_id = eset_ex.data_id)[0]
 
-    retrieved_shipment_company.customers_set # -> {}
-    retrieved_shipment_company.customers_set.load() # (2)!
-    retrieved_shipment_company.customers_set # -> {<Customer object at 0x0...>, <Customer object at 0x0...>, ...}
+    empty_eset = retrieved_shipment_company.customers_set # -> {}
+    loaded_set = empty_eset.load() # (2)!
+    loaded_set # -> {<Customer object at 0x0...>, <Customer object at 0x0...>, ...}
 
-    retrieved_shipment_company.offices_names # -> {}
-    retrieved_shipment_company.offices_names.load() # (2)!
-    " ".join(retrieved_shipment_company.offices_names) # -> "Alpha Charlie Bravo"
+    empty_set = retrieved_shipment_company.offices_names # -> {}
+    loaded_set = empty_set.load() # (2)!
+    " ".join(loaded_set) # -> "Alpha Charlie Bravo"
     ```
 
     1. Note that saving this will triger recursive saving for all elists and esets bounded to this object

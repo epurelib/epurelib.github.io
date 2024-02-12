@@ -28,13 +28,17 @@ def read(self, *args, **kwargs)
 
 Let's examine a case when we want to join three models using .join() method :thinking:. 
 
-We will create 3 classes (TestShippmentOffice, TestCustomer, TestOrder) and create much more instances for these classes, and then save them.
+!!! example "Shipping company with two joins"
 
-!!! example
+    So, for example we have a shipping parcels company: we will create classes `TestShippmentOffice`, `TestCustomer` and `TestOrder`. 
+
+    And we would like to join these three models in one Resource and read from it using _smart_ query
+
+    So we will first define `TestShippmentOffice`:
 
     ```python hl_lines="1 2 5 16 26 37 40 43 48 51 62"
     
-    from epure.generics import NotNull # (5)!
+    from epure.generics import NotNull # (1)!
     from epure import escript, epure
     from uuid import UUID
 
@@ -44,11 +48,22 @@ We will create 3 classes (TestShippmentOffice, TestCustomer, TestOrder) and crea
 
         def __init__(self, adress) -> None:
             self.adress = adress
+    ```
 
-    office1_id = TestShippmentOffice("Washington str.").save()
-    office2_id = TestShippmentOffice("Elm str.").save()
-    office3_id = TestShippmentOffice("Kole str.").save()
+    1. Check out about Epure Generics more <a href="">here</a>
 
+    Then create and save instances of it:
+
+    ??? info "Creating and saving `TestShippmentOffice` instances"
+        ```py
+        office1_id = TestShippmentOffice("Washington str.").save()
+        office2_id = TestShippmentOffice("Elm str.").save()
+        office3_id = TestShippmentOffice("Kole str.").save()
+        ```
+
+    We will then define our main class `TestCustomer` ... 
+
+    ```py
     @epure()
     class TestCustomer:
         name:str
@@ -58,43 +73,75 @@ We will create 3 classes (TestShippmentOffice, TestCustomer, TestOrder) and crea
             self.name = name
             self.country = country
 
+    ```
+    ... with its smart query `read_from_join_resource`
+
+    We will take Model and Domain of `TestCustomer`, get Models of other two classes
+
+    Model can be taken either through `.model()` method of Domain object or by taking attribute of `domain` object through `.` (dot) notation and snakecase name of class:
+    ```py
         @classmethod
         @escript
-        def test_two_joins(cls):
-            md = cls.md # (1)!
-            dom = cls.dom # (2)!
+        def read_from_join_resource(cls):
+            model = cls.md # (1)!
+            domain = cls.dom # (2)!
 
-            test_order_md = dom.test_order # (3)!
+            test_order_model = domain.test_order # (3)!
 
-            # test_office_md = dom.test_shippment_office
+            # test_office_model = domain.test_shippment_office
             # or
-            test_office_md = cls.model(TestShippmentOffice) #(4)!
-            
-            join_res = md.join(test_order_md,\
-            md.data_id == test_order_md.test_customer_id) 
+            test_office_model = domain.model(TestShippmentOffice) #(4)!
 
-            join_res.join(test_office_md,\
-            test_order_md.office_id == test_office_md.data_id) 
+    ```
+
+    1. Here we are accessing the md: <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
+    2. Here we are accessing dom: <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">Domain</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">here</a>
+    3. This way we get Model object of class <span style="color:#00A550;">TestOrder</span> by accessing dom object. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
+    4. This `model()` method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model-method">here</a>
+
+    Then we can just join these three models based on `data_id` attribute:
+
+    ```py   
+            first_join = model.join(test_order_model, model.data_id == test_order_model.test_customer_id) 
+
+            second_join = first_join.join(test_office_model, test_order_model.office_id == test_office_model.data_id) 
+
+    ```
+    After joining these three modelds, we will have a JoinResource as a result, and we can easily read from it in three ways:
+
+    - by passing our custom header in read which will return set(s) of 3 objects that are joined by `data_id` and their adress is "Washington str.".
+
+    - by reading without header, and on condtiton that returned `TestCustomer` object will have "Japan" as country.
+
+    - reading without header and condition will return all existing set(s) of three objects.
+
+    ```py
 
             res_header = join_res.read(\
-                [test_office_md.adress, md.name,\
-                md, test_order_md, md.country],\ 
-                test_office_md.adress == "Washington str.") # header
+                [test_office_model.adress, model.name,\
+                model, test_order_model, model.country],\ 
+                test_office_model.adress == "Washington str.") # header
 
             res_no_header = join_res.read(\
-                test_office_md.adress == "Washington str.") # no header
+                model.country == "Japan") # no header
 
             res_empty = join_res.read() # no header, no on_clause
 
             return res_header
+    ```
 
-    nico_id = TestCustomer("Nicolas", "Argentina").save()
-    victor_id = TestCustomer("Victor", "USA").save()
-    tom_id = TestCustomer("Tom", "Japan").save()
-    john_id = TestCustomer("John", "Laos").save()
-    mike_id = TestCustomer("Mike", "Monaco").save()
-    bob_id = TestCustomer("Bob", "Netherlands").save()
+    ??? info "Creating and saving `TestCustomer` instances"
+        ```py
+        nico_id = TestCustomer("Nicolas", "Argentina").save()
+        victor_id = TestCustomer("Victor", "USA").save()
+        tom_id = TestCustomer("Tom", "Japan").save()
+        john_id = TestCustomer("John", "Laos").save()
+        mike_id = TestCustomer("Mike", "Monaco").save()
+        bob_id = TestCustomer("Bob", "Netherlands").save()
+        ```
 
+    Defining `TestOrder` class:
+    ```py
     @epure()
     class TestOrder:
         test_customer_id:UUID
@@ -106,24 +153,22 @@ We will create 3 classes (TestShippmentOffice, TestCustomer, TestOrder) and crea
             self.order_date = order_date
             self.office_id = office_id
 
-    TestOrder(nico_id, "2022-03-15", office1_id).save()
-    TestOrder(victor_id, "2022-03-10", office2_id).save()
-    TestOrder(nico_id, "2022-03-15", office1_id).save()
-    TestOrder(tom_id, "2022-03-30", office1_id).save()
-    TestOrder(john_id, "2022-01-15", office3_id).save()
-    TestOrder(mike_id, "2022-12-10", office2_id).save()
-    TestOrder(nico_id, "2022-08-04", office1_id).save()
-    TestOrder(bob_id, "2022-09-15", office3_id).save()
-    TestOrder(bob_id, "2022-05-11", office1_id).save()
     ```
+    ??? info "Creating and saving `TestOrder` instances"
+        ```py
 
-    1. Here we are accessing the md: <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
-    2. Here we are accessing dom: <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">Domain</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">here</a>
-    3. This way we get Model object of class <span style="color:#00A550;">TestOrder</span> by accessing dom object. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
-    4. This `model()` method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model-method">here</a>
-    5. Check out about Epure Generics more <a href="">here</a>
+        TestOrder(nico_id, "2022-03-15", office1_id).save()
+        TestOrder(victor_id, "2022-03-10", office2_id).save()
+        TestOrder(nico_id, "2022-03-15", office1_id).save()
+        TestOrder(tom_id, "2022-03-30", office1_id).save()
+        TestOrder(john_id, "2022-01-15", office3_id).save()
+        TestOrder(mike_id, "2022-12-10", office2_id).save()
+        TestOrder(nico_id, "2022-08-04", office1_id).save()
+        TestOrder(bob_id, "2022-09-15", office3_id).save()
+        TestOrder(bob_id, "2022-05-11", office1_id).save()
+        ```
 
-
+<!--- # COMMENT
 
 Lets look at our `#!python classmethod` a bit closer:
 
@@ -227,6 +272,8 @@ Lets look at our `#!python classmethod` a bit closer:
     - `header` will be set by default as `[TestShippmentOffice, TestCustomer, TestOrder]` i.e. all models that were joined.
 
     - `on_clause` will be set by default as `#!python None`, and it will just return all objects that were saved for these 3 classes.
+
+# COMMENT -->
 
 Calling `test_two_joins` method will result in list of lists, each sublist will contain three objects of each type:
 
