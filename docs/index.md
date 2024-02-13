@@ -68,7 +68,7 @@ A Simple Epurized Class Example
 Let's start with simple example for Epure, you will need your DataBase to be up and running.
 We will be using PostgresSQL for this example.
 
-!!! warning
+!!! warning "Type Hinting Required!"
     Note that you need to use __type hints__ for class attributes in order to save class to DB. Class attribute without a type-hint will not be saved in DB.
 
     If you dont know which type-hint you want to use, but still want to save your field: use `#!python object` type-hint and your instance will be saved as `#!js JSON`.
