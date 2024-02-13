@@ -1367,8 +1367,18 @@ We will be using PostgresSQL for this example.</p>
 <p>Read more about GresDB class and supported by Epure DataBases <img alt="➡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/27a1.svg" title=":arrow_right:" /> <a href="https://epurelib.github.io/latest/learn/supported_db/#supported-dbs-for-epure">here</a> <img alt="⬅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/2b05.svg" title=":arrow_left:" /></p>
 </div>
 <h3 id="define-it">Define it<a class="headerlink" href="#define-it" title="Permanent link">&para;</a></h3>
-<p>Define a class that you want to save as a table:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># base class</span>
+<!-- Define a class that you want to save as a table: -->
+
+<p>We will define four classes: </p>
+<ul>
+<li>
+<p>three of them (<code>Publication</code>,<code>Reporter</code>,<code>Publisher</code>) will serve as subordinate classes </p>
+</li>
+<li>
+<p>and the one main class <code>Article</code> that will accumulate instances of these other classes: </p>
+</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># base class for Article</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@epure</span><span class="p">()</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">class</span> <span class="nc">Publication</span><span class="p">:</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">text_style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;scientific&quot;</span>
@@ -1377,23 +1387,27 @@ We will be using PostgresSQL for this example.</p>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">class</span> <span class="nc">Reporter</span><span class="p">:</span>
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">full_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Victor Bennet&quot;</span>
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nd">@epure</span><span class="p">()</span> <span class="c1"># (1)!</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">class</span> <span class="nc">Article</span><span class="p">(</span><span class="n">Publication</span><span class="p">):</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="c1"># text_style: str = &quot;scientific&quot; # inherits</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="n">reporter</span><span class="p">:</span> <span class="n">Reporter</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="n">times_published</span><span class="p">:</span> <span class="n">NotNull</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="n">authors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Charles Dickens&quot;</span><span class="p">,</span> <span class="s2">&quot;Frank Herbert&quot;</span><span class="p">]</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reporter</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reporter</span> <span class="o">=</span> <span class="n">reporter</span>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
-</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>    <span class="k">def</span> <span class="nf">get_articles_using_kwargs</span><span class="p">():</span>
-</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>
-</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>        <span class="n">articles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">times_published</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># -&gt; [&lt;Article object at 0x0...&gt;, &lt;Article object at 0x2...&gt;]</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="k">class</span> <span class="nc">Publisher</span><span class="p">:</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">publisher_name</span> <span class="o">=</span> <span class="s2">&quot;Future CodeWeave&quot;</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="nd">@epure</span><span class="p">()</span> <span class="c1"># (1)!</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="k">class</span> <span class="nc">Article</span><span class="p">(</span><span class="n">Publication</span><span class="p">):</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="c1"># text_style: str = &quot;scientific&quot; # inherits</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="n">reporter</span><span class="p">:</span> <span class="n">Reporter</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="n">times_published</span><span class="p">:</span> <span class="n">NotNull</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    <span class="n">authors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Charles Dickens&quot;</span><span class="p">,</span> <span class="s2">&quot;Frank Herbert&quot;</span><span class="p">]</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="hll">    <span class="n">publisher</span><span class="p">:</span> <span class="nb">object</span> <span class="o">=</span> <span class="n">Publisher</span><span class="p">()</span>
+</span></span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reporter</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reporter</span> <span class="o">=</span> <span class="n">reporter</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
 </span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>
-</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>        <span class="k">return</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>    <span class="k">def</span> <span class="nf">get_articles_using_kwargs</span><span class="p">():</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>        <span class="n">articles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">times_published</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># -&gt; [&lt;Article object at 0x0...&gt;, &lt;Article object at 0x2...&gt;]</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>        <span class="k">return</span> <span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></code></pre></div>
 <ol>
 <li><code class="language-python highlight"><span class="nd">@epure</span></code> is metaclass decorator function, that modifies class; more info here: </li>
@@ -1406,6 +1420,10 @@ We will be using PostgresSQL for this example.</p>
 <summary><img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>Magic</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> method and <em>smart queries</em></summary>
 <p>Read more about <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>magic</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> methods and <code class="language-python highlight"><span class="nd">@escript</span></code> decorator <img alt="➡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/27a1.svg" title=":arrow_right:" /> <a href="https://epurelib.github.io/latest/learn/epure_essentials/escript_decorator/#magic-escript-decorator">here</a> <img alt="⬅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/2b05.svg" title=":arrow_left:" /></p>
 </details>
+<div class="admonition question">
+<p class="admonition-title"><code class="language-py highlight"><span class="nb">object</span></code> type in type-hinting of a class</p>
+<p>The <code>Article</code> class has a field <code>publisher</code>, and is initialized by instance of not <em>epurized</em> class, so if we dont know by which type we want to save an object like <strong>this</strong> - we can simply type hint it by <code class="language-py highlight"><span class="nb">object</span></code> type!</p>
+</div>
 <h3 id="save-it">Save it<a class="headerlink" href="#save-it" title="Permanent link">&para;</a></h3>
 <p>Create and save instances of your class as such:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">my_reporter</span> <span class="o">=</span> <span class="n">Reporter</span><span class="p">()</span>
@@ -1547,12 +1565,15 @@ Or we can just use <code class="language-py highlight"><span class="ow">in</span
 
 <!-- You can look at `Elist` like __strictly typed__ `#!py list` with mechanism of simple saving :material-download: and retrieving :material-upload: its contents from DB. -->
 
-<p>You can look at <code>Elist</code> like <strong>strictly typed</strong> <code class="language-py highlight"><span class="nb">list</span></code> with mechanism of easy saving <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> and retrieving <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16v-6H5l7-7 7 7h-4v6H9m-4 4v-2h14v2H5Z"/></svg></span> its contents from DB.</p>
-<div class="admonition warning">
-<p class="admonition-title">Elist is not multiuser-friendly</p>
+<p><code>Elist</code> - is simple tool to store small collections in single-user aplications.</p>
+<p>You can look at <code>Elist</code> like generic <strong>strictly typed</strong> <code class="language-py highlight"><span class="nb">list</span></code> with mechanism of easy saving <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7Z"/></svg></span> and retrieving <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16v-6H5l7-7 7 7h-4v6H9m-4 4v-2h14v2H5Z"/></svg></span> its contents from DB.</p>
+<p><code>Elist</code> is a <strong>strictly typed</strong> <code class="language-py highlight"><span class="nb">list</span></code> because it can only store instances of subscripted (defined) for <code>Elist</code> type 
+(<mark class="critic">e.g</mark> <code class="language-py highlight"><span class="n">Elist</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code> <strong>can't</strong> store <code class="language-py highlight"><span class="nb">int</span></code> value)</p>
+<div class="admonition danger">
+<p class="admonition-title"><code>Elist</code> is not multiuser-friendly</p>
 <!-- <code>Elist</code> can guarantee numerated order of objects when is used by user at a time -->
-<p><code>Elist</code> can <strong>only</strong> guarantee numerated order of <strong>small</strong> collections in <strong>single-user</strong> aplications.</p>
-<p>In cases of <strong>big system</strong> with multiple users please refer to <a href="https://epurelib.github.io/latest/#eset"><code>Eset</code></a> 🙂</p>
+<p><code>Elist</code> <strong>does not</strong> guarantee numerated order of <strong>big collections</strong> in <strong>multi-user</strong> aplications.</p>
+<p>In cases of <strong>big collections</strong> with multiple users use <a href="https://epurelib.github.io/latest/#eset"><code>Eset</code></a>!</p>
 </div>
 <!-- Elist comes real handy when you want to store your instances in DB using just a regular python list :exploding_head: -->
 
@@ -1604,8 +1625,8 @@ After we will create two instances of <code>House</code>, add them to <code>hous
 Working with <code>Elist</code> collection is really easy as you can see in this example</p>
 </details>
 <div class="admonition info">
-<p class="admonition-title">More about <code>Elist</code></p>
-<p>More info and examples on Elist <img alt="➡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/27a1.svg" title=":arrow_right:" /> <a href="https://epurelib.github.io/latest/learn/elist_eset/#elist">here</a> <img alt="⬅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/2b05.svg" title=":arrow_left:" /></p>
+<p class="admonition-title">How to store <code>Elist</code> outside of class, more examples and etc.</p>
+<p>How to store Elist outside class field, examples on Elist <img alt="➡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/27a1.svg" title=":arrow_right:" /> <a href="https://epurelib.github.io/latest/learn/elist_eset/#elist">here</a> <img alt="⬅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/2b05.svg" title=":arrow_left:" /></p>
 </div>
 <h3 id="eset">Eset<a class="headerlink" href="#eset" title="Permanent link">&para;</a></h3>
 <p><code>Eset</code> is similar to <a href="https://epurelib.github.io/latest/#elist"><code>Elist</code></a>, <strong>though</strong> (as much as <code class="language-py highlight"><span class="nb">set</span></code> differes from <code class="language-py highlight"><span class="nb">list</span></code>) <code>Eset</code> has no order of its stored contents.</p>
@@ -1666,13 +1687,13 @@ Working with <code>Elist</code> collection is really easy as you can see in this
 Retriving is easily done with <code>read()</code>, and as you can see you need to <code>load()</code> <code>Eset</code> for it to be sub-loaded.</p>
 <div class="language-py highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">retrieved_shipment_company</span> <span class="o">=</span> <span class="n">EsetExample</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data_id</span> <span class="o">=</span> <span class="n">eset_ex</span><span class="o">.</span><span class="n">data_id</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">customers_set</span> <span class="c1"># -&gt; {}</span>
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">customers_set</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="c1"># (2)!</span>
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">customers_set</span> <span class="c1"># -&gt; {&lt;Customer object at 0x0...&gt;, &lt;Customer object at 0x0...&gt;, ...}</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">empty_eset</span> <span class="o">=</span> <span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">customers_set</span> <span class="c1"># -&gt; {}</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="n">loaded_set</span> <span class="o">=</span> <span class="n">empty_eset</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="c1"># (2)!</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="n">loaded_set</span> <span class="c1"># -&gt; {&lt;Customer object at 0x0...&gt;, &lt;Customer object at 0x0...&gt;, ...}</span>
 </span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
-</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">offices_names</span> <span class="c1"># -&gt; {}</span>
-</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">offices_names</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="c1"># (2)!</span>
-</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">offices_names</span><span class="p">)</span> <span class="c1"># -&gt; &quot;Alpha Charlie Bravo&quot;</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="n">empty_set</span> <span class="o">=</span> <span class="n">retrieved_shipment_company</span><span class="o">.</span><span class="n">offices_names</span> <span class="c1"># -&gt; {}</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="n">loaded_set</span> <span class="o">=</span> <span class="n">empty_set</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="c1"># (2)!</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">loaded_set</span><span class="p">)</span> <span class="c1"># -&gt; &quot;Alpha Charlie Bravo&quot;</span>
 </span></code></pre></div>
 <ol>
 <li>Note that saving this will triger recursive saving for all elists and esets bounded to this object</li>

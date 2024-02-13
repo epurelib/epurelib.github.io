@@ -96,10 +96,16 @@ log_level=3).connect() # (2)!
 
 ### Define it
 
-Define a class that you want to save as a table:
+<!-- Define a class that you want to save as a table: -->
+
+We will define four classes: 
+
+ - three of them (`Publication`,`Reporter`,`Publisher`) will serve as subordinate classes 
+ 
+ - and the one main class `Article` that will accumulate instances of these other classes: 
 
 ```python hl_lines="20"
-# base class
+# base class for Article
 @epure()
 class Publication:
     text_style: str = "scientific"
@@ -223,8 +229,6 @@ Passing _smart_ query then to `#!python .read()` will retrieve `Reporter` object
 1. learn more about `#!python read()` here:
 
 `Resource` implements CRUD interface, you can create (`.create()`), update (`.update()`), delete (`.delete()`) and read (`.read()`).
-
-
 
 And calling `#!python .smart_query_example()`, our :magic_wand: _magic_ :magic_wand: method will return your retrieved object. ✨ Viola! ✨
 
