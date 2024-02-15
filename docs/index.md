@@ -102,7 +102,7 @@ We will define four classes:
 
  - three of them (`Publication`,`Reporter`,`Publisher`) will serve as subordinate classes 
  
- - and the one main class `Article` that will accumulate instances of these other classes: 
+ - and the one main, supreme class `Article` that will accumulate instances of these other classes: 
 
 ```python hl_lines="20"
 # base class for Article
@@ -180,6 +180,11 @@ Now when your instances saved in DB table named `#!sql public.article`, we can t
 
     `Model` is used to get data from `Resource`. With use of `Model`, we can address fields of class to construct _smart_ queries 😄
 
+!!! info "Smart query is a predicate"
+    _Smart query_ is a predicate (logic expression), which is used to filter objects, hence every logic expression can be used as part of _smart query_, e.g. filtering by `#!py True` will return __all__ objects from `Resource`
+
+!!! Warning 
+    Currently it is only possible to initialize query by `#!sql True` or `#!sql False`, as shown in example below.
 
 <!-- Let's do some magic  : -->
 We will define a :magic_wand: _magic_ :magic_wand: method `get_articles` for `#!py class Article`
@@ -199,9 +204,11 @@ def get_articles(self):
 2. note that md (short for `#!python Model`) is only available in @escript decorated method scope and only; more info here: 
 
 
-One way is if we want to use `#!py for` cycle, then we need to __explicitly initialize__ our `query` by `#!py False` statement, 
+<!-- One way is if we want to use `#!py for` cycle, then we need to __explicitly initialize__ our `query` by `#!py False` statement, 
 this way `#!py False` will be our starting point in building of _smart_ query
-and therefore start of combinining these titles one by one using `#!py or`
+and therefore start of combinining these titles one by one using `#!py or` -->
+
+Here you can see example for using logical expression with _smart query_:
 
 ```py linenums="8"
     query = False
@@ -209,7 +216,7 @@ and therefore start of combinining these titles one by one using `#!py or`
     for name in title_names:
         query = query or model.title == name
 ```
-Or we can just use `#!py in` and we will get same result 😃:
+By using `#!py in` we will get same result 😃:
 ```py linenums="12"
     query = model.title in title_names # (1)!
 ```
