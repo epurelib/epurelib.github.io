@@ -183,9 +183,6 @@ Now when your instances saved in DB table named `#!sql public.article`, we can t
 !!! info "Smart query is a predicate"
     _Smart query_ is a predicate (logic expression), which is used to filter objects, hence every logic expression can be used as part of _smart query_, e.g. filtering by `#!py True` will return __all__ objects from `Resource`
 
-!!! Warning 
-    Currently it is only possible to initialize query by `#!sql True` or `#!sql False`, as shown in example below.
-
 <!-- Let's do some magic  : -->
 We will define a :magic_wand: _magic_ :magic_wand: method `get_articles` for `#!py class Article`
 
