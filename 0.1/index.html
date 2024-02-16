@@ -1377,7 +1377,7 @@ We will be using PostgresSQL for this example.</p>
 <p>three of them (<code>Publication</code>,<code>Reporter</code>,<code>Publisher</code>) will serve as subordinate classes </p>
 </li>
 <li>
-<p>and the one main class <code>Article</code> that will accumulate instances of these other classes: </p>
+<p>and the one main, supreme class <code>Article</code> that will accumulate instances of these other classes: </p>
 </li>
 </ul>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># base class for Article</span>
@@ -1448,6 +1448,10 @@ We will be using PostgresSQL for this example.</p>
 <p><code>Resource</code> is a field of <code class="language-py highlight"><span class="k">class</span></code> that contains <strong>all</strong> saved instances of this <code class="language-py highlight"><span class="k">class</span></code>. </p>
 <p><code>Model</code> is used to get data from <code>Resource</code>. With use of <code>Model</code>, we can address fields of class to construct <em>smart</em> queries 😄</p>
 </div>
+<div class="admonition info">
+<p class="admonition-title">Smart query is a predicate</p>
+<p><em>Smart query</em> is a predicate (logic expression), which is used to filter objects, hence every logic expression can be used as part of <em>smart query</em>, e.g. filtering by <code class="language-py highlight"><span class="kc">True</span></code> will return <strong>all</strong> objects from <code>Resource</code></p>
+</div>
 <!-- Let's do some magic  : -->
 <p>We will define a <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> <em>magic</em> <img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1fa84.svg" title=":magic_wand:" /> method <code>get_articles</code> for <code class="language-py highlight"><span class="k">class</span> <span class="nc">Article</span></code></p>
 <p>Imagine if we want to get all stored articles with names that are defined in <code class="language-py highlight"><span class="nb">list</span></code> of title names:
@@ -1469,9 +1473,11 @@ We will be using PostgresSQL for this example.</p>
 <li><code class="language-python highlight"><span class="nd">@escript</span></code> is method decorator for @epure decorated classes; more info here:</li>
 <li>note that md (short for <code class="language-python highlight"><span class="n">Model</span></code>) is only available in @escript decorated method scope and only; more info here: </li>
 </ol>
-<p>One way is if we want to use <code class="language-py highlight"><span class="k">for</span></code> cycle, then we need to <strong>explicitly initialize</strong> our <code>query</code> by <code class="language-py highlight"><span class="kc">False</span></code> statement, 
-this way <code class="language-py highlight"><span class="kc">False</span></code> will be our starting point in building of <em>smart</em> query
-and therefore start of combinining these titles one by one using <code class="language-py highlight"><span class="ow">or</span></code></p>
+<!-- One way is if we want to use `#!py for` cycle, then we need to __explicitly initialize__ our `query` by `#!py False` statement, 
+this way `#!py False` will be our starting point in building of _smart_ query
+and therefore start of combinining these titles one by one using `#!py or` -->
+
+<p>Here you can see example for using logical expression with <em>smart query</em>:</p>
 <p><div class="language-py highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-6-10">10</a></span>
@@ -1480,7 +1486,7 @@ and therefore start of combinining these titles one by one using <code class="la
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a>    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">title_names</span><span class="p">:</span>
 </span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a>        <span class="n">query</span> <span class="o">=</span> <span class="n">query</span> <span class="ow">or</span> <span class="n">model</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="n">name</span>
 </span></code></pre></div></td></tr></table></div>
-Or we can just use <code class="language-py highlight"><span class="ow">in</span></code> and we will get same result 😃:
+By using <code class="language-py highlight"><span class="ow">in</span></code> we will get same result 😃:
 <div class="language-py highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a>    <span class="n">query</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">title</span> <span class="ow">in</span> <span class="n">title_names</span> <span class="c1"># (1)!</span>
 </span></code></pre></div></td></tr></table></div></p>
 <ol>
