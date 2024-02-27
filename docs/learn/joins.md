@@ -5,7 +5,7 @@ def join(
         self, 
         model: Model, 
         on_clause: str, 
-        join_type: str = "LEFT", 
+        join_type: str = "", 
         alias: str = ""
     ) -> JoinResource:
 ```
@@ -16,13 +16,16 @@ def join(
 
 - `on_clause` specifies by which id (e.g. data_id) tables will be joined
 
-- `join_type` is the type of join, by default it is set to LEFT join
+- `join_type` is the type of join, by default it is set to `#!py ""` which in terms of sql means `#!sql INNER JOIN`
 
 - `alias` is experimental feature that might be added in future
 
-```python hl_lines="3" title="model.py"
-def read(self, *args, **kwargs)
-```
+There are four types of `.join()` method:
+
+- `#!py .join()` which is default join, i.e. `#!sql INNER JOIN`
+- `#!py .left_join()`
+- `#!py .right_join()`
+- `#!py .full_join()`
 
 #### Advanced example with two joins
 
@@ -104,30 +107,38 @@ Let's examine a case when we want to join three models using .join() method :thi
     ```py   
             first_join = model.join(test_order_model, model.data_id == test_order_model.test_customer_id) 
 
-            second_join = first_join.join(test_office_model, test_order_model.office_id == test_office_model.data_id) 
+            join_res = first_join.join(test_office_model, test_order_model.office_id == test_office_model.data_id) 
 
     ```
-    After joining these three modelds, we will have a JoinResource as a result, and we can easily read from it in three ways:
 
-    - by passing our custom header in read which will return set(s) of 3 objects that are joined by `data_id` and their adress is "Washington str.".
+    Or using it like a constructor (chain) of joins:
 
-    - by reading without header, and on condtiton that returned `TestCustomer` object will have "Japan" as country.
+    ```py   
+            join_res = model\
+                        .join(test_order_model, model.data_id == test_order_model.test_customer_id)\
+                        .join(test_office_model, test_order_model.office_id == test_office_model.data_id) 
 
-    - reading without header and condition will return all existing set(s) of three objects.
+    ```
+
+    After joining these three modelds, we will have a JoinResource as a result, and we can easily read from it:
+
+    ```py
+            res_no_header = join_res.read(model.country == "Japan")
+        
+            # or just:
+
+            res_empty = join_res.read() # will return all entries
+    ```
+
+    Or you can specify colums you want to select:
 
     ```py
 
-            res_header = join_res.read(\
-                [test_office_model.adress, model.name,\
-                model, test_order_model, model.country],\ 
-                test_office_model.adress == "Washington str.") # header
+            res_header = join_res.read(
+                [test_office_model.adress, model.name,
+                model, test_order_model, model.country], 
+                test_office_model.adress == "Washington str.")
 
-            res_no_header = join_res.read(\
-                model.country == "Japan") # no header
-
-            res_empty = join_res.read() # no header, no on_clause
-
-            return res_header
     ```
 
     ??? info "Creating and saving `TestCustomer` instances"

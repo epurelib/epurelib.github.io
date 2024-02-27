@@ -213,7 +213,9 @@ Here you can see example for using logical expression with _smart query_:
     for name in title_names:
         query = query or model.title == name
 ```
+
 By using `#!py in` we will get same result 😃:
+
 ```py linenums="12"
     query = model.title in title_names # (1)!
 ```
