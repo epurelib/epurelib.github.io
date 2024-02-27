@@ -1478,7 +1478,7 @@ this way `#!py False` will be our starting point in building of _smart_ query
 and therefore start of combinining these titles one by one using `#!py or` -->
 
 <p>Here you can see example for using logical expression with <em>smart query</em>:</p>
-<p><div class="language-py highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<div class="language-py highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-6-10">10</a></span>
 <span class="normal"><a href="#__codelineno-6-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a>    <span class="n">query</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1486,9 +1486,9 @@ and therefore start of combinining these titles one by one using `#!py or` -->
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a>    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">title_names</span><span class="p">:</span>
 </span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a>        <span class="n">query</span> <span class="o">=</span> <span class="n">query</span> <span class="ow">or</span> <span class="n">model</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="n">name</span>
 </span></code></pre></div></td></tr></table></div>
-By using <code class="language-py highlight"><span class="ow">in</span></code> we will get same result 😃:
+<p>By using <code class="language-py highlight"><span class="ow">in</span></code> we will get same result 😃:</p>
 <div class="language-py highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a>    <span class="n">query</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">title</span> <span class="ow">in</span> <span class="n">title_names</span> <span class="c1"># (1)!</span>
-</span></code></pre></div></td></tr></table></div></p>
+</span></code></pre></div></td></tr></table></div>
 <ol>
 <li>read more about supported SQL operators in <code class="language-python highlight"><span class="n">Epure</span></code> like <code class="language-python highlight"><span class="ow">in</span></code> here:</li>
 </ol>
