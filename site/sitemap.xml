@@ -2,87 +2,87 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/features/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/help/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/release_notes/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/domain_model/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/elist_eset/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/ini_parser/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/joins/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/learn/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/supported_db/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/epure_essentials/column_proxy_methods/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/epure_essentials/epure_cls/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/epure_essentials/epure_read/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/epure_essentials/escript_decorator/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/epure_essentials/supported_types/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/serialization_deserialization/deserialization/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://epurelib.github.io/epure-docs/0.1/learn/serialization_deserialization/serialization/</loc>
-         <lastmod>2024-02-16</lastmod>
+         <lastmod>2024-02-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

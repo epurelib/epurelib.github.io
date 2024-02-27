@@ -990,7 +990,7 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        <span class="bp">self</span><span class="p">,</span> 
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="hll">        <span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> 
 </span></span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="n">on_clause</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="n">join_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;LEFT&quot;</span><span class="p">,</span> 
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="n">join_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> 
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="n">alias</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JoinResource</span><span class="p">:</span>
 </span></code></pre></div>
@@ -1003,14 +1003,19 @@
 <p><code>on_clause</code> specifies by which id (e.g. data_id) tables will be joined</p>
 </li>
 <li>
-<p><code>join_type</code> is the type of join, by default it is set to LEFT join</p>
+<p><code>join_type</code> is the type of join, by default it is set to <code class="language-py highlight"><span class="s2">&quot;&quot;</span></code> which in terms of sql means <code class="language-sql highlight"><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span></code></p>
 </li>
 <li>
 <p><code>alias</code> is experimental feature that might be added in future</p>
 </li>
 </ul>
-<div class="language-python highlight"><span class="filename">model.py</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span></code></pre></div>
+<p>There are four types of <code>.join()</code> method:</p>
+<ul>
+<li><code class="language-py highlight"><span class="o">.</span><span class="n">join</span><span class="p">()</span></code> which is default join, i.e. <code class="language-sql highlight"><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span></code></li>
+<li><code class="language-py highlight"><span class="o">.</span><span class="n">left_join</span><span class="p">()</span></code></li>
+<li><code class="language-py highlight"><span class="o">.</span><span class="n">right_join</span><span class="p">()</span></code></li>
+<li><code class="language-py highlight"><span class="o">.</span><span class="n">full_join</span><span class="p">()</span></code></li>
+</ul>
 <h4 id="advanced-example-with-two-joins">Advanced example with two joins<a class="headerlink" href="#advanced-example-with-two-joins" title="Permanent link">&para;</a></h4>
 <p>Let's examine a case when we want to join three models using .join() method <img alt="🤔" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f914.svg" title=":thinking:" />. </p>
 <div class="admonition example">
@@ -1018,16 +1023,16 @@
 <p>So, for example we have a shipping parcels company: we will create classes <code>TestShippmentOffice</code>, <code>TestCustomer</code> and <code>TestOrder</code>. </p>
 <p>And we would like to join these three models in one Resource and read from it using <em>smart</em> query</p>
 <p>So we will first define <code>TestShippmentOffice</code>:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="hll"><span class="kn">from</span> <span class="nn">epure.generics</span> <span class="kn">import</span> <span class="n">NotNull</span> <span class="c1"># (1)!</span>
-</span></span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="hll"><span class="kn">from</span> <span class="nn">epure</span> <span class="kn">import</span> <span class="n">escript</span><span class="p">,</span> <span class="n">epure</span>
-</span></span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="hll"><span class="nd">@epure</span><span class="p">()</span>
-</span></span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">class</span> <span class="nc">TestShippmentOffice</span><span class="p">:</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">adress</span><span class="p">:</span><span class="n">NotNull</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">adress</span> <span class="o">=</span> <span class="n">adress</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="hll"><span class="kn">from</span> <span class="nn">epure.generics</span> <span class="kn">import</span> <span class="n">NotNull</span> <span class="c1"># (1)!</span>
+</span></span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="hll"><span class="kn">from</span> <span class="nn">epure</span> <span class="kn">import</span> <span class="n">escript</span><span class="p">,</span> <span class="n">epure</span>
+</span></span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="hll"><span class="nd">@epure</span><span class="p">()</span>
+</span></span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">class</span> <span class="nc">TestShippmentOffice</span><span class="p">:</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">adress</span><span class="p">:</span><span class="n">NotNull</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">adress</span> <span class="o">=</span> <span class="n">adress</span>
 </span></code></pre></div>
 <ol>
 <li>Check out about Epure Generics more <a href="">here</a></li>
@@ -1035,35 +1040,35 @@
 <p>Then create and save instances of it:</p>
 <details class="info">
 <summary>Creating and saving <code>TestShippmentOffice</code> instances</summary>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">office1_id</span> <span class="o">=</span> <span class="n">TestShippmentOffice</span><span class="p">(</span><span class="s2">&quot;Washington str.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">office2_id</span> <span class="o">=</span> <span class="n">TestShippmentOffice</span><span class="p">(</span><span class="s2">&quot;Elm str.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">office3_id</span> <span class="o">=</span> <span class="n">TestShippmentOffice</span><span class="p">(</span><span class="s2">&quot;Kole str.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">office1_id</span> <span class="o">=</span> <span class="n">TestShippmentOffice</span><span class="p">(</span><span class="s2">&quot;Washington str.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">office2_id</span> <span class="o">=</span> <span class="n">TestShippmentOffice</span><span class="p">(</span><span class="s2">&quot;Elm str.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">office3_id</span> <span class="o">=</span> <span class="n">TestShippmentOffice</span><span class="p">(</span><span class="s2">&quot;Kole str.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 </span></code></pre></div>
 </details>
 <p>We will then define our main class <code>TestCustomer</code> ... </p>
-<p><div class="language-py highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@epure</span><span class="p">()</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">class</span> <span class="nc">TestCustomer</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">name</span><span class="p">:</span><span class="nb">str</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">country</span><span class="p">:</span><span class="nb">str</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">country</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
+<p><div class="language-py highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">class</span> <span class="nc">TestCustomer</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">name</span><span class="p">:</span><span class="nb">str</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">country</span><span class="p">:</span><span class="nb">str</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">country</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
 </span></code></pre></div>
 ... with its smart query <code>read_from_join_resource</code></p>
 <p>We will take Model and Domain of <code>TestCustomer</code>, get Models of other two classes</p>
 <p>Model can be taken either through <code>.model()</code> method of Domain object or by taking attribute of <code>domain</code> object through <code>.</code> (dot) notation and snakecase name of class:
-<div class="language-py highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>    <span class="nd">@classmethod</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="nd">@escript</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">def</span> <span class="nf">read_from_join_resource</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="n">model</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">md</span> <span class="c1"># (1)!</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="n">domain</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">dom</span> <span class="c1"># (2)!</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="n">test_order_model</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">test_order</span> <span class="c1"># (3)!</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="c1"># test_office_model = domain.test_shippment_office</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="c1"># or</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        <span class="n">test_office_model</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">TestShippmentOffice</span><span class="p">)</span> <span class="c1">#(4)!</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>    <span class="nd">@classmethod</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="nd">@escript</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">def</span> <span class="nf">read_from_join_resource</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="n">model</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">md</span> <span class="c1"># (1)!</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">domain</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">dom</span> <span class="c1"># (2)!</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="n">test_order_model</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">test_order</span> <span class="c1"># (3)!</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="c1"># test_office_model = domain.test_shippment_office</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="c1"># or</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">test_office_model</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">TestShippmentOffice</span><span class="p">)</span> <span class="c1">#(4)!</span>
 </span></code></pre></div></p>
 <ol>
 <li>Here we are accessing the md: <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a></li>
@@ -1072,67 +1077,61 @@
 <li>This <code>model()</code> method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model-method">here</a></li>
 </ol>
 <p>Then we can just join these three models based on <code>data_id</code> attribute:</p>
-<p><div class="language-py highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>        <span class="n">first_join</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_model</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">data_id</span> <span class="o">==</span> <span class="n">test_order_model</span><span class="o">.</span><span class="n">test_customer_id</span><span class="p">)</span> 
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="n">second_join</span> <span class="o">=</span> <span class="n">first_join</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_office_model</span><span class="p">,</span> <span class="n">test_order_model</span><span class="o">.</span><span class="n">office_id</span> <span class="o">==</span> <span class="n">test_office_model</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span> 
+<div class="language-py highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>        <span class="n">first_join</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_model</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">data_id</span> <span class="o">==</span> <span class="n">test_order_model</span><span class="o">.</span><span class="n">test_customer_id</span><span class="p">)</span> 
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="n">join_res</span> <span class="o">=</span> <span class="n">first_join</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_office_model</span><span class="p">,</span> <span class="n">test_order_model</span><span class="o">.</span><span class="n">office_id</span> <span class="o">==</span> <span class="n">test_office_model</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span> 
 </span></code></pre></div>
-After joining these three modelds, we will have a JoinResource as a result, and we can easily read from it in three ways:</p>
-<ul>
-<li>
-<p>by passing our custom header in read which will return set(s) of 3 objects that are joined by <code>data_id</code> and their adress is "Washington str.".</p>
-</li>
-<li>
-<p>by reading without header, and on condtiton that returned <code>TestCustomer</code> object will have "Japan" as country.</p>
-</li>
-<li>
-<p>reading without header and condition will return all existing set(s) of three objects.</p>
-</li>
-</ul>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>        <span class="n">res_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>\
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>            <span class="p">[</span><span class="n">test_office_model</span><span class="o">.</span><span class="n">adress</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>\
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>            <span class="n">model</span><span class="p">,</span> <span class="n">test_order_model</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">country</span><span class="p">],</span>\ 
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>            <span class="n">test_office_model</span><span class="o">.</span><span class="n">adress</span> <span class="o">==</span> <span class="s2">&quot;Washington str.&quot;</span><span class="p">)</span> <span class="c1"># header</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        <span class="n">res_no_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>\
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>            <span class="n">model</span><span class="o">.</span><span class="n">country</span> <span class="o">==</span> <span class="s2">&quot;Japan&quot;</span><span class="p">)</span> <span class="c1"># no header</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        <span class="n">res_empty</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="c1"># no header, no on_clause</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        <span class="k">return</span> <span class="n">res_header</span>
+<p>Or using it like a constructor (chain) of joins:</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>        <span class="n">join_res</span> <span class="o">=</span> <span class="n">model</span>\
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>                    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_model</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">data_id</span> <span class="o">==</span> <span class="n">test_order_model</span><span class="o">.</span><span class="n">test_customer_id</span><span class="p">)</span>\
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>                    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_office_model</span><span class="p">,</span> <span class="n">test_order_model</span><span class="o">.</span><span class="n">office_id</span> <span class="o">==</span> <span class="n">test_office_model</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span> 
+</span></code></pre></div>
+<p>After joining these three modelds, we will have a JoinResource as a result, and we can easily read from it:</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>        <span class="n">res_no_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">country</span> <span class="o">==</span> <span class="s2">&quot;Japan&quot;</span><span class="p">)</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="c1"># or just:</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        <span class="n">res_empty</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="c1"># will return all entries</span>
+</span></code></pre></div>
+<p>Or you can specify colums you want to select:</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>        <span class="n">res_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>            <span class="p">[</span><span class="n">test_office_model</span><span class="o">.</span><span class="n">adress</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>            <span class="n">model</span><span class="p">,</span> <span class="n">test_order_model</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">country</span><span class="p">],</span> 
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>            <span class="n">test_office_model</span><span class="o">.</span><span class="n">adress</span> <span class="o">==</span> <span class="s2">&quot;Washington str.&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <details class="info">
 <summary>Creating and saving <code>TestCustomer</code> instances</summary>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">nico_id</span> <span class="o">=</span> <span class="n">TestCustomer</span><span class="p">(</span><span class="s2">&quot;Nicolas&quot;</span><span class="p">,</span> <span class="s2">&quot;Argentina&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">victor_id</span> <span class="o">=</span> <span class="n">TestCustomer</span><span class="p">(</span><span class="s2">&quot;Victor&quot;</span><span class="p">,</span> <span class="s2">&quot;USA&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">tom_id</span> <span class="o">=</span> <span class="n">TestCustomer</span><span class="p">(</span><span class="s2">&quot;Tom&quot;</span><span class="p">,</span> <span class="s2">&quot;Japan&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">john_id</span> <span class="o">=</span> <span class="n">TestCustomer</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Laos&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">mike_id</span> <span class="o">=</span> <span class="n">TestCustomer</span><span class="p">(</span><span class="s2">&quot;Mike&quot;</span><span class="p">,</span> <span class="s2">&quot;Monaco&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">bob_id</span> <span class="o">=</span> <span class="n">TestCustomer</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Netherlands&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">nico_id</span> <span class="o">=</span> <span class="n">TestCustomer</span><span class="p">(</span><span class="s2">&quot;Nicolas&quot;</span><span class="p">,</span> <span class="s2">&quot;Argentina&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">victor_id</span> <span class="o">=</span> <span class="n">TestCustomer</span><span class="p">(</span><span class="s2">&quot;Victor&quot;</span><span class="p">,</span> <span class="s2">&quot;USA&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">tom_id</span> <span class="o">=</span> <span class="n">TestCustomer</span><span class="p">(</span><span class="s2">&quot;Tom&quot;</span><span class="p">,</span> <span class="s2">&quot;Japan&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">john_id</span> <span class="o">=</span> <span class="n">TestCustomer</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Laos&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">mike_id</span> <span class="o">=</span> <span class="n">TestCustomer</span><span class="p">(</span><span class="s2">&quot;Mike&quot;</span><span class="p">,</span> <span class="s2">&quot;Monaco&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">bob_id</span> <span class="o">=</span> <span class="n">TestCustomer</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Netherlands&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 </span></code></pre></div>
 </details>
 <p>Defining <code>TestOrder</code> class:
-<div class="language-py highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nd">@epure</span><span class="p">()</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">class</span> <span class="nc">TestOrder</span><span class="p">:</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="n">test_customer_id</span><span class="p">:</span><span class="n">UUID</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">order_date</span><span class="p">:</span><span class="nb">str</span> 
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">office_id</span><span class="p">:</span><span class="n">UUID</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_customer_id</span><span class="p">,</span> <span class="n">order_date</span><span class="p">,</span> <span class="n">office_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">test_customer_id</span> <span class="o">=</span> <span class="n">test_customer_id</span>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">order_date</span> <span class="o">=</span> <span class="n">order_date</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">office_id</span> <span class="o">=</span> <span class="n">office_id</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nd">@epure</span><span class="p">()</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">class</span> <span class="nc">TestOrder</span><span class="p">:</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="n">test_customer_id</span><span class="p">:</span><span class="n">UUID</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">order_date</span><span class="p">:</span><span class="nb">str</span> 
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">office_id</span><span class="p">:</span><span class="n">UUID</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_customer_id</span><span class="p">,</span> <span class="n">order_date</span><span class="p">,</span> <span class="n">office_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">test_customer_id</span> <span class="o">=</span> <span class="n">test_customer_id</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">order_date</span> <span class="o">=</span> <span class="n">order_date</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">office_id</span> <span class="o">=</span> <span class="n">office_id</span>
 </span></code></pre></div></p>
 <details class="info">
 <summary>Creating and saving <code>TestOrder</code> instances</summary>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">nico_id</span><span class="p">,</span> <span class="s2">&quot;2022-03-15&quot;</span><span class="p">,</span> <span class="n">office1_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">victor_id</span><span class="p">,</span> <span class="s2">&quot;2022-03-10&quot;</span><span class="p">,</span> <span class="n">office2_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">nico_id</span><span class="p">,</span> <span class="s2">&quot;2022-03-15&quot;</span><span class="p">,</span> <span class="n">office1_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">tom_id</span><span class="p">,</span> <span class="s2">&quot;2022-03-30&quot;</span><span class="p">,</span> <span class="n">office1_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">john_id</span><span class="p">,</span> <span class="s2">&quot;2022-01-15&quot;</span><span class="p">,</span> <span class="n">office3_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">mike_id</span><span class="p">,</span> <span class="s2">&quot;2022-12-10&quot;</span><span class="p">,</span> <span class="n">office2_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">nico_id</span><span class="p">,</span> <span class="s2">&quot;2022-08-04&quot;</span><span class="p">,</span> <span class="n">office1_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">bob_id</span><span class="p">,</span> <span class="s2">&quot;2022-09-15&quot;</span><span class="p">,</span> <span class="n">office3_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">bob_id</span><span class="p">,</span> <span class="s2">&quot;2022-05-11&quot;</span><span class="p">,</span> <span class="n">office1_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">nico_id</span><span class="p">,</span> <span class="s2">&quot;2022-03-15&quot;</span><span class="p">,</span> <span class="n">office1_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">victor_id</span><span class="p">,</span> <span class="s2">&quot;2022-03-10&quot;</span><span class="p">,</span> <span class="n">office2_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">nico_id</span><span class="p">,</span> <span class="s2">&quot;2022-03-15&quot;</span><span class="p">,</span> <span class="n">office1_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">tom_id</span><span class="p">,</span> <span class="s2">&quot;2022-03-30&quot;</span><span class="p">,</span> <span class="n">office1_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">john_id</span><span class="p">,</span> <span class="s2">&quot;2022-01-15&quot;</span><span class="p">,</span> <span class="n">office3_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">mike_id</span><span class="p">,</span> <span class="s2">&quot;2022-12-10&quot;</span><span class="p">,</span> <span class="n">office2_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">nico_id</span><span class="p">,</span> <span class="s2">&quot;2022-08-04&quot;</span><span class="p">,</span> <span class="n">office1_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">bob_id</span><span class="p">,</span> <span class="s2">&quot;2022-09-15&quot;</span><span class="p">,</span> <span class="n">office3_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="n">TestOrder</span><span class="p">(</span><span class="n">bob_id</span><span class="p">,</span> <span class="s2">&quot;2022-05-11&quot;</span><span class="p">,</span> <span class="n">office1_id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 </span></code></pre></div>
 </details>
 </div>
@@ -1141,67 +1140,67 @@ After joining these three modelds, we will have a JoinResource as a result, and 
 Lets look at our `#!python classmethod` a bit closer:
 
 ??? info "Looking closer at `test_two_joins`"
-    <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-11-10">10</a></span>
-<span class="normal"><a href="#__codelineno-11-11">11</a></span>
-<span class="normal"><a href="#__codelineno-11-12">12</a></span>
-<span class="normal"><a href="#__codelineno-11-13">13</a></span>
-<span class="normal"><a href="#__codelineno-11-14">14</a></span>
-<span class="normal"><a href="#__codelineno-11-15">15</a></span>
-<span class="normal"><a href="#__codelineno-11-16">16</a></span>
-<span class="normal"><a href="#__codelineno-11-17">17</a></span>
-<span class="normal"><a href="#__codelineno-11-18">18</a></span>
-<span class="normal"><a href="#__codelineno-11-19">19</a></span>
-<span class="normal"><a href="#__codelineno-11-20">20</a></span>
-<span class="normal"><a href="#__codelineno-11-21">21</a></span>
-<span class="normal"><a href="#__codelineno-11-22">22</a></span>
-<span class="normal"><a href="#__codelineno-11-23">23</a></span>
-<span class="normal"><a href="#__codelineno-11-24">24</a></span>
-<span class="normal"><a href="#__codelineno-11-25">25</a></span>
-<span class="normal"><a href="#__codelineno-11-26">26</a></span>
-<span class="normal"><a href="#__codelineno-11-27">27</a></span>
-<span class="normal"><a href="#__codelineno-11-28">28</a></span>
-<span class="normal"><a href="#__codelineno-11-29">29</a></span>
-<span class="normal"><a href="#__codelineno-11-30">30</a></span>
-<span class="normal"><a href="#__codelineno-11-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="o">...</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="nd">@classmethod</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="nd">@escript</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="k">def</span> <span class="nf">test_two_joins</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5"></a>    <span class="n">md</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">md</span> <span class="c1"># (1)!</span>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6"></a>    <span class="n">dom</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">dom</span> <span class="c1"># (2)!</span>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7"></a>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8"></a>    <span class="n">test_order_md</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">test_order</span> <span class="c1"># (3)!</span>
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9"></a>
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10"></a>    <span class="c1"># test_office_md = dom.test_shippment_office</span>
-</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11"></a>    <span class="c1"># or</span>
-</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12"></a>    <span class="n">test_office_md</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">TestShippmentOffice</span><span class="p">)</span> <span class="c1">#(4)!</span>
-</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13"></a>
-</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14"></a>    <span class="n">join_res</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_md</span><span class="p">,</span>\
-</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15"></a>    <span class="n">md</span><span class="o">.</span><span class="n">data_id</span> <span class="o">==</span> <span class="n">test_order_md</span><span class="o">.</span><span class="n">test_customer_id</span><span class="p">)</span> 
-</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16"></a>
-</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17"></a>    <span class="n">join_res</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_office_md</span><span class="p">,</span>\
-</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18"></a>    <span class="n">test_order_md</span><span class="o">.</span><span class="n">office_id</span> <span class="o">==</span> <span class="n">test_office_md</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span> 
-</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19"></a>
-</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20"></a>    <span class="n">res_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>\
-</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21"></a>        <span class="p">[</span><span class="n">test_office_md</span><span class="o">.</span><span class="n">adress</span><span class="p">,</span> <span class="n">md</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>\
-</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22"></a>        <span class="n">md</span><span class="p">,</span> <span class="n">test_order_md</span><span class="p">,</span> <span class="n">md</span><span class="o">.</span><span class="n">country</span><span class="p">],</span>\ 
-</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23"></a>        <span class="n">test_office_md</span><span class="o">.</span><span class="n">adress</span> <span class="o">==</span> <span class="s2">&quot;Washington str.&quot;</span><span class="p">)</span> <span class="c1"># header</span>
-</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24"></a>
-</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25"></a>    <span class="n">res_no_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>\
-</span><span id="__span-11-26"><a id="__codelineno-11-26" name="__codelineno-11-26"></a>        <span class="n">test_office_md</span><span class="o">.</span><span class="n">adress</span> <span class="o">==</span> <span class="s2">&quot;Washington str.&quot;</span><span class="p">)</span> <span class="c1"># no header</span>
-</span><span id="__span-11-27"><a id="__codelineno-11-27" name="__codelineno-11-27"></a>
-</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28"></a>    <span class="n">res_empty</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="c1"># no header, no on_clause</span>
-</span><span id="__span-11-29"><a id="__codelineno-11-29" name="__codelineno-11-29"></a>
-</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30"></a>    <span class="k">return</span> <span class="n">res_header</span>
-</span><span id="__span-11-31"><a id="__codelineno-11-31" name="__codelineno-11-31"></a><span class="o">...</span>
+    <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span>
+<span class="normal"><a href="#__codelineno-12-20">20</a></span>
+<span class="normal"><a href="#__codelineno-12-21">21</a></span>
+<span class="normal"><a href="#__codelineno-12-22">22</a></span>
+<span class="normal"><a href="#__codelineno-12-23">23</a></span>
+<span class="normal"><a href="#__codelineno-12-24">24</a></span>
+<span class="normal"><a href="#__codelineno-12-25">25</a></span>
+<span class="normal"><a href="#__codelineno-12-26">26</a></span>
+<span class="normal"><a href="#__codelineno-12-27">27</a></span>
+<span class="normal"><a href="#__codelineno-12-28">28</a></span>
+<span class="normal"><a href="#__codelineno-12-29">29</a></span>
+<span class="normal"><a href="#__codelineno-12-30">30</a></span>
+<span class="normal"><a href="#__codelineno-12-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="o">...</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="nd">@classmethod</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="nd">@escript</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="k">def</span> <span class="nf">test_two_joins</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a>    <span class="n">md</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">md</span> <span class="c1"># (1)!</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a>    <span class="n">dom</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">dom</span> <span class="c1"># (2)!</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a>    <span class="n">test_order_md</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">test_order</span> <span class="c1"># (3)!</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a>    <span class="c1"># test_office_md = dom.test_shippment_office</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a>    <span class="c1"># or</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a>    <span class="n">test_office_md</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">TestShippmentOffice</span><span class="p">)</span> <span class="c1">#(4)!</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14"></a>    <span class="n">join_res</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_md</span><span class="p">,</span>\
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15"></a>    <span class="n">md</span><span class="o">.</span><span class="n">data_id</span> <span class="o">==</span> <span class="n">test_order_md</span><span class="o">.</span><span class="n">test_customer_id</span><span class="p">)</span> 
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16"></a>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17"></a>    <span class="n">join_res</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_office_md</span><span class="p">,</span>\
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18"></a>    <span class="n">test_order_md</span><span class="o">.</span><span class="n">office_id</span> <span class="o">==</span> <span class="n">test_office_md</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span> 
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19"></a>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20"></a>    <span class="n">res_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>\
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21"></a>        <span class="p">[</span><span class="n">test_office_md</span><span class="o">.</span><span class="n">adress</span><span class="p">,</span> <span class="n">md</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>\
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22"></a>        <span class="n">md</span><span class="p">,</span> <span class="n">test_order_md</span><span class="p">,</span> <span class="n">md</span><span class="o">.</span><span class="n">country</span><span class="p">],</span>\ 
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23"></a>        <span class="n">test_office_md</span><span class="o">.</span><span class="n">adress</span> <span class="o">==</span> <span class="s2">&quot;Washington str.&quot;</span><span class="p">)</span> <span class="c1"># header</span>
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24"></a>
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25"></a>    <span class="n">res_no_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>\
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26"></a>        <span class="n">test_office_md</span><span class="o">.</span><span class="n">adress</span> <span class="o">==</span> <span class="s2">&quot;Washington str.&quot;</span><span class="p">)</span> <span class="c1"># no header</span>
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27"></a>
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28"></a>    <span class="n">res_empty</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="c1"># no header, no on_clause</span>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29"></a>
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30"></a>    <span class="k">return</span> <span class="n">res_header</span>
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="o">...</span>
 </span></code></pre></div></td></tr></table></div>
 
     1. Here we are accessing the md: <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
@@ -1211,28 +1210,28 @@ Lets look at our `#!python classmethod` a bit closer:
 
     At line `#!python 14-15`:
 
-    <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>
+    <div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>
 </span></code></pre></div>
 
-    <div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">join_res</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_md</span><span class="p">,</span> <span class="n">md</span><span class="o">.</span><span class="n">data_id</span> <span class="o">==</span> <span class="n">test_order_md</span><span class="o">.</span><span class="n">test_customer_id</span><span class="p">)</span> 
+    <div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">join_res</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_md</span><span class="p">,</span> <span class="n">md</span><span class="o">.</span><span class="n">data_id</span> <span class="o">==</span> <span class="n">test_order_md</span><span class="o">.</span><span class="n">test_customer_id</span><span class="p">)</span> 
 </span></code></pre></div>
 
     Because TestOrder has `test_customer_id` field, we can use it as `on_clause` to join it to our TestCustomer <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a>
 
     At line `#!python 17-18`:
 
-    <div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">join_res</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_office_md</span><span class="p">,</span>\
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="n">test_order_md</span><span class="o">.</span><span class="n">office_id</span> <span class="o">==</span> <span class="n">test_office_md</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span> 
+    <div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">join_res</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_office_md</span><span class="p">,</span>\
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="n">test_order_md</span><span class="o">.</span><span class="n">office_id</span> <span class="o">==</span> <span class="n">test_office_md</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span> 
 </span></code></pre></div>
 
     After we joined two Models, we can additionally join another <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> TestOffice using `office_id`
 
     At line `#!python 20-23`:
 
-    <div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">res_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>\
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="p">[</span><span class="n">test_office_md</span><span class="o">.</span><span class="n">adress</span><span class="p">,</span> <span class="n">md</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>\
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="n">md</span><span class="p">,</span> <span class="n">test_order_md</span><span class="p">,</span> <span class="n">md</span><span class="o">.</span><span class="n">country</span><span class="p">],</span>\ 
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">test_office_md</span><span class="o">.</span><span class="n">adress</span> <span class="o">==</span> <span class="s2">&quot;Washington str.&quot;</span><span class="p">)</span> <span class="c1"># header</span>
+    <div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">res_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>\
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="p">[</span><span class="n">test_office_md</span><span class="o">.</span><span class="n">adress</span><span class="p">,</span> <span class="n">md</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>\
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="n">md</span><span class="p">,</span> <span class="n">test_order_md</span><span class="p">,</span> <span class="n">md</span><span class="o">.</span><span class="n">country</span><span class="p">],</span>\ 
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="n">test_office_md</span><span class="o">.</span><span class="n">adress</span> <span class="o">==</span> <span class="s2">&quot;Washington str.&quot;</span><span class="p">)</span> <span class="c1"># header</span>
 </span></code></pre></div>
 
     <a href="https://epurelib.github.io/0.1/learn/epure_read/#read">read()</a> here takes:
@@ -1247,15 +1246,15 @@ Lets look at our `#!python classmethod` a bit closer:
 
     At line `#!python 25-26`:
 
-    <div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">res_no_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>\
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>        <span class="n">test_office_md</span><span class="o">.</span><span class="n">adress</span> <span class="o">==</span> <span class="s2">&quot;Washington str.&quot;</span><span class="p">)</span>
+    <div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">res_no_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>\
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>        <span class="n">test_office_md</span><span class="o">.</span><span class="n">adress</span> <span class="o">==</span> <span class="s2">&quot;Washington str.&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 
     Because no `header` is passed, `header` will be set by default as `[TestShippmentOffice, TestCustomer, TestOrder]` i.e. all models that were joined. 
 
     At line `#!python 28`:
 
-    <div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">res_empty</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="c1"># no header, no on_clause</span>
+    <div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">res_empty</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="c1"># no header, no on_clause</span>
 </span></code></pre></div>
 
     Because neither `header`, nor `on_clause` were passed: 
@@ -1267,10 +1266,10 @@ Lets look at our `#!python classmethod` a bit closer:
 # COMMENT -->
 
 <p>Calling <code>test_two_joins</code> method will result in list of lists, each sublist will contain three objects of each type:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">TestCustomer</span><span class="o">.</span><span class="n">test_two_joins</span><span class="p">()</span> <span class="c1"># -&gt;</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="c1"># &#39;[[resource.test_join_resource.TestShippmentOffice object, </span>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    <span class="c1">#      pyt1.tests.resource.test_join_resource.TestCustomer object, </span>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="c1">#      resource.test_join_resource.TestOrder object], ...]&#39;</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">TestCustomer</span><span class="o">.</span><span class="n">test_two_joins</span><span class="p">()</span> <span class="c1"># -&gt;</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="c1"># &#39;[[resource.test_join_resource.TestShippmentOffice object, </span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    <span class="c1">#      pyt1.tests.resource.test_join_resource.TestCustomer object, </span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    <span class="c1">#      resource.test_join_resource.TestOrder object], ...]&#39;</span>
 </span></code></pre></div>
 
 
