@@ -1009,6 +1009,8 @@
 <p><code>alias</code> is experimental feature that might be added in future</p>
 </li>
 </ul>
+<div class="admonition info">
+<p class="admonition-title">Four types of <code>.join()</code> method</p>
 <p>There are four types of <code>.join()</code> method:</p>
 <ul>
 <li><code class="language-py highlight"><span class="o">.</span><span class="n">join</span><span class="p">()</span></code> which is default join, i.e. <code class="language-sql highlight"><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span></code></li>
@@ -1016,6 +1018,7 @@
 <li><code class="language-py highlight"><span class="o">.</span><span class="n">right_join</span><span class="p">()</span></code></li>
 <li><code class="language-py highlight"><span class="o">.</span><span class="n">full_join</span><span class="p">()</span></code></li>
 </ul>
+</div>
 <h4 id="advanced-example-with-two-joins">Advanced example with two joins<a class="headerlink" href="#advanced-example-with-two-joins" title="Permanent link">&para;</a></h4>
 <p>Let's examine a case when we want to join three models using .join() method <img alt="🤔" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f914.svg" title=":thinking:" />. </p>
 <div class="admonition example">
@@ -1077,14 +1080,18 @@
 <li>This <code>model()</code> method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model-method">here</a></li>
 </ol>
 <p>Then we can just join these three models based on <code>data_id</code> attribute:</p>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>        <span class="n">first_join</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_model</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">data_id</span> <span class="o">==</span> <span class="n">test_order_model</span><span class="o">.</span><span class="n">test_customer_id</span><span class="p">)</span> 
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="n">join_res</span> <span class="o">=</span> <span class="n">first_join</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_office_model</span><span class="p">,</span> <span class="n">test_order_model</span><span class="o">.</span><span class="n">office_id</span> <span class="o">==</span> <span class="n">test_office_model</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span> 
+<div class="language-py highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>        <span class="n">first_join</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_model</span><span class="p">,</span>\
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>        <span class="n">model</span><span class="o">.</span><span class="n">data_id</span> <span class="o">==</span> <span class="n">test_order_model</span><span class="o">.</span><span class="n">test_customer_id</span><span class="p">)</span> 
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="n">join_res</span> <span class="o">=</span> <span class="n">first_join</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_office_model</span><span class="p">,</span>\
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="n">test_order_model</span><span class="o">.</span><span class="n">office_id</span> <span class="o">==</span> <span class="n">test_office_model</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span> 
 </span></code></pre></div>
 <p>Or using it like a constructor (chain) of joins:</p>
 <div class="language-py highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>        <span class="n">join_res</span> <span class="o">=</span> <span class="n">model</span>\
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>                    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_model</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">data_id</span> <span class="o">==</span> <span class="n">test_order_model</span><span class="o">.</span><span class="n">test_customer_id</span><span class="p">)</span>\
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>                    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_office_model</span><span class="p">,</span> <span class="n">test_order_model</span><span class="o">.</span><span class="n">office_id</span> <span class="o">==</span> <span class="n">test_office_model</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span> 
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>                    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_model</span><span class="p">,</span>\
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>                    <span class="n">model</span><span class="o">.</span><span class="n">data_id</span> <span class="o">==</span> <span class="n">test_order_model</span><span class="o">.</span><span class="n">test_customer_id</span><span class="p">)</span>\
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>                    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_office_model</span><span class="p">,</span>\
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>                    <span class="n">test_order_model</span><span class="o">.</span><span class="n">office_id</span> <span class="o">==</span> <span class="n">test_office_model</span><span class="o">.</span><span class="n">data_id</span><span class="p">)</span> 
 </span></code></pre></div>
 <p>After joining these three modelds, we will have a JoinResource as a result, and we can easily read from it:</p>
 <div class="language-py highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>        <span class="n">res_no_header</span> <span class="o">=</span> <span class="n">join_res</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">country</span> <span class="o">==</span> <span class="s2">&quot;Japan&quot;</span><span class="p">)</span>

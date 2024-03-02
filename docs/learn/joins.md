@@ -20,12 +20,14 @@ def join(
 
 - `alias` is experimental feature that might be added in future
 
-There are four types of `.join()` method:
+!!! info "Four types of `.join()` method" 
 
-- `#!py .join()` which is default join, i.e. `#!sql INNER JOIN`
-- `#!py .left_join()`
-- `#!py .right_join()`
-- `#!py .full_join()`
+    There are four types of `.join()` method:
+
+    - `#!py .join()` which is default join, i.e. `#!sql INNER JOIN`
+    - `#!py .left_join()`
+    - `#!py .right_join()`
+    - `#!py .full_join()`
 
 #### Advanced example with two joins
 
@@ -105,9 +107,11 @@ Let's examine a case when we want to join three models using .join() method :thi
     Then we can just join these three models based on `data_id` attribute:
 
     ```py   
-            first_join = model.join(test_order_model, model.data_id == test_order_model.test_customer_id) 
+            first_join = model.join(test_order_model,\
+            model.data_id == test_order_model.test_customer_id) 
 
-            join_res = first_join.join(test_office_model, test_order_model.office_id == test_office_model.data_id) 
+            join_res = first_join.join(test_office_model,\
+            test_order_model.office_id == test_office_model.data_id) 
 
     ```
 
@@ -115,8 +119,10 @@ Let's examine a case when we want to join three models using .join() method :thi
 
     ```py   
             join_res = model\
-                        .join(test_order_model, model.data_id == test_order_model.test_customer_id)\
-                        .join(test_office_model, test_order_model.office_id == test_office_model.data_id) 
+                        .join(test_order_model,\
+                        model.data_id == test_order_model.test_customer_id)\
+                        .join(test_office_model,\
+                        test_order_model.office_id == test_office_model.data_id) 
 
     ```
 
