@@ -8,6 +8,13 @@ def join(
         join_type: str = "", 
         alias: str = ""
     ) -> JoinResource:
+
+def left_join(...) - > JoinResource:
+
+def right_join(...) - > JoinResource:
+
+def full_join(...) - > JoinResource:
+
 ```
 
 `.join()` is a method of <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a>, that joins model(s) by specific `on_clause` and `join_type`
