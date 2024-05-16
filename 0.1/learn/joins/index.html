@@ -1066,7 +1066,7 @@
 </span></code></pre></div>
 ... with its smart query <code>read_from_join_resource</code></p>
 <p>We will take Model and Domain of <code>TestCustomer</code>, get Models of other two classes</p>
-<p>Model can be taken either through <code>.model()</code> method of Domain object or by taking attribute of <code>domain</code> object through <code>.</code> (dot) notation and snakecase name of class:
+<p>Model can be taken either through <code>.get_model()</code> method of Domain object or by taking attribute of <code>domain</code> object through <code>.</code> (dot) notation and snakecase name of class:
 <div class="language-py highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>    <span class="nd">@classmethod</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="nd">@escript</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">def</span> <span class="nf">read_from_join_resource</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
@@ -1077,13 +1077,13 @@
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="c1"># test_office_model = domain.test_shippment_office</span>
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="c1"># or</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">test_office_model</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">TestShippmentOffice</span><span class="p">)</span> <span class="c1">#(4)!</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">test_office_model</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">TestShippmentOffice</span><span class="p">)</span> <span class="c1">#(4)!</span>
 </span></code></pre></div></p>
 <ol>
 <li>Here we are accessing the md: <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a></li>
 <li>Here we are accessing dom: <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">Domain</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">here</a></li>
 <li>This way we get Model object of class <span style="color:#00A550;">TestOrder</span> by accessing dom object. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a></li>
-<li>This <code>model()</code> method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model-method">here</a></li>
+<li>This <code>get_model()</code> method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#get_model-method">here</a></li>
 </ol>
 <p>Then we can just join these three models based on <code>data_id</code> attribute:</p>
 <div class="language-py highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>        <span class="n">first_join</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_model</span><span class="p">,</span>\
@@ -1194,7 +1194,7 @@ Lets look at our `#!python classmethod` a bit closer:
 </span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a>
 </span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a>    <span class="c1"># test_office_md = dom.test_shippment_office</span>
 </span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a>    <span class="c1"># or</span>
-</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a>    <span class="n">test_office_md</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">TestShippmentOffice</span><span class="p">)</span> <span class="c1">#(4)!</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a>    <span class="n">test_office_md</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">TestShippmentOffice</span><span class="p">)</span> <span class="c1">#(4)!</span>
 </span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a>
 </span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14"></a>    <span class="n">join_res</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_order_md</span><span class="p">,</span>\
 </span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15"></a>    <span class="n">md</span><span class="o">.</span><span class="n">data_id</span> <span class="o">==</span> <span class="n">test_order_md</span><span class="o">.</span><span class="n">test_customer_id</span><span class="p">)</span> 
@@ -1219,7 +1219,7 @@ Lets look at our `#!python classmethod` a bit closer:
     1. Here we are accessing the md: <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
     2. Here we are accessing dom: <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">Domain</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">here</a>
     3. This way we get Model object of class <span style="color:#00A550;">TestOrder</span> by accessing dom object. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
-    4. This `model()` method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model-method">here</a>
+    4. This `get_model()` method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#get_model-method">here</a>
 
     At line `#!python 14-15`:
 
