@@ -90,7 +90,7 @@ Let's examine a case when we want to join three models using .join() method :thi
 
     We will take Model and Domain of `TestCustomer`, get Models of other two classes
 
-    Model can be taken either through `.model()` method of Domain object or by taking attribute of `domain` object through `.` (dot) notation and snakecase name of class:
+    Model can be taken either through `.get_model()` method of Domain object or by taking attribute of `domain` object through `.` (dot) notation and snakecase name of class:
     ```py
         @classmethod
         @escript
@@ -102,14 +102,14 @@ Let's examine a case when we want to join three models using .join() method :thi
 
             # test_office_model = domain.test_shippment_office
             # or
-            test_office_model = domain.model(TestShippmentOffice) #(4)!
+            test_office_model = domain.get_model(TestShippmentOffice) #(4)!
 
     ```
 
     1. Here we are accessing the md: <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
     2. Here we are accessing dom: <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">Domain</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">here</a>
     3. This way we get Model object of class <span style="color:#00A550;">TestOrder</span> by accessing dom object. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
-    4. This `model()` method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model-method">here</a>
+    4. This `get_model()` method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#get_model-method">here</a>
 
     Then we can just join these three models based on `data_id` attribute:
 
@@ -209,7 +209,7 @@ Lets look at our `#!python classmethod` a bit closer:
 
         # test_office_md = dom.test_shippment_office
         # or
-        test_office_md = cls.model(TestShippmentOffice) #(4)!
+        test_office_md = cls.get_model(TestShippmentOffice) #(4)!
         
         join_res = md.join(test_order_md,\
         md.data_id == test_order_md.test_customer_id) 
@@ -234,7 +234,7 @@ Lets look at our `#!python classmethod` a bit closer:
     1. Here we are accessing the md: <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">Model</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
     2. Here we are accessing dom: <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">Domain</a> object of <span style="color:#00A550;">TestCustomer</span> class. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#domain">here</a>
     3. This way we get Model object of class <span style="color:#00A550;">TestOrder</span> by accessing dom object. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model">here</a>
-    4. This `model()` method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#model-method">here</a>
+    4. This `get_model()` method of Model might be more convinient for you if you have class instance in reach. Read more about it <a href="https://epurelib.github.io/0.1/learn/domain_model/#get_model-method">here</a>
 
     At line `#!python 14-15`:
 

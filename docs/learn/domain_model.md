@@ -5,9 +5,9 @@ In Epure, Model class represents table and your decorated by @epure() class from
 
 Model of a class can be accessed through the `.md` field
 
-!!! warning "Accessing `.dom`, `.md` fields and `.model()` method"
+!!! warning "Accessing `.dom`, `.md` fields and `.get_model()` method"
 
-    `.dom`, `.md` fields and `.model()` method can be only accessed in method of "epurized" class, decorated by @escript function. Read more about @escript <a href="https://epurelib.github.io/0.1/learn/escript_decorator/#magic-escript-decorator">here</a>
+    `.dom`, `.md` fields and `.get_model()` method can be only accessed in method of "epurized" class, decorated by @escript function. Read more about @escript <a href="https://epurelib.github.io/0.1/learn/escript_decorator/#magic-escript-decorator">here</a>
 
 You can get ColumnProxy objects by accessing fields of Model
 
@@ -32,11 +32,11 @@ Through ColumnProxy object you then can create all kinds of queries. Read more a
     ...
     ```
 
-### `.model()` method
+### `.get_model()` method
 
-`.model()` is a simple and easy way to get the Model object of class using instance of this class e.g.:
+`.get_model()` is a simple and easy way to get the Model object of class using instance of this class e.g.:
 
-??? example "Getting Model object with `.model()` method"
+??? example "Getting Model object with `.get_model()` method"
 
     The more convinient way if you have instance of Class
 
@@ -50,7 +50,7 @@ Through ColumnProxy object you then can create all kinds of queries. Read more a
     ...
     @escript
     def method_to_get_model(self):
-        my_epure_cls_model = self.model(MyEpureCls) # This will return Model object
+        my_epure_cls_model = self.get_model(MyEpureCls) # This will return Model object
     ...
     ```
 
@@ -59,9 +59,9 @@ Through ColumnProxy object you then can create all kinds of queries. Read more a
 
 Domain comes from the idea of "DDD" or Domain Driven Design, in Epure, Domain represents object of DataBase and can be accessed through the `.dom` field
 
-!!! warning "Accessing `.dom`, `.md` fields and `.model()` method"
+!!! warning "Accessing `.dom`, `.md` fields and `.get_model()` method"
 
-    `.dom`, `.md` fields and `.model()` method can be only accessed in method of "epurized" class, decorated by @escript function. Read more about @escript <a href="https://epurelib.github.io/0.1/learn/escript_decorator/#magic-escript-decorator">here</a>
+    `.dom`, `.md` fields and `.get_model()` method can be only accessed in method of "epurized" class, decorated by @escript function. Read more about @escript <a href="https://epurelib.github.io/0.1/learn/escript_decorator/#magic-escript-decorator">here</a>
 
 You can dynamically interact with Domain object by getting Models from it.
 
@@ -79,7 +79,7 @@ You can dynamically interact with Domain object by getting Models from it.
     ...
     @escript
     def method_to_get_model(self):
-        my_epure_cls_model = self.model(MyEpureCls) # This will return Model object
+        my_epure_cls_model = self.get_model(MyEpureCls) # This will return Model object
     ...
     ```
 
